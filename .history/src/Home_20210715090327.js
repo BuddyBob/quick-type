@@ -4,6 +4,7 @@ import Wpm from './components/Wpm';
 import Accuracy from './components/Accuracy';
 import GetText from './components/GetText';
 import Popup from './components/Popup/Popup'
+import CurrentUser from './components/CurrentUser'
 import { Link } from 'react-router-dom';
 import { IoSettingsSharp } from 'react-icons/io5'
 import { FaInfo } from 'react-icons/fa'
@@ -23,11 +24,10 @@ function setData(){
 }
 setData()
 class Home extends Component{
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     setData();
     this.state = {
-      userStatusLoggedIn:false,
       englishType:localStorage.getItem("englishType"),
       popup:false,
       userInput: '',
@@ -41,6 +41,7 @@ class Home extends Component{
       currentUser: null
     };
   }
+
   
   newThing(){
     this.setState(this.state.text)
@@ -122,6 +123,7 @@ class Home extends Component{
       <div className="app">
         <div className="container mt-5 mb-5" style={{width:'100%'}}>
         <div>
+          <currentUser/>
         </div>
           <div className="row">
             <div className="col-md-6 offset-md-3">

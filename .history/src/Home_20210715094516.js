@@ -4,6 +4,8 @@ import Wpm from './components/Wpm';
 import Accuracy from './components/Accuracy';
 import GetText from './components/GetText';
 import Popup from './components/Popup/Popup'
+import WithMyHook from './components/WithMyHook'
+import { useAuth } from './context/AuthContext'
 import { Link } from 'react-router-dom';
 import { IoSettingsSharp } from 'react-icons/io5'
 import { FaInfo } from 'react-icons/fa'
@@ -118,10 +120,15 @@ class Home extends Component{
   }
   
   render(){
+    const myHookValue = this.props.myHookValue;
+    const { currentUser, logout } = useAuth();
     return (
       <div className="app">
         <div className="container mt-5 mb-5" style={{width:'100%'}}>
         <div>
+        <button onclick={}>
+          LOGOUT
+        </button>
         </div>
           <div className="row">
             <div className="col-md-6 offset-md-3">
@@ -196,4 +203,4 @@ class Home extends Component{
     );  
   }
 }
-export default Home;
+export default WithMyHook(Home);

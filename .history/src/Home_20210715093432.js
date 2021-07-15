@@ -116,6 +116,11 @@ class Home extends Component{
       }, 1000)
     }
   }
+  checkUserLoggedStatus(){
+    // console.log(this.state.userStatusLoggedIn)
+    return <h1>HELLO</h1>
+  }
+
   
   render(){
     return (

@@ -116,12 +116,19 @@ class Home extends Component{
       }, 1000)
     }
   }
+  checkUserLoggedStatus(){
+    // console.log(this.state.userStatusLoggedIn)
+    return <h1>HELLO</h1>
+  }
+
   
   render(){
+    const status = this.checkUserLoggedStatus()
     return (
       <div className="app">
         <div className="container mt-5 mb-5" style={{width:'100%'}}>
         <div>
+          {status && <div>LOGGED IN <CurrentUser/></div>}
         </div>
           <div className="row">
             <div className="col-md-6 offset-md-3">

@@ -3,11 +3,12 @@ import Preview from './components/Preview';
 import Wpm from './components/Wpm';
 import Accuracy from './components/Accuracy';
 import GetText from './components/GetText';
-import Popup from './components/Popup/Popup'
+import Popup from './components/Popup'
 import { Link } from 'react-router-dom';
 import { IoSettingsSharp } from 'react-icons/io5'
 import { FaInfo } from 'react-icons/fa'
 import { FaUserPlus } from 'react-icons/fa'
+import { useAuth } from './components/context/AuthContext'
 import { IoLogIn } from 'react-icons/io5'
 function setData(){
   if (localStorage.getItem("wordCount")) {
@@ -23,11 +24,10 @@ function setData(){
 }
 setData()
 class Home extends Component{
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     setData();
     this.state = {
-      userStatusLoggedIn:false,
       englishType:localStorage.getItem("englishType"),
       popup:false,
       userInput: '',
@@ -41,6 +41,7 @@ class Home extends Component{
       currentUser: null
     };
   }
+
   
   newThing(){
     this.setState(this.state.text)
@@ -120,9 +121,10 @@ class Home extends Component{
   render(){
     return (
       <div className="app">
-        <div className="container mt-5 mb-5" style={{width:'100%'}}>
         <div>
+          {props.childYes && <Child />}
         </div>
+        <div className="container mt-5 mb-5" style={{width:'100%'}}>
           <div className="row">
             <div className="col-md-6 offset-md-3">
               <div>

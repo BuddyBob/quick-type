@@ -9,6 +9,7 @@ import { IoSettingsSharp } from 'react-icons/io5'
 import { FaInfo } from 'react-icons/fa'
 import { FaUserPlus } from 'react-icons/fa'
 import { IoLogIn } from 'react-icons/io5'
+import WithComponentHooks from "with-component-hooks";
 function setData(){
   if (localStorage.getItem("wordCount")) {
     console.log("WORD COUNT ",localStorage.getItem("wordCount"))
@@ -118,6 +119,7 @@ class Home extends Component{
   }
   
   render(){
+    const myHookValue = this.props.myHookValue;
     return (
       <div className="app">
         <div className="container mt-5 mb-5" style={{width:'100%'}}>
@@ -196,4 +198,4 @@ class Home extends Component{
     );  
   }
 }
-export default Home;
+export default WithComponentHooks(Home);

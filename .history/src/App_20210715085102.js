@@ -1,6 +1,6 @@
 
-import Home from './Home';
 import Info from './components/Pages/Info';
+import Home from './Home';
 import Settings from './components/Pages/Settings';
 import Login from './components/Register/Login'
 import Signup from './components/Register/Signup';

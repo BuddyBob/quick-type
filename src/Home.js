@@ -24,8 +24,6 @@ function setData(){
 }
 setData()
 let interval = null
-let started = false;
-let sec = 0;
 
 const Home = () =>  {
   // set hooks
@@ -37,14 +35,14 @@ const Home = () =>  {
   const [symbols, setSymbols] = useState(0)
   const [errors,setError] = useState(0)
   const [finished, setFinished] = useState(false)
+  const [sec,setSec] = useState(0)
+  const [started,setStarted] = useState(false)
   const [text,setText] = useState(GetText(localStorage.getItem('wordCount'),localStorage.getItem('englishType')))
   const [registerError,setRegError] = useState("")
   const { currentUser, logout } = useAuth()
 
-  //interval does not work well with my overall structute
+  //interval does not work well with my overall structure
   //so this was the worst back up I could find. fake hooks
-  function setStarted(){ started = true; console.log("STARTED") }
-  function setSec(seconds){ sec = seconds; console.log("ADDED")}
 
   //get new text
   function newText(){
@@ -119,13 +117,13 @@ const Home = () =>  {
       //call popup
       setPopup(true)
       setFinished(true)
-      started = false
+      setStarted(false)
     }
   }
   //if restart button clicked in popup
   function restartPopup(){
-    sec = 0
-    started = false
+    setSec(0)
+    setStarted(false)
     setSymbols(0)
     setError(0)
     setPopup(false)
@@ -134,8 +132,8 @@ const Home = () =>  {
   }
   //if close button clicked in popup
   function closePopup(){
-    sec = 0
-    started = false
+    setSec(0)
+    setStarted(false)
     setSymbols(0)
     setError(0)
     setPopup(false)
@@ -146,14 +144,12 @@ const Home = () =>  {
   //too confuzling
   function setTimer() {
     if (!started) {
-      setStarted();
+      setStarted(true);
       interval = setInterval(() => {
-        setSec(sec+1)
-        console.log("ADDED",sec)
+        setSec(prevSec => prevSec + 1)
       }, 1000)
     }
   }
-  console.log(currentUser)
   return (
     <div className="app">
       <div className="container mt-5 mb-5" style={{width:'100%'}}>

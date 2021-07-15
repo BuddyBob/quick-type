@@ -9,7 +9,7 @@ import { IoSettingsSharp } from 'react-icons/io5'
 import { FaInfo } from 'react-icons/fa'
 import { FaUserPlus } from 'react-icons/fa'
 import { useAuth } from './components/context/AuthContext'
-import { IoLogIn } from 'react-icons/io5'
+
 function setData(){
   if (localStorage.getItem("wordCount")) {
     console.log("WORD COUNT ",localStorage.getItem("wordCount"))
@@ -118,9 +118,11 @@ class Home extends Component{
     }
   }
   
+    // const imageStyle = {position: "absolute",top:"7%",marginLeft:"40%"}
   render(){
     return (
       <div className="app">
+        {/* <C1 handler = {this.handler} /> */}
         <div className="container mt-5 mb-5" style={{width:'100%'}}>
           <div className="row">
             <div className="col-md-6 offset-md-3">
@@ -132,6 +134,7 @@ class Home extends Component{
                   <div className="col-auto">
                     <Link to='/info'>
                         <FaInfo className="info-icon"/>
+                        {/* <input  style={{display:"inline",padding:"none"}} width="80vh" height="70vh" className="icon-image" type="image" src={infoIcon} aria-label="Info Icon"/> */}
                     </Link>
                   </div>
                   <div className="col-auto">
@@ -142,11 +145,6 @@ class Home extends Component{
                   <div className="col-auto">
                     <Link to='/signup'>
                       <FaUserPlus className="addUser-icon"/>
-                    </Link>
-                  </div>
-                  <div className="col-auto">
-                    <Link to='/signup'>
-                      <IoLogIn className="login-icon"/>
                     </Link>
                   </div>
                 </form>

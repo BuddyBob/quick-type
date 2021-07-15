@@ -29,8 +29,8 @@
 }
 .login-icon{
     color:var(--white);
-    min-width: 4vh;
-    min-height: 3.5vh;
+    min-width: 5vh;
+    min-height: 5vh;
     position: relative;
     left:-10px
 }

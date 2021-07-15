@@ -9,24 +9,26 @@ import { IoSettingsSharp } from 'react-icons/io5'
 import { FaInfo } from 'react-icons/fa'
 import { FaUserPlus } from 'react-icons/fa'
 import { useAuth } from './components/context/AuthContext'
-import { IoLogIn } from 'react-icons/io5'
-function setData(){
-  if (localStorage.getItem("wordCount")) {
-    console.log("WORD COUNT ",localStorage.getItem("wordCount"))
-  }else{
-      localStorage.setItem("wordCount","10")
-  }
-  if (localStorage.getItem("englishType")){
-    console.log("ENGLISH TYPE",localStorage.getItem("englishType"))
-  }else{
-    localStorage.setItem("englishType","english")
-  }
-}
 setData()
+// let initialState = {
+//   englishType:localStorage.getItem("englishType"),
+//   popup:false,
+//   userInput: '',
+//   previousUserInput:'',
+//   symbols: 0,
+//   sec: 0,
+//   errors:0,
+//   started: false,
+//   finished: false,
+//   text: GetText(localStorage.getItem('wordCount'),localStorage.getItem('englishType')),
+//   currentUser: null
+// }
+
+// const [thing, setState] = useState([
 class Home extends Component{
+  setData();
   constructor() {
     super();
-    setData();
     this.state = {
       englishType:localStorage.getItem("englishType"),
       popup:false,
@@ -41,10 +43,21 @@ class Home extends Component{
       currentUser: null
     };
   }
-
+  setData(){
+    if (localStorage.getItem("wordCount")) {
+      console.log("WORD COUNT ",localStorage.getItem("wordCount"))
+    }else{
+        localStorage.setItem("wordCount","10")
+    }
+    if (localStorage.getItem("englishType")){
+      console.log("ENGLISH TYPE",localStorage.getItem("englishType"))
+    }else{
+      localStorage.setItem("englishType","english")
+    }
+  }
   
   newThing(){
-    this.setState(this.state.text)
+    this.setState(initialState)
   }
   onUserInputChange = (e) =>{
     const v = e.target.value;
@@ -118,9 +131,11 @@ class Home extends Component{
     }
   }
   
+    // const imageStyle = {position: "absolute",top:"7%",marginLeft:"40%"}
   render(){
     return (
       <div className="app">
+        {/* <C1 handler = {this.handler} /> */}
         <div className="container mt-5 mb-5" style={{width:'100%'}}>
           <div className="row">
             <div className="col-md-6 offset-md-3">
@@ -132,6 +147,7 @@ class Home extends Component{
                   <div className="col-auto">
                     <Link to='/info'>
                         <FaInfo className="info-icon"/>
+                        {/* <input  style={{display:"inline",padding:"none"}} width="80vh" height="70vh" className="icon-image" type="image" src={infoIcon} aria-label="Info Icon"/> */}
                     </Link>
                   </div>
                   <div className="col-auto">
@@ -142,11 +158,6 @@ class Home extends Component{
                   <div className="col-auto">
                     <Link to='/signup'>
                       <FaUserPlus className="addUser-icon"/>
-                    </Link>
-                  </div>
-                  <div className="col-auto">
-                    <Link to='/signup'>
-                      <IoLogIn className="login-icon"/>
                     </Link>
                   </div>
                 </form>

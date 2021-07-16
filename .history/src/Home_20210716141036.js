@@ -12,7 +12,7 @@ import { IoLogIn } from 'react-icons/io5'
 import { IoLogOut } from 'react-icons/io5'
 import { useAuth } from './components/context/AuthContext'
 import { db } from './firebase'
-console.log(localStorage)
+localStorage.clear()
 function setData(){
   console.log("CURRENT USER ID",localStorage.getItem("currentUserId"))
   //setData if user is not logged in

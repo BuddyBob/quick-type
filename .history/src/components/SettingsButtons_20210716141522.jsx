@@ -28,7 +28,6 @@ const SettingsButtons = ({runFunction, types, localStorageName, additionalText})
       console.log("LOGGED IN?", loggedIn)
       useEffect(() => {
         if (loggedIn){
-            console.log("USER ID",userId)
             returnUserData(userId).then(result => {
             console.log("LOGGED IN")
             console.log("RESULTS ",result)

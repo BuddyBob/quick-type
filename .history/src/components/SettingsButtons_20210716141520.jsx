@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Reload from './Reload'
 import styled from 'styled-components'
 import { useAuth } from './context/AuthContext'
 import { db } from '../firebase'
@@ -28,7 +29,6 @@ const SettingsButtons = ({runFunction, types, localStorageName, additionalText})
       console.log("LOGGED IN?", loggedIn)
       useEffect(() => {
         if (loggedIn){
-            console.log("USER ID",userId)
             returnUserData(userId).then(result => {
             console.log("LOGGED IN")
             console.log("RESULTS ",result)

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Reload from './Reload'
 import styled from 'styled-components'
 import { useAuth } from './context/AuthContext'
 import { db } from '../firebase'
@@ -24,11 +25,10 @@ const SettingsButtons = ({runFunction, types, localStorageName, additionalText})
       const [englishType,setEnglishType] = useState(localStorage.getItem("englishType"))
       const [wordCount,setWordCount] = useState(localStorage.getItem("wordCount"))
       console.log("USER ID",userId)
-      const [loggedIn,setLoggedIn] = useState(userId===undefined ? false : true)
+      const [loggedIn,setLoggedIn] = useState(userId==undefined ? false : true)
       console.log("LOGGED IN?", loggedIn)
       useEffect(() => {
         if (loggedIn){
-            console.log("USER ID",userId)
             returnUserData(userId).then(result => {
             console.log("LOGGED IN")
             console.log("RESULTS ",result)
@@ -81,6 +81,7 @@ const SettingsButtons = ({runFunction, types, localStorageName, additionalText})
             //make sure data is not the same 
             else if (data !== localStorage.getItem('wordCount')){
                 localStorage.setItem('wordCount', data);
+                Reload();
             }else{
                 localStorage.setItem('wordCount', data);
             }
@@ -92,6 +93,7 @@ const SettingsButtons = ({runFunction, types, localStorageName, additionalText})
             }
             else if (data !== localStorage.getItem('englishType')){
                 localStorage.setItem('englishType', data);
+                Reload();
             }else{
                 localStorage.setItem('englishType', data);
             }

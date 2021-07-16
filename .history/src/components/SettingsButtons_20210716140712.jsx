@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import Reload from './Reload'
 import styled from 'styled-components'
-import { useAuth } from './context/AuthContext'
+import firebase from '../firebase'
 import { db } from '../firebase'
 const SettingsButtons = ({runFunction, types, localStorageName, additionalText}) => {
-    const { currentUser } = useAuth()
+    import { useAuth } from './context/AuthContext'
+    const { currentUser, logout } = useAuth()
     function returnUserData(userId){
         let docRef = db.collection("users").doc(userId)
         return docRef.get().then((doc) => {
@@ -18,20 +20,16 @@ const SettingsButtons = ({runFunction, types, localStorageName, additionalText})
             console.log("Error getting document:", error);
         });
       }
-      let userId;
-      console.log("CURRENT USER",currentUser)
-      if (currentUser !== null){userId = currentUser.uid}
+      const userId = localStorage.getItem("currentUserId")
       const [englishType,setEnglishType] = useState(localStorage.getItem("englishType"))
       const [wordCount,setWordCount] = useState(localStorage.getItem("wordCount"))
-      console.log("USER ID",userId)
-      const [loggedIn,setLoggedIn] = useState(userId===undefined ? false : true)
+      const [loggedIn,setLoggedIn] = useState(userId!==null ? true : false)
+      console.log(userId)
       console.log("LOGGED IN?", loggedIn)
       useEffect(() => {
         if (loggedIn){
-            console.log("USER ID",userId)
             returnUserData(userId).then(result => {
             console.log("LOGGED IN")
-            console.log("RESULTS ",result)
             setEnglishType(result.englishType)
             setWordCount(result.wordCount)
             })
@@ -81,6 +79,7 @@ const SettingsButtons = ({runFunction, types, localStorageName, additionalText})
             //make sure data is not the same 
             else if (data !== localStorage.getItem('wordCount')){
                 localStorage.setItem('wordCount', data);
+                Reload();
             }else{
                 localStorage.setItem('wordCount', data);
             }
@@ -92,6 +91,7 @@ const SettingsButtons = ({runFunction, types, localStorageName, additionalText})
             }
             else if (data !== localStorage.getItem('englishType')){
                 localStorage.setItem('englishType', data);
+                Reload();
             }else{
                 localStorage.setItem('englishType', data);
             }

@@ -24,6 +24,7 @@ const Settings = (props) => {
         });
         
       }, [])
+      
     return (
         <div>   
             <NavBar/>
@@ -34,10 +35,10 @@ const Settings = (props) => {
                 <Label type="label">Word Count</Label>
                 <ToggleGroup dbData={data} additionalText={" words"} runFunction={'changeWordCount'} change={"wordCount"}/>
             </div>
-            <div className="wordCount-container">
+            {/* <div className="wordCount-container">
                 <Label type="label">English Type</Label>
                 <ToggleGroup dbData={data} additionalText={""} runFunction={"changeEnglishType"} change={"englishType"} types={['english','english1k','english2k']}/>
-            </div>
+            </div> */}
             
         </div>
         );

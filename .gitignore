@@ -1,6 +1,6 @@
 .idea
 **/node_modules/*
-**/.firebase
+**/src/firebase
 **/.firebaserc
 **/.runtimeconfig.json
 */npm-debug.log
@@ -15,3 +15,5 @@ service-account-credentials.json
 **/tsconfig-compile.json
 yarn.lock
 pnpm-lock.yaml
+.DS_Store
+.vscode

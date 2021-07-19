@@ -30,7 +30,7 @@ const Login = (props) =>  {
             e.preventDefault()
         
             try {
-              setError("")
+              setError('')
               setLoading("true")
               const x = await login(emailRef.current.value, passwordRef.current.value)
               console.log("LOGGED IN TO USER", x.user.uid)

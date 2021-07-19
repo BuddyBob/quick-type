@@ -77,8 +77,9 @@ const Home = () =>  {
 
 
   //get new text
-  function newText(){
-    setText(loggedIn ? GetText(wordCount,englishType) : GetText(localStorage.getItem('wordCount'),localStorage.getItem('englishType')))
+  function newText(event){
+    event.preventDefault()
+    Reload()
   }
   //logout
   async function handleLogout(){

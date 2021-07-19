@@ -7,8 +7,8 @@ import Signup from './components/Register/Signup';
 import ForgotPassword from './components/Register/ForgotPassword'
 import React, { Component } from 'react';
 import { AuthProvider } from './components/context/AuthContext';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { BrowserRouter as Switch, Route } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
+import { HashRouter as Switch, Route } from 'react-router-dom';
 
 class App extends Component {
   render() {

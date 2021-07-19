@@ -1,0 +1,8 @@
+# node_modules
+.vscode/**
+# .vscode-test/**
+# .gitignore
+# vsc-extension-quickstart.md
+history
+node_modules
+build/.DS_Store

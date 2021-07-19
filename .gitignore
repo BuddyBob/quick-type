@@ -1,6 +1,7 @@
-.vscode/**
-history
+.vscode/settings.json
+.history
 node_modules
-config.js
+src/config.js
 node_modules
 .DS_Store
+

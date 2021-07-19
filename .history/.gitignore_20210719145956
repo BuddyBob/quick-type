@@ -1,5 +1,0 @@
-.vscode/**
-history
-node_modules
-src/firebase.js
-config.js

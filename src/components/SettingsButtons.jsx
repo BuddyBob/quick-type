@@ -3,12 +3,10 @@ import Reload from './Reload'
 import styled from 'styled-components'
 import { useAuth } from './context/AuthContext'
 import { db } from '../firebase'
-console.log('HELLO')
 const SettingsButtons = ({dbData, runFunction, types, change, additionalText}) => {
     const Button = styled.button`
     background-color: ${(props) => theme[props.theme].default};
     color:${(props) => theme[props.theme].hover};
-    whitespace:wrap;
     padding:5px 5px;
     margin: 3px;
     border-color: #ede8e8;
@@ -33,49 +31,18 @@ const SettingsButtons = ({dbData, runFunction, types, change, additionalText}) =
     }
     const userId = localStorage.getItem('currentUserId')
     const { currentUser } = useAuth();
-    let [wrdCount,setWordCount] = useState()
-    let [englishType, setEnglishType] = useState()
-    let index = 0
-    useEffect(()=>{
-    
-        if (dbData){
-            index = types.indexOf(dbData.wordCount)
-        }
-    },[dbData])
-    const [active, setActive] = useState(types[index]);
-    useEffect(()=>{
-        if (dbData){
-            setWordCount(dbData.wordCount)
-            setEnglishType(dbData.englishType)
-        }else{
-            db.collection("users").doc(currentUser.uid).get().then((doc) => {
-                setWordCount(doc.wordCount)
-                setEnglishType(doc.englishType)
-            })
-        }
-    },[dbData])
-
-    function updateData(currentData){
-        if (change === 'wordCount'){
-            // setWordCount(data)
-            db.collection("users").doc(currentUser.uid).update({wordCount:currentData})
-            setWordCount(currentData)
-            setActive(currentData)
-        }
-        if (change === 'englishType'){
-            db.collection("users").doc(currentUser.uid).update({englishType:active})
-        }
+    let [data, setData] = useState(dbData)
+    async function changed(e){
+        const val = e.target.value;
+        await db.collection("users").doc(userId).update({wordCount:val})
+        db.collection("users").doc(userId).get().then((doc) => {setData(doc.data())})
+        dbData = data
     }
-    console.log(active)
     return (
         <div>
-        { active &&
+        { change == "wordCount" &&
             <div>
-                {types.map((type) => (
-                <ButtonToggle active={active === type} onClick={() => updateData(type)}>
-                    {type+additionalText}
-                </ButtonToggle>
-                ))}
+                <input onChange={changed}   placeholder={dbData ? dbData.wordCount : null} type="text" style={{width:"250px",marginBottom:"20px"}}/>
             </div>
         }
         </div>

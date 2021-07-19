@@ -12,9 +12,8 @@ const Settings = (props) => {
     const [englishType,setEnglishType] = useState()
     const [data, setData] = useState()
     useEffect(() => {
-        db.collection("users").doc("0850Op6lSBMBBSUioz8v0NboDez1").get().then((doc) => {
+        db.collection("users").doc(localStorage.getItem("currentUserId")).get().then((doc) => {
             if (doc.exists) {
-                console.log("FROM SETTINGS",doc.data())
                 setData(doc.data())
             } else {
                 // doc.data() will be undefined in this case
@@ -33,7 +32,7 @@ const Settings = (props) => {
             </div>
             <div className="wordCount-container">
                 <Label type="label">Word Count</Label>
-                <ToggleGroup dbData={data} additionalText={" words"} runFunction={'changeWordCount'} change={"wordCount"} types={['10','15','60']}/>
+                <ToggleGroup dbData={data} additionalText={" words"} runFunction={'changeWordCount'} change={"wordCount"}/>
             </div>
             <div className="wordCount-container">
                 <Label type="label">English Type</Label>

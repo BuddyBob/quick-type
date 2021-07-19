@@ -11,7 +11,6 @@ const Login = (props) =>  {
         const { currentUser, login } = useAuth()   
         const [error, setError] = useState('')
         const [loading, setLoading] = useState("false")
-        const [successLogged,setSuccessLogged] = useState(false)
         const history = useHistory()
         function returnUserData(userId){
             let docRef = db.collection("users").doc(userId)
@@ -33,8 +32,10 @@ const Login = (props) =>  {
             try {
               setError("")
               setLoading("true")
-              await login(emailRef.current.value, passwordRef.current.value)
-              setSuccessLogged(true)
+              const x = await login(emailRef.current.value, passwordRef.current.value)
+              console.log("LOGGED IN TO USER", x.user.uid)
+              localStorage.setItem("currentUserId",x.user.uid)
+              history.push('/')
             } catch(err) {
                 if (err.message === "The password is invalid or the user does not have a password."){
                     setError("Email or password is incorrect!")
@@ -43,16 +44,7 @@ const Login = (props) =>  {
         
             setLoading("false")
         }
-        useEffect(() => {
-            if (successLogged){
-                returnUserData(currentUser.uid).then(result => {
-                    console.log("LOGGED IN TO USER", currentUser.uid)
-                    console.log(result.wordCount,result.englishType)
-                    history.push('/')
-                })
-            }
-        }, [])
-        
+    
         return (
             <div>
                 <NavBar/>

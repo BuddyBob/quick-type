@@ -4,6 +4,7 @@ import Wpm from './components/Wpm';
 import Accuracy from './components/Accuracy';
 import GetText from './components/GetText';
 import Popup from './components/Popup/Popup'
+import Reload from './components/Reload'
 import { Link } from 'react-router-dom';
 import { IoSettingsSharp } from 'react-icons/io5'
 import { FaInfo } from 'react-icons/fa'
@@ -63,7 +64,7 @@ const Home = () =>  {
       })
     }
   }, [])
-  // console.log({id:userId,status:loggedIn,english:englishType,words:wordCount})
+  console.log({id:userId,status:loggedIn,english:englishType,words:wordCount})
   const [popup, setPopup] = useState(false)
   const [userInput,setUserInput] = useState('')
   const [previousUserInput, setPreviousUserInput] = useState('') 
@@ -92,6 +93,7 @@ const Home = () =>  {
       setUserId(null)
       console.log("LOGGED OUT")
       localStorage.removeItem("currentUserId");
+      Reload()
 
 
     }catch{

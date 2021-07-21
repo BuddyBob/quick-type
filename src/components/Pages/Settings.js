@@ -1,5 +1,5 @@
 
-import ToggleGroup from '../SettingsButtons';
+import ToggleGroup from './SettingsButtons';
 import NavBar from '../Nav/NavBar';
 import React, { useState, useEffect } from 'react'
 import { Label } from '../Label'
@@ -25,28 +25,41 @@ const Settings = (props) => {
         });
         
       }, [])
-      
-    return (
-        <>
-        <NavBar/>
-        <div className="settings">   
+              {/* <div>
+            <h1 className="settings-title">Settings</h1>
+        </div>
+        <div className="input-group settings-options">
             <div>
-                <h1 className="settings-title">Settings</h1>
+                <Label type="label">Word Count</Label>
+                <ToggleGroup dbData={data} additionalText={" words"} runFunction={'changeWordCount'} change={"wordCount"}/>
             </div>
-            <form className="form-inline settings-options">
-                <div className="row row-display stats">
-                    <div className="col-auto">
-                        <Label type="label">Word Count</Label>
-                        <ToggleGroup dbData={data} additionalText={" words"} runFunction={'changeWordCount'} change={"wordCount"}/>
+            <div>
+                <Label type="label">English Type</Label>
+                <ToggleGroup dbData={data} additionalText={""} runFunction={'changeEnglishType'} change={"englishType"}/>
+            </div>
+        </div> */}
+    return (
+        <div>
+            <NavBar/>
+            <div className="wrapper fadeInDown">
+                <div id="formContent">
+                    <div id="formContent"></div>
+                    <h2 className="register-title">Settings</h2>
+                </div>
+            <form>
+                <div class="row mt-4">
+                    <div class="col">
+                        <ToggleGroup dbData={data} additionalText={""} change={"wordCount"}/>
                     </div>
-                    <div className="col-auto">
-                        <Label type="label">English Type</Label>
-                        <ToggleGroup dbData={data} additionalText={""} runFunction={'changeEnglishType'} change={"englishType"}/>
+                    <div class="col">
+                        <ToggleGroup dbData={data} additionalText={""} change={"englishType"}/>
                     </div>
                 </div>
             </form>
+            </div>
         </div>
-        </>
+        
+
         );
 }
 export default Settings;

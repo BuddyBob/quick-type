@@ -2,7 +2,7 @@ import React from 'react';
 const Accuracy = (props) => {
     const divStyle = {
         color: "#ede8e8",
-        fontSize: "1.3rem",
+        fontSize: "1rem",
         fontFamily:'Roboto Mono',
         fontWeight: 'bold',
         padding: "10px"

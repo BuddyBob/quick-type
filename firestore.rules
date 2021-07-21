@@ -4,7 +4,6 @@ service cloud.firestore {
     match /users/{itemId} {
       allow read: if true
       allow write: if true
-      allow update: if ["english","english1k","english2k"].includes(incomingData().englishType)
     }
   }
 }

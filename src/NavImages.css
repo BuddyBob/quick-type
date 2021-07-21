@@ -38,7 +38,7 @@
 .logout{
     color:var(--white);
     min-width: 3.7vh;
-    min-height: 3.5vh;
+    min-height: 3.2vh;
 }
 .logout:hover{
     background-color: var(--background);

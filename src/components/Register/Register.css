@@ -113,7 +113,7 @@ input[type=password],input[type=text] {
   display: inline-block;
   font-size: 16px;
   margin: 5px;
-  width: 85%;
+  width: 86%;
   border: 2px solid var(--background);
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;

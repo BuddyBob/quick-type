@@ -32,6 +32,7 @@ const Signup = (props) =>  {
                         password: passwordRef.current.value,
                         wordCount:"15",
                         englishType:"english",
+                        wpmHistory:[]
                     })
                     .then(() => {
                         localStorage.setItem("currentUserId",x.user.uid)

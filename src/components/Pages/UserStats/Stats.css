@@ -1,0 +1,41 @@
+:root {
+    --background:#323437;
+    --dark: #2D2F31;
+    --white: #ede8e8;
+    --titleColor: #ffdc7a
+    
+}
+.tb{
+    width:98%;
+    position: relative;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:20px;
+    text-align: center;
+}
+.avgTitle{
+    color:var(--titleColor)
+}
+table thead tr th{ color: var(--background)}
+table tbody tr td{ font-family: 'Roboto Mono', Courier, monospace; color: var(--titleColor)}
+/* .row-count{
+    position: relative;
+    left:30%
+}
+.row-count-input{
+    position: relative;
+    right:5px;
+    width:20px;
+}
+.row-count-btn{
+    font-size: 10px;
+    padding:20px 20px 20px 20px
+} */
+
+.inp{
+    position: relative;
+    top:-2px;
+}
+.btnThing{
+    position: relative;
+}

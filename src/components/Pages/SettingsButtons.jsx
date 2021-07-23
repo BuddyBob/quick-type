@@ -5,7 +5,6 @@ import { Label } from '../Label'
 const SettingsButtons = ({dbData,change}) => {
     const userId = localStorage.getItem('currentUserId')
     const englishTypeRef = useRef()
-    const { currentUser } = useAuth();
     const [Alert, setAlert] = useState([false,"No Error"])
     let [data, setData] = useState(dbData)
     async function changed(e){
@@ -17,8 +16,8 @@ const SettingsButtons = ({dbData,change}) => {
                 case isNum === false: 
                     setAlert([true,"You have not entered a valid number"])
                     break
-                case val <= 0: 
-                    setAlert([true,"You have entered a number less than or equal to zero"])
+                case val < 5: 
+                    setAlert([true,"You have entered a number less 5"])
                     break
                 default:
                     setAlert([false,"No Error"])

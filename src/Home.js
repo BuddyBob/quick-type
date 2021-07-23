@@ -1,4 +1,4 @@
-import React, { useContext, useState , useEffect} from 'react';
+import React, { useState , useEffect} from 'react';
 import Preview from './components/Preview';
 import Wpm from './components/Wpm';
 import Accuracy from './components/Accuracy';
@@ -11,8 +11,11 @@ import { FaInfo } from 'react-icons/fa'
 import { FaUserPlus } from 'react-icons/fa'
 import { IoLogIn } from 'react-icons/io5'
 import { IoLogOut } from 'react-icons/io5'
+import { IoStatsChart } from 'react-icons/io5'
 import { useAuth } from './components/context/AuthContext'
 import { db } from './firebase'
+import './index.css';
+import './NavImages.css'
 function setData(){
   console.log("CURRENT USER ID",localStorage.getItem("currentUserId"))
   //setData if user is not logged in
@@ -104,7 +107,7 @@ const Home = () =>  {
   //run function as input feild changes
   function onUserInputChange(e){
     const v = e.target.value;
-    //check if error occured
+    //check if error occurred
     if ((v.length>previousUserInput.length) && (v[v.length-1]!==text[v.length-1])){
       setError(errors + 1)
     }
@@ -128,40 +131,54 @@ const Home = () =>  {
   //final raw wpm, does not include errors as penalties
   //meaning you can enter the whole given text incorrectly but at 50wpm, 
   //the raw wpm will be 50wpm
-  function finalRawWPM(sym,time){
+  function finalRawWpm(sym,time){
     let GrossWpm = (sym/5) / (time/60);
     if (GrossWpm < 0){GrossWpm = 0}
     return (Math.round(GrossWpm))
   }
   //gathers fake accuracy 
   //compares the final result to the given text
-  function finalAccuracy(userInput,text){
-    function correctSymbols(input,text){
+  function finalAccuracy(userInput,textLength){
+    function correctSymbols(input,textLength){
       let correct = 0;
-      for (let i = 0; i <= text.length-1; i++){
+      for (let i = 0; i <= textLength-1; i++){
             if (input[i] === text[i]){correct++}
       }
       return correct
     }
-    let correct = correctSymbols(userInput,text);
-    let acc = (correct/text.length)*100
+    let correct = correctSymbols(userInput,textLength);
+    let acc = (correct/textLength)*100
     return (Math.round((acc + Number.EPSILON) * 100) / 100)
   }
   //gather real accuracy
   //backspacing on incorrect chars does not effect error count
-  function finalRealAccuracy(userInput,text,errors){
-    let typed = userInput.length-errors
+  function finalRealAccuracy(userInputLength,text,errors){
+    let typed = (userInputLength)-errors
     let acc = (typed/text.length)*100
     return (Math.round((acc + Number.EPSILON) * 100) / 100)
   }
   //check if length of input is equal to given text
-  function onFinish() {
-    if (text.length-1 === symbols) {
+  async function onFinish() {
+    if (text.length-1 === userInput.length) {
       clearInterval(interval);
       //call popup
       setPopup(true)
       setFinished(true)
       setStarted(false)
+      //add new wpm entry to db under wpmHistory
+      await db.collection("users").doc(userId).get().then(async (doc) => {
+          const a = await doc.data().logs.wpmHistory
+          a.push(finalWpm(errors,symbols+1,sec))
+          const b = await doc.data().logs.rawWpmHistory
+          b.push(finalRawWpm(symbols+1,sec))
+          const c = await doc.data().logs.realAccuracyHistory
+          c.push(finalRealAccuracy(userInput.length+1,text,errors))
+          const d = await doc.data().logs.accuracyHistory
+          d.push(finalAccuracy(userInput,text.length-1))
+          const e = await doc.data().logs.errorHistory
+          e.push(errors)
+          db.collection("users").doc(userId).update({logs:{wpmHistory:a,rawWpmHistory:b,realAccuracyHistory:c,accuracyHistory:d,errorHistory:e}})
+      })
     }
   }
   //if restart button clicked in popup
@@ -196,44 +213,54 @@ const Home = () =>  {
   }
   return (
     <div className="app">
-      <div className="container mt-5 mb-5" style={{width:'100%'}}>
+      <div className="container mt-5 mb-5">
         <div className="row">
           <div className="col-md-6 offset-md-3">
             <div>
               <Link style={{textDecoration:"none"}}to='/'>
                 <h1 className="quick-type-home-horizontal">Quick Type</h1>
               </Link>
-              <form className="form-group nav-bar" style={{position:"absolute"}}>
-                <div className="col-auto">
+              <form className="input-group nav-bar" style={{position:"absolute"}}>
+                <div>
                   <Link to='/info'>
-                      <FaInfo className="info-icon"/>
+                      <FaInfo size={20} className="info-icon"/>
                   </Link>
                 </div>
                 { currentUser !== null &&
-                <div className="col-auto">
+                <div>
                   <Link to='/settings' >
-                      <IoSettingsSharp className="settings-icon"/>
+                      <IoSettingsSharp size={20} className="settings-icon"/>
                   </Link>
                 </div>
                 } 
                 { currentUser === null &&
-                <div className="col-auto">
+                <div>
                   <Link to='/signup'>
-                    <FaUserPlus className="addUser-icon"/>
+                    <FaUserPlus size={22} className="addUser-icon"/>
                   </Link>
                 </div>
                 }
                 { currentUser === null &&
-                  <div className="col-auto">
+                  <div>
                     <Link to='/login'>
-                      <IoLogIn className="login-icon"/>
+                      <IoLogIn size={25} className="login-icon"/>
                     </Link>
                   </div>}
-                { currentUser !== null && <div className="col-auto"><IoLogOut onClick={handleLogout} className="logout"/></div>}
+                { currentUser !== null && 
+                  <div>
+                    <Link to="/stats">
+                      <IoStatsChart  size={20} className="logout-icon"/>
+                    </Link>
+                  </div>
+                }
+                { currentUser !== null && 
+                <div style={{color: 'white'}}>
+                  <IoLogOut size={25} onClick={handleLogout} className="logout-icon"/>
+                </div>}
               </form>
             </div>
-            <div style={{focus:"2"}}>
-            <Preview wordCount={loggedIn ? wordCount : localStorage.getItem('wordCount')} text={text} userInput={userInput}/>
+            <div>
+              <Preview wordCount={loggedIn ? wordCount : localStorage.getItem('wordCount')} text={text} userInput={userInput}/>
             </div>
             <form className="row g-4">
               <div className="col-auto">
@@ -269,7 +296,7 @@ const Home = () =>  {
       accuracy={finalAccuracy} 
       realAccuracy={finalRealAccuracy} 
       wpm={finalWpm}
-      rawWpm={finalRawWPM}>
+      rawWpm={finalRawWpm}>
         <h3 className="popup-title">Results</h3>
       </Popup>
     </div>

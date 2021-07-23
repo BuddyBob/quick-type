@@ -5,7 +5,6 @@ import { useAuth } from '../context/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
 import { db } from '../../firebase'
 import './Register.css'
-import Reload from '../Reload'
 const Signup = (props) =>  {
         const emailRef = useRef()
         const passwordRef = useRef()
@@ -32,7 +31,12 @@ const Signup = (props) =>  {
                         password: passwordRef.current.value,
                         wordCount:"15",
                         englishType:"english",
-                        wpmHistory:[]
+                        logs:{
+                            errorHistory:[],
+                            wpmHistory:[],
+                            rawWpmHistory:[],
+                            accuracyHistory:[],
+                            realAccuracyHistory:[]}
                     })
                     .then(() => {
                         localStorage.setItem("currentUserId",x.user.uid)

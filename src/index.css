@@ -4,7 +4,6 @@
     --dark: #2D2F31;
     --white: #ede8e8;
     --titleColor: #ffdc7a
-    
 }
 /** background color */
 body {
@@ -18,6 +17,14 @@ body {
     margin:0px;
 
 }
+/* .app{
+    width:100%;
+    position: relative;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:10%;
+} */
+
 /** buttons */
 .buttons {
     background-color:var(--dark);
@@ -211,3 +218,5 @@ label{
     font-weight:"bold";
     margin-bottom:15px;
 }
+
+/* --------------------------------------------------- */

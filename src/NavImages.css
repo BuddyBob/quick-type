@@ -9,38 +9,14 @@
 .nav-bar{
     display:flex;
     justify-content:space-around;
-    width:20%;
-    left:70%;
+    width:200px;
+    margin-top:-90px;
     position: relative;
-    top:20px;
+    left:2px;
+
 }
-.info-icon{
-    color:var(--white);
-    min-height: 2.4vh;
-}
-.settings-icon{
-    color:var(--white);
-    min-width: 3vh;
-    min-height: 2.5vh;
-}
-.addUser-icon{
-    color:var(--white);
-    min-width: 4vh;
-    min-height: 2.3vh;
-}
-.login-icon{
-    color:var(--white);
-    min-width: 4vh;
-    min-height: 3.5vh;
-    position: relative;
-    left:-10px
-}
-.logout{
-    color:var(--white);
-    min-width: 3.7vh;
-    min-height: 3.2vh;
-}
-.logout:hover{
+
+.logout-icon:hover{
     background-color: var(--background);
     color:var(--titleColor);
 }
@@ -57,33 +33,12 @@
 .info-icon:hover{
     color:var(--titleColor);
 }
-@media screen and (max-width:1300px){
-    .nav-bar{
-        position: relative;
-        left:68%;
-    }
-}
-@media screen and (max-width:1220px){
-    .nav-bar{
-        position: relative;
-        left:28%;
-        top:-30px;
-    }
-}
-@media screen and (max-width:767px){
-    .nav-bar{
-        position: relative;
-        left:65%;
-        top:7%;
-    }
-}
-@media screen and (max-width: 630px) {
-    .nav-bar{
-        position: relative;
-        transform: rotate(0deg);
-        display:flex;
-        left:20%;
-        top:-10%;
-    }
+.stats-icon:hover{
+    color:var(--titleColor)
 }
 
+/* @media screen and (max-width:1260px){
+    .nav-bar{
+        width:200px
+    }
+} */

@@ -6,15 +6,14 @@ import { FaRedo } from 'react-icons/fa'
 function Popup(props) {
     let final_wpm = props.wpm(props.state.errors,props.state.symbols,props.state.sec)
     let final_raw_wpm = props.rawWpm(props.state.symbols,props.state.sec)
-    let final_accuracy = props.accuracy(props.state.userInput,props.state.text)
-    let final_real_accuracy = props.realAccuracy(props.state.userInput,props.state.text,props.state.errors)
+    let final_accuracy = props.accuracy(props.state.userInput,props.state.text.length)
+    let final_real_accuracy = props.realAccuracy(props.state.userInput.length,props.state.text,props.state.errors)
     let seconds = props.state.sec % 60;
     return (props.trigger) ? (
         <div className="popup">
             <div className="popup-inner">
             <FaRedo aria-label="restart button"className="class-btn restart" onClick={() => props.restart()} type="image"/>
             <CgClose aria-label="close button"className="class-btn close" onClick={() => props.close()} type="image"/>
-            {/* <input aria-label="close button" type="image" src={closeIcon} className="class-btn close" onClick={() => props.close()}/> */}
             <form className="form-inline">
                 <div className="row row-display stats">
                     <div className="col-auto">

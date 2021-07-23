@@ -1,14 +1,14 @@
-
-import Home from './Home';
-import Info from './components/Pages/Info';
-import Settings from './components/Pages/Settings';
-import Login from './components/Register/Login'
-import Signup from './components/Register/Signup';
-import ForgotPassword from './components/Register/ForgotPassword'
 import React, { Component } from 'react';
 import { AuthProvider } from './components/context/AuthContext';
 import { HashRouter as Router } from 'react-router-dom';
 import { HashRouter as Switch, Route } from 'react-router-dom';
+import Home from './Home';
+import Info from './components/Pages/Info';
+import Stats from './components/Pages/UserStats/Stats';
+import Settings from './components/Pages/Settings';
+import Login from './components/Register/Login'
+import Signup from './components/Register/Signup';
+import ForgotPassword from './components/Register/ForgotPassword'
 
 class App extends Component {
   render() {
@@ -23,6 +23,7 @@ class App extends Component {
             <Route exact path="/signup" component={Signup}/>
             <Route exact path="/login" component={Login}/>
             <Route exact path="/forgot-password" component={ForgotPassword}/>
+            <Route exact path="/stats" component={Stats}/>
           </Switch>
         </AuthProvider>
         </Router>

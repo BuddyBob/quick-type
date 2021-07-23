@@ -10,9 +10,9 @@
     display:flex;
     justify-content:space-around;
     width:200px;
-    margin-top:-90px;
     position: relative;
-    left:2px;
+    top:65px;
+    left:60%;
 
 }
 
@@ -37,8 +37,16 @@
     color:var(--titleColor)
 }
 
-/* @media screen and (max-width:1260px){
+@media screen and (max-width:1325px){
     .nav-bar{
-        width:200px
+        position: relative;
+        left:58%;
     }
-} */
+}
+@media screen and (max-width:1265px){
+    .nav-bar{
+        position: relative;
+        left:0%;
+        top:20px;
+    }
+}

@@ -1,8 +1,6 @@
 .vscode
 .history
-node_modules
 src/config.js
 node_modules
 .DS_Store
 .gitignore
-

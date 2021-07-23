@@ -266,6 +266,10 @@ const Home = () =>  {
               <div className="col-auto">
                 <input
                   autoFocus
+                  autoComplete="off" 
+                  autoCorrect="off" 
+                  autoCapitalize="off" 
+                  spellCheck="false"
                   value={userInput}
                   onChange={onUserInputChange}
                   className="form-control mb-4 inputField"

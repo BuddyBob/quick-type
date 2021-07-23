@@ -15,7 +15,6 @@ body {
     min-height: 100vh;
     padding:0px;
     margin:0px;
-
 }
 
 
@@ -207,10 +206,11 @@ label{
 /** Home page **/
 .quick-type-home-horizontal{
     color:var(--titleColor);
-    font-size:"50px";
+    font-size:40px;
     font-family:"Roboto Mono";
     font-weight:"bold";
     margin-bottom:15px;
+    margin-top:50px;
 }
 
 /* --------------------------------------------------- */

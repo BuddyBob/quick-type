@@ -3,6 +3,8 @@ import { useAuth } from '../../context/AuthContext'
 import { db } from '../../../firebase'
 import NavBar from '../../Nav/NavBar';
 import './Stats.css'
+import $ from 'jquery'; 
+import 'bootstrap';
 import sum from 'lodash/sum';
 const Stats = () => {
     const { currentUser } = useAuth();
@@ -57,9 +59,6 @@ const Stats = () => {
                 )
         })
     }
-    function changeRows(){
-        console.log(document.getElementById('row-count').value())
-    }
     return(
         <div>
             {wpmArr && rawWpmArr && accuracyArr && realAccuracyArr && errorArr &&
@@ -88,18 +87,12 @@ const Stats = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className="display">
-                        <h3 className="text-center mt-5 mb-4 avgTitle" style={{color: '#ede8e8'}}>Display Log Settings</h3>
-                        <form>
-                            <div className="form-group row">
-                                <label className="col-sm-2" style={{height:"50px",marginTop:"8px",marginLeft:"20px"}}>Rows</label>
-                                <div className="col-sm-3 input-group">
-                                    <input type="text" id="row-count" className="form-control inp" placeholder="type here"/>
-                                    <button type="submit" onClick={changeRows} className="btn btn-dark btnThing" style={{backgroundColor:"#2D2F31",color:"#ffdc7a"}}>Update</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                    <select name="rows-count" id="rows">
+                        <option value="5">5 rows</option>
+                        <option value="10">10 rows</option>
+                        <option value="30">30 rows</option>
+                        <option value="60">60 rows</option>
+                    </select>
                     <div>
                         <div>
                             <h2 className="text-center font-weight-bold mt-5 avgTitle">Log</h2>

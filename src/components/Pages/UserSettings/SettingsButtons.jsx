@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react'
-import { useAuth } from '../context/AuthContext'
-import { db } from '../../firebase'
-import { Label } from '../Label'
+import { useAuth } from '../../context/AuthContext'
+import { db } from '../../../firebase'
+import { Label } from '../../Label'
+import './Settings.css'
 const SettingsButtons = ({dbData,change}) => {
     const userId = localStorage.getItem('currentUserId')
     const englishTypeRef = useRef()
@@ -57,9 +58,9 @@ const SettingsButtons = ({dbData,change}) => {
                 </div>
             </div>
             <div className="row">
-                <div class="input-group col-md-20">
+                <div className="input-group col-md-20">
                     <input ref={englishTypeRef} className="form-control p-3 settings-input" placeholder={dbData ? dbData.englishType : null}/>
-                    <button type="submit" onClick={submitEnglishType}  class="btn btn-dark p-3" style={{backgroundColor:"#2D2F31",color:"#ffdc7a"}}>Update</button>
+                    <button type="submit" onClick={submitEnglishType}  className="btn btn-dark p-3" style={{backgroundColor:"#2D2F31",color:"#ffdc7a"}}>Update</button>
                 </div>
             </div>
         </div>

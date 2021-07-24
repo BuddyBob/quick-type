@@ -1,9 +1,9 @@
 
 import ToggleGroup from './SettingsButtons';
-import NavBar from '../Nav/NavBar';
+import NavBar from '../../Nav/NavBar';
 import React, { useState, useEffect } from 'react'
-import { db } from '../../firebase'
-import '../../index.css'
+import { db } from '../../../firebase'
+import './Settings.css'
 
 const Settings = (props) => {
     const [data, setData] = useState()

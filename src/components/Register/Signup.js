@@ -29,7 +29,7 @@ const Signup = (props) =>  {
                     db.collection("users").doc(x.user.uid).set({
                         email: emailRef.current.value,
                         password: passwordRef.current.value,
-                        wordCount:"15",
+                        wordCount:"30",
                         englishType:"english",
                         logs:{
                             errorHistory:[],

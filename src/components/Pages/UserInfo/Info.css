@@ -1,0 +1,33 @@
+.info-title{
+    font-family: 'Roboto Mono', Courier, monospace;
+    font-size:100px;
+    font-weight:"bold";
+    text-align:center;
+    
+}
+.info-text{
+    font-family: 'Roboto Mono', Courier, monospace;
+    color:var(--white);
+    font-size: 1.3rem;
+    padding-bottom:20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:50%;
+    justify-content:center;
+    text-align:center;
+}
+
+/* @media screen and (max-width: 550px) {
+
+    .info-text{
+        position:absolute;
+        font-family: 'Roboto Mono', Courier, monospace;
+        color:var(--white);
+        left:41%;
+        width: 40%;
+        height: 20%;
+        font-size: 1.3rem;
+        padding-bottom:20px;
+    }
+} */

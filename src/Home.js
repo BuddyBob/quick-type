@@ -23,7 +23,7 @@ function setData(){
     if (localStorage.getItem("wordCount")) {
       console.log("WORD COUNT ",localStorage.getItem("wordCount"))
     }else{
-        localStorage.setItem("wordCount","10")
+        localStorage.setItem("wordCount","30")
     }
     if (localStorage.getItem("englishType")){
       console.log("ENGLISH TYPE",localStorage.getItem("englishType"))
@@ -95,9 +95,9 @@ const Home = () =>  {
     try{
       await logout()
       setEnglishType("english")
-      setWordCount("15")
+      setWordCount("30")
       localStorage.setItem("englishType","english")
-      localStorage.setItem("wordCount","15")
+      localStorage.setItem("wordCount","30")
       setLoggedIn(false)
       setUserId(null)
       console.log("LOGGED OUT")

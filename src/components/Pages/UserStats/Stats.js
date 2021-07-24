@@ -91,12 +91,12 @@ const Stats = () => {
                             </tbody>
                         </table>
                     </div>
-                    <select name="rows-count" id="rows" defaultValue={rowCount} onChange={handleChange} >
+                    {/* <select name="rows-count" id="rows" defaultValue={rowCount} onChange={handleChange} >
                         <option value="5">5 rows</option>
                         <option value="10">10 rows</option>
                         <option value="30">30 rows</option>
                         <option value="60">60 rows</option>
-                    </select>
+                    </select> */}
                     <div>
                         <div>
                             <h2 className="text-center font-weight-bold mt-5 avgTitle">Log</h2>

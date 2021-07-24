@@ -14,7 +14,8 @@ const Stats = () => {
     const [accuracyArr,setAccuracyArr] = useState()
     const [realAccuracyArr,setRealAccuracyArr] = useState()
     const [errorArr,setErrorArr] = useState()
-    useEffect(() => {
+    const [rowCount,setRowCount] = useState(localStorage.getItem("rowCount"))
+    useEffect(async () => {
             db.collection("users")
             .doc(userId)
             .get()
@@ -59,6 +60,9 @@ const Stats = () => {
                 )
         })
     }
+    function handleChange(e){
+        localStorage.setItem("rowCount",e.target.value)
+    }
     return(
         <div>
             {wpmArr && rawWpmArr && accuracyArr && realAccuracyArr && errorArr &&
@@ -87,7 +91,7 @@ const Stats = () => {
                             </tbody>
                         </table>
                     </div>
-                    <select name="rows-count" id="rows">
+                    <select name="rows-count" id="rows" defaultValue={rowCount} onChange={handleChange} >
                         <option value="5">5 rows</option>
                         <option value="10">10 rows</option>
                         <option value="30">30 rows</option>

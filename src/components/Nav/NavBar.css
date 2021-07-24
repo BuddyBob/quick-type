@@ -20,9 +20,9 @@ a{
 nav{
     display: flex;
     background-color:var(--dark);
-    padding-right:20px;
+    padding-right:0;
     justify-content:space-around;
-    min-height:10vh;
+    min-height:8vh;
     align-items:center;
     font-family: "Roboto Mono",Courier, monospace;
 }

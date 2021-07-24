@@ -171,19 +171,21 @@ const Home = () =>  {
       setFinished(true)
       setStarted(false)
       //add new wpm entry to db under wpmHistory
-      await db.collection("users").doc(userId).get().then(async (doc) => {
-          const a = await doc.data().logs.wpmHistory
-          a.push(finalWpm(errors,symbols+1,sec))
-          const b = await doc.data().logs.rawWpmHistory
-          b.push(finalRawWpm(symbols+1,sec))
-          const c = await doc.data().logs.realAccuracyHistory
-          c.push(finalRealAccuracy(userInput.length+1,text,errors))
-          const d = await doc.data().logs.accuracyHistory
-          d.push(finalAccuracy(userInput,text.length-1))
-          const e = await doc.data().logs.errorHistory
-          e.push(errors)
-          db.collection("users").doc(userId).update({logs:{wpmHistory:a,rawWpmHistory:b,realAccuracyHistory:c,accuracyHistory:d,errorHistory:e}})
-      })
+      if (loggedIn){
+        await db.collection("users").doc(userId).get().then(async (doc) => {
+            const a = await doc.data().logs.wpmHistory
+            a.push(finalWpm(errors,symbols+1,sec))
+            const b = await doc.data().logs.rawWpmHistory
+            b.push(finalRawWpm(symbols+1,sec))
+            const c = await doc.data().logs.realAccuracyHistory
+            c.push(finalRealAccuracy(userInput.length+1,text,errors))
+            const d = await doc.data().logs.accuracyHistory
+            d.push(finalAccuracy(userInput,text.length-1))
+            const e = await doc.data().logs.errorHistory
+            e.push(errors)
+            db.collection("users").doc(userId).update({logs:{wpmHistory:a,rawWpmHistory:b,realAccuracyHistory:c,accuracyHistory:d,errorHistory:e}})
+        })
+      }
     }
   }
   //if restart button clicked in popup

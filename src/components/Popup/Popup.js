@@ -12,10 +12,8 @@ function Popup(props) {
     return (props.trigger) ? (
         <div className="popup">
             <div className="popup-inner">
-            <div className="input-group">
             <FaRedo aria-label="restart button"className="class-btn restart" onClick={() => props.restart()} type="image"/>
             <CgClose aria-label="close button"className="class-btn close" onClick={() => props.close()} type="image"/>
-            </div>
             <form className="form-inline">
                 <div className="row row-display stats">
                     <div className="col-auto">

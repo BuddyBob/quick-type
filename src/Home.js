@@ -17,6 +17,7 @@ import { db } from './firebase'
 import './index.css';
 import './NavImages.css'
 function setData(){
+  console.log(localStorage.getItem("currentUser"))
   console.log("CURRENT USER ID",localStorage.getItem("currentUserId"))
   //setData if user is not logged in
   if (localStorage.getItem("currentUserId") === null){
@@ -310,6 +311,8 @@ const Home = () =>  {
       rawWpm={finalRawWpm}>
         <h3 className="popup-title">Results</h3>
       </Popup>
+      
+
     </div>
   );  
 }

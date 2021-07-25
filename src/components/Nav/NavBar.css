@@ -20,10 +20,13 @@ a{
 nav{
     display: flex;
     background-color:var(--dark);
-    padding-right:20px;
     justify-content:space-around;
     min-height:8vh;
     align-items:center;
+    position: relative;
+    right:10px;
+    width:104%;
+    top:-10px;
     font-family: "Roboto Mono",Courier, monospace;
 }
 nav  .logo{
@@ -42,6 +45,7 @@ nav .nav-links-wide{
     display:flex;
     justify-content:space-around;
     margin-top:15px;
+    margin-right:30px;
     width:500px;
     position: relative;
     left:100px;
@@ -53,6 +57,7 @@ nav .nav-links-skinny{
     width:200px;
     position: relative;
     left:100px;
+
 }
 
 nav .nav-links-wide a {
@@ -107,7 +112,7 @@ nav .burger{
         z-index: 1;
         position:fixed;
         left:0px;
-        height:120vh;
+        height:115vh;
         top:2vh;
         background-color: var(--dark);
         display: flex;
@@ -165,7 +170,6 @@ nav .burger{
         font-weight: 700;
     }
 }
-
 
 
 @media screen and (max-width:1200px){

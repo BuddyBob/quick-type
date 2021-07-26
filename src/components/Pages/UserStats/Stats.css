@@ -20,8 +20,8 @@ table tbody tr td{ font-family: 'Roboto Mono', Courier, monospace; color: var(--
 .btnThing{
     position: relative;
 }
-.dropdown{
+.row-count-drop{
+    text-align:left;
     position: relative;
-    top:90px;
-    left:20px;
+    top:100px
 }

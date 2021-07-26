@@ -3,11 +3,22 @@ import { useAuth } from '../../context/AuthContext'
 import { db } from '../../../firebase'
 import NavBar from '../../Nav/NavBar';
 import Reload from '../../Reload'
+import { makeStyles } from '@material-ui/core/styles';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 import './Stats.css'
-import 'bootstrap';
-import $ from 'jquery';
 import sum from 'lodash/sum';
+const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1.4),
+      minWidth: 110
+    },
+  }));
 const Stats = () => {
+    const classes = useStyles();
     const { currentUser } = useAuth();
     const [userId,setUserId] = useState(currentUser.uid)
     const [wpmArr,setWpmArr] = useState()
@@ -28,7 +39,6 @@ const Stats = () => {
                     await setAccuracyArr(data.logs.accuracyHistory.reverse())
                     await setRealAccuracyArr(data.logs.realAccuracyHistory.reverse())
                     await setErrorArr(data.logs.errorHistory.reverse())
-
                 }
             )
         },[]
@@ -62,11 +72,8 @@ const Stats = () => {
         })
     }
     function handleChange(e){
+        setRowCount(e.target.value)
         localStorage.setItem("rowCount",e.target.value)
-        Reload()
-    }
-    function clickMe(){
-        $('.dropdown-toggle').dropdown()
     }
     return(
         <div className="iii">
@@ -96,45 +103,35 @@ const Stats = () => {
                             </tbody>
                         </table>
                     </div>
-                    <div className="text-center font-weight-bold mt-4 log-display">
-                        <h3 className>Log Display Settings</h3>
-                    </div>
-        {/* <div class="dropdown">
-            <button onClick={clickMe} className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button className="dropdown-item" type="button">Action</button>
-                <button className="dropdown-item" type="button">Another action</button>
-                <button className="dropdown-item" type="button">Something else here</button>
-            </div>
-        </div> */}
-                    <div className="dropdown">
-                        <select name="rows-count" id="rows" defaultValue={rowCount} onChange={handleChange} >
-                            <option value="5">5 rows</option>
-                            <option value="10">10 rows</option>
-                            <option value="30">30 rows</option>
-                            <option value="60">60 rows</option>
-                        </select>
-                    </div>
-                    <div>
-                        <div>
-                            <h2 className="text-center font-weight-bold mt-5 avgTitle">Log</h2>
-                            <table className="table table-dark table-striped tb">
-                                <thead >
-                                    <tr className="table-light">
-                                        <th scope="col">Wpm</th>
-                                        <th scope="col">Raw Wpm</th>
-                                        <th scope="col">Accuracy</th>
-                                        <th scope="col">Real Accuracy</th>
-                                        <th scope="col">Errors</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {returnIt(rowCount)}
-                                </tbody>
-                            </table>
+
+                    <div id="log-settings">
+                        <div className="row-count-drop">
+                            <FormControl variant="filled" className={classes.formControl}>
+                                <InputLabel className="dropdown-label" style={{color:"#ffdc7a", backgroundColor:"#323437"}}>Rows</InputLabel>
+                                <Select style={{color:"white"}} value={rowCount} onChange={handleChange}>
+                                <MenuItem value={5}>5 rows</MenuItem>
+                                <MenuItem value={10}>10 rows</MenuItem>
+                                <MenuItem value={30}>30 rows</MenuItem>
+                                </Select>
+                            </FormControl>
                         </div>
+                    </div>
+                    <div id="log-table">
+                        <h2 className="text-center font-weight-bold mt-5 avgTitle">Log</h2>
+                        <table className="table table-dark table-striped tb">
+                            <thead >
+                                <tr className="table-light">
+                                    <th scope="col">Wpm</th>
+                                    <th scope="col">Raw Wpm</th>
+                                    <th scope="col">Accuracy</th>
+                                    <th scope="col">Real Accuracy</th>
+                                    <th scope="col">Errors</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {returnIt(rowCount)}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             }

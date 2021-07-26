@@ -309,7 +309,7 @@ const Home = () =>  {
       realAccuracy={finalRealAccuracy} 
       wpm={finalWpm}
       rawWpm={finalRawWpm}>
-        <h3 className="popup-title">Results</h3>
+      <h3 className="popup-title">Results</h3>
       </Popup>
       
 

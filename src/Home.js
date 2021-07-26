@@ -5,6 +5,7 @@ import Accuracy from './components/Accuracy';
 import GetText from './components/GetText';
 import Popup from './components/Popup/Popup'
 import Reload from './components/Reload'
+import SetData from './components/SetData'
 import { Link } from 'react-router-dom';
 import { IoSettingsSharp } from 'react-icons/io5'
 import { FaInfo } from 'react-icons/fa'
@@ -17,27 +18,6 @@ import { db } from './firebase'
 import './index.css';
 import './NavImages.css'
 
-function setData(){
-  console.log("CURRENT USER ID",localStorage.getItem("currentUserId"))
-  //setData if user is not logged in
-  if (localStorage.getItem("currentUserId") === null){
-    if (localStorage.getItem("wordCount")) {
-      console.log("WORD COUNT ",localStorage.getItem("wordCount"))
-    }else{
-        localStorage.setItem("wordCount","30")
-    }
-    if (localStorage.getItem("englishType")){
-      console.log("ENGLISH TYPE",localStorage.getItem("englishType"))
-    }else{
-      localStorage.setItem("englishType","english1k")
-    }
-  } 
-  if (localStorage.getItem("rowCount")){
-    console.log("ROW COUNT",localStorage.getItem("rowCount"))
-  }else{
-    localStorage.setItem("rowCount","5")
-  }
-}
 function returnUserData(userId){
   let docRef = db.collection("users").doc(userId)
   return docRef.get().then((doc) => {
@@ -51,7 +31,7 @@ function returnUserData(userId){
       console.log("Error getting document:", error);
   });
 }
-setData()
+SetData()
 let interval = null
 
 const Home = () =>  {

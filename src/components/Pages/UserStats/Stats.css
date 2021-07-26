@@ -25,3 +25,21 @@ table tbody tr td{ font-family: 'Roboto Mono', Courier, monospace; color: var(--
     position: relative;
     top:100px
 }
+.log-sort-drop{
+    text-align:left;
+    position: relative;
+    top:100px
+}
+
+@media screen and (max-width:1040px){   
+    .log-sort-drop{
+        position: fixed;
+        top:47%;
+    }
+}
+@media screen and (max-width:691px){   
+    .log-sort-drop{
+        position: fixed;
+        top:50%;
+    }
+}

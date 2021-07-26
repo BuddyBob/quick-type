@@ -302,7 +302,7 @@ const Home = () =>  {
         <script src="js/bootstrap.min.js"></script>
       </div>
       <Popup 
-      trigger={popup} 
+      trigger={true} 
       state={{errors,sec,symbols,text,userInput}} 
       next={nextPopup} 
       restart={restartPopup} 

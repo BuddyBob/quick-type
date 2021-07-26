@@ -105,16 +105,28 @@ const Stats = () => {
                     </div>
 
                     <div id="log-settings">
-                        <div className="row-count-drop">
-                            <FormControl variant="filled" className={classes.formControl}>
-                                <InputLabel className="dropdown-label" style={{color:"#ffdc7a", backgroundColor:"#323437"}}>Rows</InputLabel>
-                                <Select style={{color:"white"}} value={rowCount} onChange={handleChange}>
-                                <MenuItem value={5}>5 rows</MenuItem>
-                                <MenuItem value={10}>10 rows</MenuItem>
-                                <MenuItem value={30}>30 rows</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </div>
+                        <form className="input-group">
+                            <div className="row-count-drop">
+                                <FormControl variant="filled" className={classes.formControl}>
+                                    <InputLabel className="dropdown-label" style={{color:"#ffdc7a", backgroundColor:"#323437"}}>Rows</InputLabel>
+                                    <Select style={{color:"white"}} value={rowCount} onChange={handleChange}>
+                                    <MenuItem value={5}>5 rows</MenuItem>
+                                    <MenuItem value={10}>10 rows</MenuItem>
+                                    <MenuItem value={30}>30 rows</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+                            <div className="log-sort-drop">
+                                <FormControl variant="filled" className={classes.formControl}>
+                                    <InputLabel className="dropdown-label" style={{color:"#ffdc7a", backgroundColor:"#323437"}}>Sort</InputLabel>
+                                    <Select style={{color:"white"}} value={rowCount} onChange={handleChange}>
+                                    <MenuItem value={5}>5 rows</MenuItem>
+                                    <MenuItem value={10}>10 rows</MenuItem>
+                                    <MenuItem value={30}>30 rows</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+                        </form>
                     </div>
                     <div id="log-table">
                         <h2 className="text-center font-weight-bold mt-5 avgTitle">Log</h2>

@@ -9,8 +9,8 @@ const Info = () => {
                 <div className="info-container">
                     <p className="info-text">
                         Quick Type is a simple typing test which gives you many useful features 
-                        to help you get accurate data about your typing stats and help you focus on 
-                        <strong>only</strong> typing.
+                        to help you get accurate data about your typing stats and help you focus on
+                        <strong> only</strong> typing fast!
                     </p>
                 </div>
             </div>

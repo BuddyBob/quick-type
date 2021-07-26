@@ -30,7 +30,7 @@ const Signup = (props) =>  {
                         email: emailRef.current.value,
                         password: passwordRef.current.value,
                         wordCount:"30",
-                        englishType:"english",
+                        englishType:"english1k",
                         logs:{
                             errorHistory:[],
                             wpmHistory:[],

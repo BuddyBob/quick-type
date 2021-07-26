@@ -16,8 +16,8 @@ import { useAuth } from './components/context/AuthContext'
 import { db } from './firebase'
 import './index.css';
 import './NavImages.css'
+
 function setData(){
-  console.log(localStorage.getItem("currentUser"))
   console.log("CURRENT USER ID",localStorage.getItem("currentUserId"))
   //setData if user is not logged in
   if (localStorage.getItem("currentUserId") === null){
@@ -29,7 +29,7 @@ function setData(){
     if (localStorage.getItem("englishType")){
       console.log("ENGLISH TYPE",localStorage.getItem("englishType"))
     }else{
-      localStorage.setItem("englishType","english")
+      localStorage.setItem("englishType","english1k")
     }
   } 
   if (localStorage.getItem("rowCount")){
@@ -51,7 +51,6 @@ function returnUserData(userId){
       console.log("Error getting document:", error);
   });
 }
-
 setData()
 let interval = null
 
@@ -84,7 +83,6 @@ const Home = () =>  {
   const [started,setStarted] = useState(false)
   const [registerError,setRegError] = useState("")
 
-
   //get new text
   function newText(event){
     event.preventDefault()
@@ -95,9 +93,9 @@ const Home = () =>  {
     setRegError('')
     try{
       await logout()
-      setEnglishType("english")
+      setEnglishType("english1k")
       setWordCount("30")
-      localStorage.setItem("englishType","english")
+      localStorage.setItem("englishType","english1k")
       localStorage.setItem("wordCount","30")
       setLoggedIn(false)
       setUserId(null)
@@ -244,7 +242,7 @@ const Home = () =>  {
                 { currentUser === null &&
                 <div>
                   <Link to='/signup'>
-                    <FaUserPlus size={22} className="addUser-icon"/>
+                    <FaUserPlus style={{position:"relative",left:"3px"}}size={22} className="addUser-icon"/>
                   </Link>
                 </div>
                 }

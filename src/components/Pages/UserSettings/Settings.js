@@ -31,10 +31,13 @@ const Settings = (props) => {
             <form>
                 <div className="row mt-4">
                     <div className="col">
-                        <ToggleGroup dbData={data} change={"wordCount"}/>
+                        <ToggleGroup dbData={data} change={"wordCount"} types={["50","60"]}/>
                     </div>
                     <div className="col">
-                        <ToggleGroup dbData={data} change={"englishType"}/>
+                        <ToggleGroup dbData={data} change={"englishType"} types={["english1k","english3k","english2k","english4k"]}/>
+                    </div>
+                    <div className="col">
+                        <ToggleGroup dbData={data} change={"random"} types={["1","2"]}/>
                     </div>
                 </div>
             </form>

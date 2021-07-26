@@ -32,11 +32,11 @@ function setData(){
       localStorage.setItem("englishType","english")
     }
   } 
-  // if (localStorage.getItem("rowCount")){
-  //   console.log("ROW COUNT",localStorage.getItem("rowCount"))
-  // }else{
-  //   localStorage.setItem("rowCount","5")
-  // }
+  if (localStorage.getItem("rowCount")){
+    console.log("ROW COUNT",localStorage.getItem("rowCount"))
+  }else{
+    localStorage.setItem("rowCount","5")
+  }
 }
 function returnUserData(userId){
   let docRef = db.collection("users").doc(userId)

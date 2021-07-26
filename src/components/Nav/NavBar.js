@@ -6,7 +6,6 @@ import { useAuth } from '../context/AuthContext'
 function NavBar() {
     const { currentUser, logout } = useAuth()
     const [loggedIn,setLoggedIn] = useState(currentUser ? true : false)
-    console.log(loggedIn)
     const [open,setOpen] = useState(false)
     return (
         <div>

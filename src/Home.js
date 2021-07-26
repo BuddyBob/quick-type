@@ -191,6 +191,7 @@ const Home = () =>  {
   }
   //if restart button clicked in popup
   function restartPopup(){
+    console.log("CLICKEDs")
     setSec(0)
     setStarted(false)
     setSymbols(0)
@@ -200,7 +201,7 @@ const Home = () =>  {
     setUserInput("")
   }
   //if close button clicked in popup
-  function closePopup(){
+  function nextPopup(){
     setSec(0)
     setStarted(false)
     setSymbols(0)
@@ -303,7 +304,7 @@ const Home = () =>  {
       <Popup 
       trigger={popup} 
       state={{errors,sec,symbols,text,userInput}} 
-      close={closePopup} 
+      next={nextPopup} 
       restart={restartPopup} 
       accuracy={finalAccuracy} 
       realAccuracy={finalRealAccuracy} 

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useAuth } from '../../context/AuthContext'
 import { db } from '../../../firebase'
 import NavBar from '../../Nav/NavBar';
+import Reload from '../../Reload'
 import './Stats.css'
-import $ from 'jquery'; 
 import 'bootstrap';
+import $ from 'jquery';
 import sum from 'lodash/sum';
 const Stats = () => {
     const { currentUser } = useAuth();
@@ -35,9 +36,9 @@ const Stats = () => {
     function getAvg(arr){
         return (sum(arr)/arr.length)
     }
-    function returnIt(){
+    function returnIt(rowDisplay){
             let _ = require('underscore')
-            const zipped = _.zip(wpmArr.slice(0,5),rawWpmArr.slice(0,5),accuracyArr.slice(0,5),realAccuracyArr.slice(0,5),errorArr.slice(0,5))
+            const zipped = _.zip(wpmArr.slice(0,rowDisplay),rawWpmArr.slice(0,rowDisplay),accuracyArr.slice(0,rowDisplay),realAccuracyArr.slice(0,rowDisplay),errorArr.slice(0,rowDisplay))
             return zipped.map(pair => {
                 return (
                     <tr>
@@ -62,9 +63,13 @@ const Stats = () => {
     }
     function handleChange(e){
         localStorage.setItem("rowCount",e.target.value)
+        Reload()
+    }
+    function clickMe(){
+        $('.dropdown-toggle').dropdown()
     }
     return(
-        <div>
+        <div className="iii">
             {wpmArr && rawWpmArr && accuracyArr && realAccuracyArr && errorArr &&
                 <div>
                     <NavBar/>
@@ -91,12 +96,27 @@ const Stats = () => {
                             </tbody>
                         </table>
                     </div>
-                    {/* <select name="rows-count" id="rows" defaultValue={rowCount} onChange={handleChange} >
-                        <option value="5">5 rows</option>
-                        <option value="10">10 rows</option>
-                        <option value="30">30 rows</option>
-                        <option value="60">60 rows</option>
-                    </select> */}
+                    <div className="text-center font-weight-bold mt-4 log-display">
+                        <h3 className>Log Display Settings</h3>
+                    </div>
+        {/* <div class="dropdown">
+            <button onClick={clickMe} className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button className="dropdown-item" type="button">Action</button>
+                <button className="dropdown-item" type="button">Another action</button>
+                <button className="dropdown-item" type="button">Something else here</button>
+            </div>
+        </div> */}
+                    <div className="dropdown">
+                        <select name="rows-count" id="rows" defaultValue={rowCount} onChange={handleChange} >
+                            <option value="5">5 rows</option>
+                            <option value="10">10 rows</option>
+                            <option value="30">30 rows</option>
+                            <option value="60">60 rows</option>
+                        </select>
+                    </div>
                     <div>
                         <div>
                             <h2 className="text-center font-weight-bold mt-5 avgTitle">Log</h2>
@@ -111,7 +131,7 @@ const Stats = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {returnIt()}
+                                    {returnIt(rowCount)}
                                 </tbody>
                             </table>
                         </div>

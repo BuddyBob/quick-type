@@ -1,6 +1,6 @@
 import React from 'react'
 import './Popup.css'
-import { CgClose } from 'react-icons/cg'
+import { IoArrowForward } from 'react-icons/io5'
 import { FaRedo } from 'react-icons/fa'
 
 function Popup(props) {
@@ -13,7 +13,7 @@ function Popup(props) {
         <div className="popup">
             <div className="popup-inner">
             <FaRedo aria-label="restart button"className="class-btn restart" onClick={() => props.restart()} type="image"/>
-            <CgClose aria-label="close button"className="class-btn close" onClick={() => props.close()} type="image"/>
+            <IoArrowForward aria-label="next button"className="class-btn next" onClick={() => props.next()} type="image"/>
             <form className="form-inline">
                 <div className="row row-display stats">
                     <div className="col-auto">

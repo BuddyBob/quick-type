@@ -145,14 +145,34 @@ nav .burger{
         height:175%
     }
 }
-@media screen and (max-height:660px){
+@media screen and (max-height:700px){
     nav  .nav-links-skinny{
         height:200%
     }
 }
-@media screen and (max-height:600px){
+@media screen and (max-height:625px){
     nav  .nav-links-skinny{
         height:225%
+    }
+}
+@media screen and (max-height:550px){
+    nav  .nav-links-skinny{
+        height:250%
+    }
+}
+@media screen and (max-height:475px){
+    nav  .nav-links-skinny{
+        height:300%
+    }
+}
+@media screen and (max-height:400px){
+    nav  .nav-links-skinny{
+        height:325%
+    }
+}
+@media screen and (max-height:350px){
+    nav  .nav-links-skinny{
+        height:400%
     }
 }
 @media screen and (max-width:1300px){

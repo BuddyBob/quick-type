@@ -12,12 +12,9 @@ body {
     box-sizing: border-box;
     align-items: center;
     justify-content: center;
-    min-height: 1000vh;
     padding:0px;
     margin:0px;
     padding: 10px;
-    clear: both;
-    overflow: hidden;
 }
 
 

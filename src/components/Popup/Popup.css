@@ -34,8 +34,11 @@
     min-width:3vh;
     min-height:3vh;
     position:absolute;
-    top:9px;
+    top:8px;
     right:10px;
+    margin-right:20px;
+    justify-content:space-around;
+    width:2%
 }
 .popup-inner .restart{
     color:var(--titleColor);
@@ -43,7 +46,7 @@
     min-height:2vh;
     position:absolute;
     top:13px;
-    right:50px;
+    right:100px;
 }
 .restart:hover{
     border-bottom: 2px solid white;
@@ -109,10 +112,6 @@
     .number{
         font-size: 20px;
         color:var(--titleColor);
-    }
-    .close{
-        width:2vh;
-        height:1vh
     }
 }
 

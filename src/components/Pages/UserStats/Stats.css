@@ -5,6 +5,7 @@
     --titleColor: #ffdc7a
     
 }
+
 .tb{
     width:98%;
     position: relative;
@@ -25,4 +26,9 @@ table tbody tr td{ font-family: 'Roboto Mono', Courier, monospace; color: var(--
 }
 .btnThing{
     position: relative;
+}
+.dropdown{
+    position: relative;
+    top:90px;
+    left:20px;
 }

@@ -191,7 +191,6 @@ const Home = () =>  {
   }
   //if restart button clicked in popup
   function restartPopup(){
-    console.log("CLICKEDs")
     setSec(0)
     setStarted(false)
     setSymbols(0)
@@ -211,7 +210,7 @@ const Home = () =>  {
     setUserInput("")
     setText(loggedIn ? GetText(wordCount,englishType) : GetText(localStorage.getItem('wordCount'),localStorage.getItem('englishType')))
   }
-  //too confuzling
+  //timer
   function setTimer() {
     if (!started) {
       setStarted(true);
@@ -302,7 +301,7 @@ const Home = () =>  {
         <script src="js/bootstrap.min.js"></script>
       </div>
       <Popup 
-      trigger={true} 
+      trigger={popup} 
       state={{errors,sec,symbols,text,userInput}} 
       next={nextPopup} 
       restart={restartPopup} 

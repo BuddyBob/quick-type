@@ -5,45 +5,49 @@ import './NavBar.css'
 import { useAuth } from '../context/AuthContext'
 function NavBar() {
     const { currentUser, logout } = useAuth()
-    const [loggedIn,setLoggedIn] = useState(currentUser ? true : false)
-    const [open,setOpen] = useState(false)
     return (
-        <div>
-            {loggedIn &&
-            <div>
-                <nav>
-                    <Link className="logo" to="/">Quick Type</Link>
-                    <ul className={"nav-links-wide"} style={{transform:open ? "translateX(-125px)" : ""}}>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/settings">Settings</Link>
-                        </li>
-                        <li>
-                            <Link to="/stats">Stats</Link>
-                        </li>
-                        <li>
-                            <Link to="/info">Info</Link>
-                        </li>
-                    </ul>
-                    <span onClick={() => setOpen(!open)} className="burger"><AiOutlineMenu/></span>
+        <div id="navbar">
+            {currentUser &&
+            <div id="logged-in">
+                <nav className="navbar">
+                    <Link to="/" style={{textDecoration: 'none' }}>
+                        <span className="logo">Quick Type</span>
+                    </Link>
+                    <div className="navbar-links">
+                        <ul>
+                            <li>
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/settings">Settings</Link>
+                            </li>
+                            <li>
+                                <Link to="/stats">Stats</Link>
+                            </li>
+                            <li>
+                                <Link to="/info">Info</Link>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
             </div>
             }
-            {!loggedIn && 
-            <div>
-                <nav>
-                    <Link className="logo" to="/">Quick Type</Link>
-                    <ul className={"nav-links-skinny"} style={{transform:open ? "translateX(0px)" : ""}}>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link to="/info">Info</Link>
-                        </li>
-                    </ul>
-                    <span onClick={() => setOpen(!open)} className="burger"><AiOutlineMenu/></span>
+            {currentUser === null &&
+            <div id="logged-out">
+                <nav className="navbar">
+                    <Link to="/" style={{textDecoration: 'none' }}>
+                        <span className="logo">Quick Type</span>
+                    </Link>
+                    <div className="navbar-links">
+                        <ul>
+                            <li>
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/info">Info</Link>
+                            </li>
+                        </ul>
+                    </div>
                 </nav>
             </div>
             }

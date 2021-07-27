@@ -89,6 +89,7 @@
     position: relative;
     top:8px;
     margin-bottom: 30px;
+    font-size:18px;
 }
 /* phone */
 @media screen and (max-width:810px){
@@ -162,4 +163,18 @@
         height:120%;
         top:50px;
     }
+}
+
+
+/* animals */
+.animal-img{
+    position: relative;
+    left:23px;
+    top:400px;
+}
+.speed-desc{
+    position: relative;
+    left:-70px;
+    top:285%;
+    border:none;
 }

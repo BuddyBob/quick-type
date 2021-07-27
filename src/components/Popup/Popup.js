@@ -1,5 +1,7 @@
 import React from 'react'
 import './Popup.css'
+import {Input, FormControl, InputLabel, FormHelperText } from '@material-ui/core';
+import Cheetha from  '../../images/Cheetha.png'
 import { IoArrowForward } from 'react-icons/io5'
 import { FaRedo } from 'react-icons/fa'
 
@@ -57,9 +59,20 @@ function Popup(props) {
                         </div>
                     </div>
                 </div>
+                <form>
+                    <div className="row level">
+                        <div className="animal col">
+                            <input className="animal-img" src={Cheetha} type="image" style={{width:"150px",height:"140px"}}/>
+                        </div>
+                        <div className="col">
+                            <input readOnly className="speed-desc" value="You have the typing speed of a Cheetah!" type="text" style={{fontSize:"20px",width:"200%",height:"75%"}}/>
+                        </div>
+                    </div>
+                </form>
             </form>
             {props.children}
             </div>
+
         </div>
     ) : "";
 }

@@ -222,7 +222,7 @@ const Home = () =>  {
                 { currentUser === null &&
                 <div>
                   <Link to='/signup'>
-                    <FaUserPlus style={{position:"relative",left:"3px"}}size={22} className="addUser-icon"/>
+                    <FaUserPlus style={{position:"relative",left:"3px",color:"white"}}size={22} className="addUser-icon"/>
                   </Link>
                 </div>
                 }

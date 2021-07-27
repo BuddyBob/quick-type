@@ -15,12 +15,28 @@
     left:60%;
 
 }
-
+.logout-icon{
+    color:var(--white)
+}
+.login-icon{
+    color:var(--white)
+}
+.addUser-icon{
+    color:var(--white)
+}
+.settings-icon{
+    color:var(--white)
+}
+.info-icon{
+    color:var(--white)
+}
+.stats-icon{
+    color:var(--white)
+}
 .logout-icon:hover{
     background-color: var(--background);
     color:var(--titleColor);
 }
-
 .login-icon:hover{
     color:var(--titleColor)
 }

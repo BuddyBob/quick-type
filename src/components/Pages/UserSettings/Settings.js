@@ -28,17 +28,12 @@ const Settings = (props) => {
                     <div id="formContent"></div>
                     <h2 className="register-title">Settings</h2>
                 </div>
-            <form>
+            <form className="settings-options">
                 <div className="row mt-4">
-                    <div className="col">
                         <ToggleGroup dbData={data} change={"wordCount"} types={["50","60"]}/>
-                    </div>
-                    <div className="col">
-                        <ToggleGroup dbData={data} change={"englishType"} types={["english1k","english3k","english2k","english4k"]}/>
-                    </div>
-                    <div className="col">
-                        <ToggleGroup dbData={data} change={"random"} types={["1","2"]}/>
-                    </div>
+                <div className="row">
+                    <ToggleGroup dbData={data} change={"englishType"} types={["english1k","english3k","english2k","english4k"]}/>
+                </div>
                 </div>
             </form>
             </div>

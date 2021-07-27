@@ -70,15 +70,15 @@ const SettingsButtons = ({dbData,change,types}) => {
         )
     }
     return (
-        <div style={{position:"relative",left:"100px"}}>
+        <div>
             { Alert[0] &&
-            <div class="container">
-                <div class="row" id="danger-container">
-                    <div class="span20">
-                        <div class="alert alert-danger alert-dismissible" role="alert">
-                            <h5 class="alert-heading">OOPS</h5>
-                            <span styles={{fontSize:"2px"}}>{Alert[1]}</span>
-                            <button onClick={() => {setAlert([false,null])}} type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <div className="container">
+                <div className="row" id="danger-container">
+                    <div className="span20">
+                        <div className="alert alert-danger alert-dismissible" role="alert">
+                            <h5 className="alert-heading">OOPS</h5>
+                            <span style={{fontSize:"2px"}}>{Alert[1]}</span>
+                            <button onClick={() => {setAlert([false,null])}} type="button" className="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">x</span>
                             </button>
                         </div>
@@ -87,30 +87,28 @@ const SettingsButtons = ({dbData,change,types}) => {
             </div>
             }
         {change === "englishType" &&
-            <div className="container">
+            <form>
                 <div className="row">
-                    <div className="col mt-3">
+                    <div className="col mt-3 englishType-label" style={{left:"20px"}}>
                         <Label type="label" >{change}</Label>
                     </div>
                 </div>
-                <div className="row">
-                    <div className="input-group col-md-20">
-                        {BtnGroup()}
-                    </div>
+                <div className="row btnGroup">
+                    {BtnGroup()}
                 </div>
-            </div>
+            </form>
         }
         {change === "wordCount" &&
-            <div className="container">
+            <form>
                 <div className="row">
-                    <div className="col mt-3">
+                    <div className="col mt-3 wordCount-label">
                         <Label type="label" >{change}</Label>
                     </div>
                 </div>
                 <div className="row">
-                    <input className="settings-input" onChange={changed} placeholder={dbData ? dbData.wordCount : null} type="text" />
+                    <input className="wordCount-input" onChange={changed} placeholder={dbData ? dbData.wordCount : null} type="text" />
                 </div>
-            </div>
+            </form>
         }
         </div>
     )

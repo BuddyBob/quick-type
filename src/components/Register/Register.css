@@ -127,7 +127,17 @@ input[type=password]:focus,input[type=text]:focus {
 input[type=password]:placeholder,input[type=password]:placeholder {
   color: #cccccc;
 }
+@media screen and (max-width:470px) {
+  input[type=submit]{
+    font-size:10px;
+    margin-right:auto;
+    margin-left:auto;
+    text-align: center;
+    padding: 15px 50px;
 
+
+  }
+}
 
 
 /* ANIMATIONS */

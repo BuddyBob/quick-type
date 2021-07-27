@@ -1,4 +1,5 @@
 
+/* table */
 .tb{
     width:98%;
     position: relative;
@@ -12,34 +13,60 @@
 }
 table thead tr th{ color: var(--background)}
 table tbody tr td{ font-family: 'Roboto Mono', Courier, monospace; color: var(--titleColor)}
-
-.inp{
-    position: relative;
-    top:-2px;
-}
-.btnThing{
-    position: relative;
-}
-.row-count-drop{
-    text-align:left;
-    position: relative;
-    top:100px
-}
-.log-sort-drop{
-    text-align:left;
-    position: relative;
-    top:100px
+@media screen and (max-width:580px){
+    table thead tr th{ font-size: 13px;}
+    table tbody tr td{ font-size:12px;}
 }
 
-@media screen and (max-width:1040px){   
-    .log-sort-drop{
-        position: fixed;
-        top:47%;
+
+
+
+
+/* log */
+.log{
+    position: relative;
+    top:-75px;
+}
+.row-count-dropdown{
+    position: relative;
+    top:100px;
+    left:10px;
+    text-align: left;
+}
+.sort-type-dropdown{
+    position: relative;
+    top:100px;
+    left:15px;
+    text-align: left;
+}
+.options{
+    font-size:12px;
+}
+
+@media screen and (max-width:710px){   
+    .log{
+        position: relative;
+        top:-10px;
     }
+    .row-count-dropdown{
+        position: relative;
+        left:3px;
+    }
+    .sort-type-dropdown{
+        position: relative;
+        top:35px;
+        left:-70px;
+    }
+    .options{
+        font-size:10px;
+        padding:0px;
+        margin:0px;
+    }
+    
 }
-@media screen and (max-width:691px){   
+/* @media screen and (max-width:691px){   
     .log-sort-drop{
         position: fixed;
         top:50%;
     }
-}
+} */

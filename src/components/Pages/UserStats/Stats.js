@@ -3,7 +3,6 @@ import { useAuth } from '../../context/AuthContext'
 import { db } from '../../../firebase'
 import NavBar from '../../Nav/NavBar';
 import Reload from '../../Reload'
-import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
@@ -11,14 +10,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import './Stats.css'
 import sum from 'lodash/sum';
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-      margin: theme.spacing(1.4),
-      minWidth: 110
-    },
-  }));
+
 const Stats = () => {
-    const classes = useStyles();
     const { currentUser } = useAuth();
     const [userId,setUserId] = useState(currentUser.uid)
     const [wpmArr,setWpmArr] = useState()
@@ -71,10 +64,6 @@ const Stats = () => {
             const zipped = _.zip(wpmArr.slice(0,rowDisplay),rawWpmArr.slice(0,rowDisplay),accuracyArr.slice(0,rowDisplay),realAccuracyArr.slice(0,rowDisplay),errorArr.slice(0,rowDisplay))
             //sort zip
             const modZipped = sortData(sortType,zipped)
-            // arr.sort( function( a, b ){
-            // if ( a[2] == b[2] ) return 0;
-            // return a[2] > b[2] ? -1 : 1;
-            // });
             return modZipped.map(pair => {
                 return (
                     <tr>
@@ -129,51 +118,53 @@ const Stats = () => {
                             </tbody>
                         </table>
                     </div>
-
-                    <div id="log-settings">
-                        <form className="input-group">
-                            <div className="row-count-drop">
-                                <FormControl variant="filled" className={classes.formControl}>
-                                    <InputLabel className="dropdown-label" style={{color:"#ffdc7a", backgroundColor:"#323437"}}>Rows</InputLabel>
-                                    <Select style={{color:"white"}} value={rowCount} onChange={(e) => handleChange(e,"rows")}>
-                                    <MenuItem value={5}>5 rows</MenuItem>
-                                    <MenuItem value={10}>10 rows</MenuItem>
-                                    <MenuItem value={30}>30 rows</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </div>
-                            <div className="log-sort-drop">
-                                <FormControl variant="filled" className={classes.formControl}>
-                                    <InputLabel className="dropdown-label" style={{color:"#ffdc7a", backgroundColor:"#323437"}}>Sort</InputLabel>
-                                    <Select style={{color:"white"}} value={sortType} onChange={(e) => handleChange(e,"sort")}>
-                                    <MenuItem value={"new - old"}>Newest to Oldest</MenuItem>
-                                    <MenuItem value={"old - new"}>Oldest to Newest</MenuItem>
-                                    <MenuItem value={"Real Wpm"}>Real Wpm</MenuItem>
-                                    <MenuItem value={"Raw Wpm"}>Raw Wpm</MenuItem>
-                                    <MenuItem value={"Real Accuracy"}>Real Accuracy</MenuItem>
-                                    <MenuItem value={"Raw Accuracy"}>Raw Accuracy</MenuItem>
-                                    <MenuItem value={"Errors"}>Errors</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </div>
-                        </form>
-                    </div>
-                    <div id="log-table">
-                        <h2 className="text-center font-weight-bold mt-5 avgTitle">Log</h2>
-                        <table className="table table-dark table-striped tb">
-                            <thead >
-                                <tr className="table-light">
-                                    <th scope="col">Wpm</th>
-                                    <th scope="col">Raw Wpm</th>
-                                    <th scope="col">Accuracy</th>
-                                    <th scope="col">Real Accuracy</th>
-                                    <th scope="col">Errors</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {returnIt(rowCount)}
-                            </tbody>
-                        </table>
+                    <div className="log">
+                        <div id="log-settings">
+                            <form className="input-group">
+                                <div className="row-count-drop">
+                                    <FormControl variant="filled" className="row-count-dropdown">
+                                        <InputLabel className="dropdown-label" style={{color:"#ffdc7a", backgroundColor:"#323437"}}>Rows</InputLabel>
+                                        <Select style={{color:"white"}} value={rowCount} onChange={(e) => handleChange(e,"rows")}>
+                                        <MenuItem value={5}><span className="options">5 rows</span></MenuItem>
+                                        <MenuItem value={10}><span className="options">10 rows</span></MenuItem>
+                                        <MenuItem value={30}><span className="options">30 rows</span></MenuItem>
+                                        <MenuItem value={100}><span className="options">100 rows</span></MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
+                                <div className="log-sort-drop">
+                                    <FormControl variant="filled" className="sort-type-dropdown">
+                                        <InputLabel className="dropdown-label" style={{color:"#ffdc7a", backgroundColor:"#323437"}}>Sort</InputLabel>
+                                        <Select style={{color:"white"}} value={sortType} onChange={(e) => handleChange(e,"sort")}>
+                                        <MenuItem value={"new - old"}><span className="options">Newest to Oldest</span></MenuItem>
+                                        <MenuItem value={"old - new"}><span className="options">Oldest to Newest</span></MenuItem>
+                                        <MenuItem value={"Real Wpm"}><span className="options">Real Wpm</span></MenuItem>
+                                        <MenuItem value={"Raw Wpm"}><span className="options">Raw Wpm</span></MenuItem>
+                                        <MenuItem value={"Real Accuracy"}><span className="options">Real Accuracy</span></MenuItem>
+                                        <MenuItem value={"Raw Accuracy"}><span className="options">Raw Accuracy</span></MenuItem>
+                                        <MenuItem value={"Errors"}><span className="options">Errors</span></MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </div>
+                            </form>
+                        </div>
+                        <div id="log-table">
+                            <h2 className="text-center font-weight-bold mt-5 avgTitle">Log</h2>
+                            <table className="table table-dark table-striped tb">
+                                <thead >
+                                    <tr className="table-light">
+                                        <th scope="col">Wpm</th>
+                                        <th scope="col">Raw Wpm</th>
+                                        <th scope="col">Accuracy</th>
+                                        <th scope="col">Real Accuracy</th>
+                                        <th scope="col">Errors</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {returnIt(rowCount)}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             }

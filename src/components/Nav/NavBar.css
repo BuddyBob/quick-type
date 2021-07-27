@@ -87,8 +87,7 @@ nav .burger{
         left:40%
     }
     nav  .nav-links-wide{
-        z-index: 1;
-        left:30%;
+        z-index: 10;
         position:fixed;
         padding-left:80px;
         min-height:125vh;
@@ -96,10 +95,10 @@ nav .burger{
         background-color: var(--dark);
         display: flex;
         flex-direction: column;
-        
         align-items: center;
         transform:translateX(-500px);
         transition: .5s ease-in-out;
+        padding-top:50px;
         padding-bottom:500px;
     }
     nav  .nav-links-skinny{
@@ -203,3 +202,12 @@ nav .burger{
     }
 }
 
+@media screen and (max-width:630px){
+    nav{
+        width:110%;
+    }
+    .burger{
+        position: relative;
+        margin-right:20px;
+    }
+}

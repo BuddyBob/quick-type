@@ -1,180 +1,232 @@
 /* background */
-.popup{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height: 150%;
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 150%;
     background-color: var(--dark);
-    margin-top:2px;
-    display:flex;
-    flex:auto;
-    justify-content:center;
-    align-items:center;
+    margin-top: 2px;
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
 }
+
 /* main popup */
-.popup-inner{
-    border-top:2px solid var(--white);
-    border-right:2px solid var(--white);
-    border-left:2px solid var(--white);
-    border-bottom:2px solid var(--white);
-    height:95%;
-    position:relative;
-    width:70%;
+.popup-inner {
+    border: 2px solid var(--white);
+    padding-bottom:300px;
+    border-radius: 15px;
+    height: 95%;
+    position: relative;
+    width: 70%;
     background-color: var(--dark);
-    
 }
-.stats{
-    position:absolute;
-    top:50px;
-} 
+
+
 /* restart text button */
-.popup-inner .restart{
-    color:var(--titleColor);
-    min-width:18px;
-    min-height:18px;
-    position:absolute;
-    top:23px;
-    right:20px;
+.popup-inner .restart {
+    color: var(--titleColor);
+    min-width: 18px;
+    min-height: 18px;
+    position: absolute;
+    top: 23px;
+    right: 20px;
 }
+
 /* new text button */
-.popup-inner .next{
-    color:var(--titleColor);
-    min-width:25px;
-    min-height:25px;
-    position:absolute;
-    top:20px;
-    right:80px;
+.popup-inner .next {
+    color: var(--titleColor);
+    min-width: 25px;
+    min-height: 25px;
+    position: absolute;
+    top: 20px;
+    right: 80px;
 }
 
-.restart:hover{
+.restart:hover {
     border-bottom: 2px solid white;
 }
-.next:hover{
+
+.next:hover {
     border-bottom: 2px solid white;
 }
-.popup-title{
-    position:absolute;
-    color:var(--white);
-    font-size:180%;
+
+.popup-title {
+    position: absolute;
+    color: var(--white);
+    font-size: 180%;
     border-bottom: 1px solid;
-    left:6.7%;
-    top:2px;
-    margin-top:10px;
+    border-color: deeppink;
+    left: 6.7%;
+    top: 2px;
+    margin-top: 10px;
 }
 
-.row-display{
-    position:absolute;
-    left:5%;
-    padding-right:0;
-    margin-top:20px;
+
+
+/* levels */
+
+.level {
+    border:2px solid;
+    border-color: var(--backgroundColor);
+    border-radius: 20px;
+    position: relative;
+    top: 50px;
+    left:60px;
+    margin-right:100px;
+}
+
+.animal-img {
+    position: relative;
+    width:160px;
+    height:150px;
+    border-right:2px solid;
+    padding-right:20px;
+    border-color: white;
 
 }
-/* labels */
-.label-popup{
-    text-align: center;
-    background-color:var(--white);
-    border-color: var(--white);
-    color: var(--black);
-    font-family: "Roboto Mono",sans-serif;
-    font-weight:400;
-    border-radius:10px;
-    font-size:24px;
-    padding: 0px 50px 0px 50px;
-    margin-bottom: 10px;
-}
-/* number stats */
-.number{
+
+.speed-desc {
+    position: relative;
+    border: none;
+    font-size:20px;
+    text-align:center;
+    font-family: "Roboto Mono", "Helvetica Neue", courier new, monospace;
     color:var(--titleColor);
-    position: relative;
-    top:8px;
-    margin-bottom: 30px;
-    font-size:18px;
+    top:40px;
+    right:50px;
+    margin-bottom:20px
 }
-/* phone */
-@media screen and (max-width:810px){
-    .label-popup{
-        font-size:20px;
-        padding: 3px 10px 3px 10px;
-        margin-top:20px;
-        margin-right:50px;
+@media screen and (max-width: 1156px){
+    .level {
+        position: relative;
     }
-    .popup{
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height: 200%;
-        background-color: var(--background);
-        margin-top:2px;
-        display:flex;
-        flex:auto;
-        justify-content:center;
-        align-items:center;
+    .speed-desc{
+        top:25px;
+        right:50px;
+        font-size: 15px;
     }
-    .number{
-        font-size: 20px;
-        color:var(--titleColor);
+    .animal-img{
+        width:110px;
+        height:100px;
+        right:10px;
+        margin-left:20px;
+    }
+
+}
+@media screen and (max-width:980px){
+    .level{
+        border:none;
+        display: flex;
+        flex-direction: column;
+    }
+    .animal-img{
+        width:100px;
+        border-right:none;
+        border-bottom: 2px solid;
+        border-color: white;
+        display: block;
+        padding:0px;
+        left:10px;
+    }
+    .speed-desc{
+        top:120px;
+        position: relative;
+        white-space: nowrap;
+        left:30px;
     }
 }
-/* very tiny phone */
-@media screen and (max-width:810px) and (max-height:377px){
-    .label-popup{
+@media screen and (max-width:980px){
+    .level{
+        position: relative;
+        top:0px;
+        left:0px;
+        margin-right:60px;
+    }
+}
+@media screen and (max-width:980px){
+    .speed-desc{
+        position: relative;
+        white-space: inherit;
+    }
+}
+/* level positioning as window screen shrinks (HIGH WINDOW)*/
+/* @media screen and (max-width: 1096px){
+    .level {
+        position: relative;
+        top:400px;
+    }
+    .speed-desc{
+        top:28px;
+        right:10px;
+        font-size: 20;
+    }
+
+}
+@media screen and (max-width:997px){
+    .level {
+        top:500px;
+    }
+    .animal-img{
+        height:100px;
+        width:100px;
+    }
+    .speed-desc{
+        font-size:15px;
+        top:25px;
+        right:40px;
+    }
+}
+@media screen and (max-width:946px){
+    .animal-img{
+        height:100px;
+        width:100px;
+    }
+}
+@media screen and (max-width:805px){
+    .speed-desc{
+        font-size:15px;
+        top: 15px;
+        right:10px;
+    }
+}
+@media screen and (max-width:720px){
+    .speed-desc{
         font-size:10px;
-        padding: 2px 8px 2px 8px;
-        margin-top:20px;
-        margin-right:50px;
-    }
-
-}
-
-/* popup goes above view whenever window is shortened (height)   */
-@media screen and (min-width:100px) and (max-height:366px){
-    .popup-inner{
-        margin-top:100px;
-        height:100%
-    }
-    .popup{
-        height:270%
-    }
-}
-@media screen and (min-width:1200px) and (max-height:310px){
-    .popup-inner{
-        margin-top:100px;
-    }
-}
-/* medium screen stats has stats go below border */
-@media screen and (min-width:811px) and (max-width:1003px) and (max-height:575px){
-    .label-popup{
-        padding: 2px 5px 2px 5px;
-        font-size:20px
-    }
-    .number{
-        font-size:19px
+        top: 15px;
+        right:10px;
     }
 }
 
-/* mini screen has stats go below border */
-@media screen and (max-width:517px) and (max-height:330px){
-    .number{
-        font-size: 10px;
+@media screen and (max-width:700px){
+    .level{
+        border:none;
+        display:flex;
+        flex-direction:column;
+        left:10px;
     }
-    .popup-inner{
-        height:120%;
-        top:50px;
+    .animal-img{
+        border:none;
+        display:flex;
+        flex-direction:column;
+        right:10px;
+    }
+    .speed-desc{
+        top:90px;
+        left:15px;
+        font-size:20px;
     }
 }
+@media screen and (max-height:629px) {
+    .animal-img{
+        top:0px;
+        width:100px;
+        height:100px;
+    }
+    .speed-desc{
+        top:90px;
+    }
+} */
 
-
-/* animals */
-.animal-img{
-    position: relative;
-    left:23px;
-    top:400px;
-}
-.speed-desc{
-    position: relative;
-    left:-70px;
-    top:285%;
-    border:none;
-}

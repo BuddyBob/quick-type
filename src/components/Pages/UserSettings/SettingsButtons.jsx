@@ -1,15 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react'
-import Button from '@material-ui/core/Button'
-import styled from 'styled-components'
+import React, { useState, useEffect } from 'react'
 import { db } from '../../../firebase'
 import { Label } from '../../Label'
+import styled from 'styled-components'
 import './Settings.css'
 const SettingsButtons = ({dbData,change,types}) => {
     const userId = localStorage.getItem('currentUserId')
-    const englishTypeRef = useRef()
     const [Alert, setAlert] = useState([false,"No Error"])
-    let [data, setData] = useState(dbData)
     const [active, setActive] = useState()
+    let [data, setData] = useState(dbData)
     useEffect(async () =>{
         await db.collection("users").doc(userId).get().then(async (doc) => {
             await setActive(change==="englishType" ? doc.data().englishType : "")
@@ -49,10 +47,11 @@ const SettingsButtons = ({dbData,change,types}) => {
     `
     const BtnToggle = styled(Btn)`
         opacity: 0.5;
+        border-color: white;
         ${({ active }) => 
         active && `
         border:2px solid;
-        borderColor:#fff;
+        border-color:#ffdc7a;
         opacity:5;
         `}
     `
@@ -62,9 +61,9 @@ const SettingsButtons = ({dbData,change,types}) => {
     }
     function BtnGroup(){
         return  (
-        <div style={{position:"relative",left:"30px"}}>
+        <div style={{position:"relative",left:"30px", padding:"5px"}}>
         {types.map(type => (
-            <BtnToggle active={active===type} onClick={() => btnClicked(type)}>{type}</BtnToggle>
+            <BtnToggle style={{margin:"5px"}}active={active===type} onClick={() => btnClicked(type)}>{type}</BtnToggle>
         ))}
         </div>
         )
@@ -77,7 +76,7 @@ const SettingsButtons = ({dbData,change,types}) => {
                     <div className="span20">
                         <div className="alert alert-danger alert-dismissible" role="alert">
                             <h5 className="alert-heading">OOPS</h5>
-                            <span style={{fontSize:"2px"}}>{Alert[1]}</span>
+                            <span style={{fontSize:"15px"}}>{Alert[1]}</span>
                             <button onClick={() => {setAlert([false,null])}} type="button" className="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">x</span>
                             </button>
@@ -99,7 +98,7 @@ const SettingsButtons = ({dbData,change,types}) => {
             </form>
         }
         {change === "wordCount" &&
-            <form>
+            <form className="wrrdd">
                 <div className="row">
                     <div className="col mt-3 wordCount-label">
                         <Label type="label" >{change}</Label>

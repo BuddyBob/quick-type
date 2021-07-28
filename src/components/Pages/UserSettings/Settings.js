@@ -25,12 +25,11 @@ const Settings = (props) => {
             <NavBar/>
             <div className="wrapper fadeInDown">
                 <div id="formContent">
-                    <div id="formContent"></div>
                     <h2 className="register-title">Settings</h2>
                 </div>
             <form className="settings-options">
                 <div className="row mt-4">
-                        <ToggleGroup dbData={data} change={"wordCount"} types={["50","60"]}/>
+                    <ToggleGroup dbData={data} change={"wordCount"} types={["50","60"]}/>
                 <div className="row">
                     <ToggleGroup dbData={data} change={"englishType"} types={["english1k","english3k","english2k","english4k"]}/>
                 </div>

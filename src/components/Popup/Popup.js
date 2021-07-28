@@ -2,6 +2,7 @@ import React from 'react'
 import  useWindowDimensions  from './useWindowDimensions'
 import Cheetah from '../../images/Cheetah.png'
 import Sloth from '../../images/Sloth.png'
+import Horse from '../../images/Horse.png'
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { IoArrowForward } from 'react-icons/io5'
@@ -26,12 +27,20 @@ const useStyles = makeStyles((theme) => ({
 function chooseAnimal(wpm){
     let animal;
     switch (true) {
-        case wpm < 30:
-            animal = ["Sloth","You're as fast as a Sloth."]
+        case wpm <= 30:
+            animal = ["Sloth","Uhh... Your as slow as a sloth"]
             break
-        case (wpm > 91):
-            animal = ["Cheetah","Wow! You're as fast as a Cheetah."]
+        case wpm > 31 &&  wpm <= 50:
+            animal = ["Sloth","Ok. You type as fast as an elephant"]
             break
+        case (wpm > 50 && wpm <= 70):
+            animal = ["Horse","Sure. You type as fast as a horse"]
+            break
+        case (wpm > 70 && wpm <= 100):
+            animal = ["Cheetah","Wow! You type as fast as a Cheetah can run!"]
+            break
+        case (wpm === "Infinity" || wpm > 200):
+            animal = ["Hacker", "Legit!"]
         default:
             animal = ["Hacker","You type as fast as a HACKER!"]
             break
@@ -93,7 +102,8 @@ function Popup(props) {
                                 src={
                                 animal_name === "Sloth" ? Sloth : 
                                 animal_name === "Cheetah" ? Cheetah: 
-                                Cheetah
+                                animal_name === "Horse" ? Horse: 
+                                " "
                                 } 
                                 type="image" 
                                 />

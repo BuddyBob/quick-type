@@ -84,18 +84,18 @@
     height:150px;
     border-right:2px solid;
     padding-right:20px;
-    border-color: white;
+    border-color: var(--hotPink);
 
 }
 
 .speed-desc {
     position: relative;
     border: none;
-    font-size:20px;
+    font-size:18px;
     text-align:center;
     font-family: "Roboto Mono", "Helvetica Neue", courier new, monospace;
     color:var(--titleColor);
-    top:40px;
+    top:50px;
     right:50px;
     margin-bottom:20px
 }
@@ -126,7 +126,7 @@
         width:100px;
         border-right:none;
         border-bottom: 2px solid;
-        border-color: white;
+        border-color: var(--hotPink);
         display: block;
         padding:0px;
         left:10px;
@@ -134,7 +134,7 @@
     .speed-desc{
         top:120px;
         position: relative;
-        white-space: nowrap;
+        white-space: inherit;
         left:30px;
     }
 }
@@ -145,88 +145,8 @@
         left:0px;
         margin-right:60px;
     }
-}
-@media screen and (max-width:980px){
     .speed-desc{
         position: relative;
         white-space: inherit;
     }
 }
-/* level positioning as window screen shrinks (HIGH WINDOW)*/
-/* @media screen and (max-width: 1096px){
-    .level {
-        position: relative;
-        top:400px;
-    }
-    .speed-desc{
-        top:28px;
-        right:10px;
-        font-size: 20;
-    }
-
-}
-@media screen and (max-width:997px){
-    .level {
-        top:500px;
-    }
-    .animal-img{
-        height:100px;
-        width:100px;
-    }
-    .speed-desc{
-        font-size:15px;
-        top:25px;
-        right:40px;
-    }
-}
-@media screen and (max-width:946px){
-    .animal-img{
-        height:100px;
-        width:100px;
-    }
-}
-@media screen and (max-width:805px){
-    .speed-desc{
-        font-size:15px;
-        top: 15px;
-        right:10px;
-    }
-}
-@media screen and (max-width:720px){
-    .speed-desc{
-        font-size:10px;
-        top: 15px;
-        right:10px;
-    }
-}
-
-@media screen and (max-width:700px){
-    .level{
-        border:none;
-        display:flex;
-        flex-direction:column;
-        left:10px;
-    }
-    .animal-img{
-        border:none;
-        display:flex;
-        flex-direction:column;
-        right:10px;
-    }
-    .speed-desc{
-        top:90px;
-        left:15px;
-        font-size:20px;
-    }
-}
-@media screen and (max-height:629px) {
-    .animal-img{
-        top:0px;
-        width:100px;
-        height:100px;
-    }
-    .speed-desc{
-        top:90px;
-    }
-} */
-

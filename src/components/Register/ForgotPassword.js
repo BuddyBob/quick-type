@@ -1,10 +1,30 @@
 import React, { useRef, useState } from 'react'
-import NavBar from '../Nav/NavBar'
-import { Alert } from "react-bootstrap"
+import { makeStyles } from '@material-ui/core/styles';
+import { AlertTitle, Alert } from '@material-ui/lab';
+import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { Link } from 'react-router-dom'
+import IconButton from '@material-ui/core/IconButton';
+import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
+import { db } from '../../firebase'
+import NavBar from '../Nav/NavBar'
 import './Register.css'
+const useStyles = makeStyles((theme) => ({
+    root: {
+      width: '100%',
+      '& > * + *': {
+        marginTop: theme.spacing(),
+      },
+    },
+    errorText: {
+        textAlign: 'left'
+    },
+    successText: {
+        textAlign: 'left'
+    }
+}));
 const ForgotPassword = () =>  {
+        const classes = useStyles();
         const emailRef = useRef()
         const { resetPassword } = useAuth()
         const [error, setError] = useState('')
@@ -22,7 +42,6 @@ const ForgotPassword = () =>  {
             } catch(err) {
                 setError(err.message)
             }
-        
             setLoading("false")
         }
         
@@ -34,8 +53,39 @@ const ForgotPassword = () =>  {
                         <div className="fadeIn first">
                         <h2 className="register-title">Password Reset</h2>
                         </div>
-                        {error && <Alert variant="danger">{error}</Alert>}
-                        {message && <Alert variant="success">{message}</Alert>}
+                        {error && 
+                            <div className={classes.root}>
+                                <Alert 
+                                    action={
+                                        <IconButton
+                                        aria-label="close"
+                                        color="inherit"
+                                        size="small"
+                                        onClick={() => {
+                                            setError('');
+                                        }}
+                                        >
+                                        <CloseIcon fontSize="inherit" />
+                                        </IconButton>
+                                    }
+                                className={classes.errorText} 
+                                severity="error">
+                                    <AlertTitle>Oh No!</AlertTitle>
+                                    {error}
+                                </Alert>
+                            </div>
+                        }
+                        {message && 
+                            <div className={classes.root}>
+                                <Alert 
+                                    icon={<CheckIcon fontSize="inherit" />}
+                                    className={classes.successText} 
+                                    severity="success">
+                                    <AlertTitle>Success!</AlertTitle>
+                                    {message}
+                                </Alert>
+                            </div>
+                        }
                         <form onSubmit={handleSubmit}>
                             <input autoComplete="off" ref={emailRef} type="text" id="email" className="fadeIn second" name="login" placeholder="Email" required/>
                             <input disable={loading} type="submit" className="fadeIn fourth" value="Reset Password"/>

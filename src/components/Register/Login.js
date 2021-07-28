@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'left'
     }
   }));
-const Login = (props) =>  {
+const Login = () =>  {
         const classes = useStyles();
         const emailRef = useRef()
         const passwordRef = useRef()

@@ -6,9 +6,10 @@ import GetText from './components/GetText';
 import Popup from './components/Popup/Popup'
 import Reload from './components/Reload'
 import SetData from './components/SetData'
+import useSound from 'use-sound';
+import assets from './assets'
 import { Link } from 'react-router-dom';
 import { IoSettingsSharp } from 'react-icons/io5'
-import { FaInfo } from 'react-icons/fa'
 import { FaUserPlus } from 'react-icons/fa'
 import { IoLogIn } from 'react-icons/io5'
 import { IoLogOut } from 'react-icons/io5'
@@ -34,9 +35,7 @@ function returnUserData(userId){
 }
 SetData()
 let interval = null
-
 const Home = () =>  {
-
   // set hooks
   const { currentUser, logout } = useAuth()
   const [userId, setUserId] = useState(currentUser ? currentUser.uid : null)
@@ -53,7 +52,7 @@ const Home = () =>  {
       })
     }
   }, [])
-  // console.log({id:userId,status:loggedIn,english:englishType,words:wordCount})
+  const [play] = useSound(assets.sounds.click2);
   const [popup, setPopup] = useState(false)
   const [userInput,setUserInput] = useState('')
   const [previousUserInput, setPreviousUserInput] = useState('') 
@@ -62,7 +61,7 @@ const Home = () =>  {
   const [finished, setFinished] = useState(false)
   const [sec,setSec] = useState(0)
   const [started,setStarted] = useState(false)
-  const [registerError,setRegError] = useState("")
+  const [registerError,setRegError] = useState('')
 
   //get new text
   function newText(event){
@@ -91,6 +90,7 @@ const Home = () =>  {
   }
   //run function as input feild changes
   function onUserInputChange(e){
+    play()
     const v = e.target.value;
     //check if error occurred
     if ((v.length>previousUserInput.length) && (v[v.length-1]!==text[v.length-1])){

@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import NavBar from '../../Nav/NavBar' 
+import GenData from './GenData'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,26 +12,30 @@ import TableRow from '@material-ui/core/TableRow';
 const StyledTableCell = withStyles((theme) => ({
     head: {
       backgroundColor: "#ede8e8",
+      padding:5,
     },
     body: {
       color:"#ffdc7a",
-      fontSize: 14,
+      fontSize: 12,
+      fontFamily:"Roboto Mono"
     },
 }))(TableCell);
   
 const StyledTableRow = withStyles((theme) => ({
     root: {
-      '&:nth-of-type(odd)': {
-        backgroundColor: "#2D2F31",
-      },
-      '&:nth-of-type(even)': {
-        backgroundColor: "#1f2022",
-      },
+      backgroundColor:"#2D2F31",
+      height:1,
     },
+
   }))(TableRow);
   
 const useStyles = makeStyles({
-
+    table: {
+        border:"1px solid white", 
+        borderRadius:200, 
+        maxWidth: 500, 
+        margin: 'auto'
+    }
 });
 
 function createData(place, name, wpm) {
@@ -47,18 +52,18 @@ const data = [
 
 function Leaderboard() {
   const classes = useStyles();
-
+  GenData();
   return (
     <div>
         <div id="nav" style={{marginBottom:"40px"}}>
         <NavBar/>
         </div>
-        <Table style={{ maxWidth: 1000, margin: 'auto' }}>
+        <Table className={classes.table}>
             <TableHead>
                 <TableRow>
-                    <StyledTableCell style={{color:"#ed3469"}} align="left">#</StyledTableCell>
-                    <StyledTableCell align="left">Name</StyledTableCell>
-                    <StyledTableCell align="center">Wpm</StyledTableCell>
+                    <StyledTableCell style={{color:"#ed3469", paddingLeft:"15px"}} align="left"><strong>#</strong></StyledTableCell>
+                    <StyledTableCell style={{paddingLeft:"15px"}} align="left"><strong>Name</strong></StyledTableCell>
+                    <StyledTableCell style={{paddingLeft:"15px"}} align="center"><strong>Wpm</strong></StyledTableCell>
                 </TableRow>
             </TableHead>
             <TableBody>

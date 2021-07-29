@@ -1,10 +1,7 @@
 import React from 'react'
 import  useWindowDimensions  from './useWindowDimensions'
-import Cheetah from '../../images/Cheetah.png'
-import Sloth from '../../images/Sloth.png'
-import Horse from '../../images/Horse.png'
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+import assets from '../../assets/'
+import { Paper, Grid } from '@material-ui/core/';
 import { IoArrowForward } from 'react-icons/io5'
 import { FaRedo } from 'react-icons/fa'
 import { makeStyles } from '@material-ui/core/styles';
@@ -100,9 +97,9 @@ function Popup(props) {
                             <input 
                                 className="animal-img" 
                                 src={
-                                animal_name === "Sloth" ? Sloth : 
-                                animal_name === "Cheetah" ? Cheetah: 
-                                animal_name === "Horse" ? Horse: 
+                                animal_name === "Sloth" ? assets.images.Sloth : 
+                                animal_name === "Cheetah" ? assets.images.Cheetah: 
+                                animal_name === "Horse" ? assets.images.Horse: 
                                 " "
                                 } 
                                 type="image" 

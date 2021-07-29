@@ -44,3 +44,9 @@ body{
 .navbar-links li a:hover{
     color: var(--titleColor);
 }
+@media screen and (max-width:747px) {
+    .logo{
+        position: relative;
+        right:15px;
+    }
+}

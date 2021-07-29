@@ -15,6 +15,9 @@
     left:60%;
 
 }
+.leaderboard-icon{
+    color:var(--white)
+}
 .logout-icon{
     color:var(--white)
 }
@@ -33,8 +36,10 @@
 .stats-icon{
     color:var(--white)
 }
+.leaderboard-icon:hover{
+    color:var(--titleColor)
+}
 .logout-icon:hover{
-    background-color: var(--background);
     color:var(--titleColor);
 }
 .login-icon:hover{
@@ -53,13 +58,14 @@
     color:var(--titleColor)
 }
 
-@media screen and (max-width:1325px){
+@media screen and (max-width:1420px){
     .nav-bar{
         position: relative;
         left:58%;
     }
 }
-@media screen and (max-width:1265px){
+
+@media screen and (max-width:1350px){
     .nav-bar{
         position: relative;
         left:0%;

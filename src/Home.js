@@ -13,6 +13,7 @@ import { FaUserPlus } from 'react-icons/fa'
 import { IoLogIn } from 'react-icons/io5'
 import { IoLogOut } from 'react-icons/io5'
 import { IoStatsChart } from 'react-icons/io5'
+import { FaCrown } from 'react-icons/fa'
 import { useAuth } from './components/context/AuthContext'
 import { db } from './firebase'
 import './index.css';
@@ -208,41 +209,41 @@ const Home = () =>  {
               </Link>
               <form className="input-group nav-bar" style={{position:"absolute"}}>
                 <div>
-                  <Link to='/info'>
-                      <FaInfo size={20} className="info-icon"/>
+                  <Link to="/leader-board">
+                    <FaCrown size={19} className="leaderboard-icon"/>
                   </Link>
                 </div>
                 { currentUser !== null &&
                 <div>
                   <Link to='/settings' >
-                      <IoSettingsSharp size={20} className="settings-icon"/>
+                      <IoSettingsSharp size={18} className="settings-icon"/>
                   </Link>
                 </div>
                 } 
                 { currentUser === null &&
                 <div>
                   <Link to='/signup'>
-                    <FaUserPlus style={{position:"relative",left:"3px",color:"white"}}size={22} className="addUser-icon"/>
+                    <FaUserPlus style={{position:"relative",left:"3px"}} size={20} className="addUser-icon"/>
                   </Link>
                 </div>
                 }
                 { currentUser === null &&
                   <div>
                     <Link to='/login'>
-                      <IoLogIn size={25} className="login-icon"/>
+                      <IoLogIn size={22} className="login-icon"/>
                     </Link>
                   </div>}
                 { currentUser !== null && 
                   <div>
                     <Link to="/stats">
-                      <IoStatsChart  size={20} className="logout-icon"/>
+                      <IoStatsChart  size={18} className="stats-icon"/>
                     </Link>
                   </div>
                 }
                 { currentUser !== null && 
-                <div style={{color: 'white'}}>
-                  <IoLogOut size={25} onClick={handleLogout} className="logout-icon"/>
-                </div>}
+                  <div style={{color: 'white'}}>
+                    <IoLogOut size={22} onClick={handleLogout} className="logout-icon"/>
+                  </div>}
               </form>
             </div>
             <div>

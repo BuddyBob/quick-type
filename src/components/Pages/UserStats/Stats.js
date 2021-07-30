@@ -98,9 +98,9 @@ const Stats = () => {
                         <table className="table table-dark table-striped tb">
                             <thead >
                                 <tr className="table-light">
-                                    <th scope="col">Wpm</th>
+                                    <th scope="col">Real Wpm</th>
                                     <th scope="col">Raw Wpm</th>
-                                    <th scope="col">Accuracy</th>
+                                    <th scope="col">Raw Accuracy</th>
                                     <th scope="col">Real Accuracy</th>
                                     <th scope="col">Errors</th>
                                 </tr>
@@ -153,7 +153,7 @@ const Stats = () => {
                                     <tr className="table-light">
                                         <th scope="col">Wpm</th>
                                         <th scope="col">Raw Wpm</th>
-                                        <th scope="col">Accuracy</th>
+                                        <th scope="col">Raw Accuracy</th>
                                         <th scope="col">Real Accuracy</th>
                                         <th scope="col">Errors</th>
                                     </tr>

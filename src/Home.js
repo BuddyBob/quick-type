@@ -35,6 +35,20 @@ function returnUserData(userId){
 }
 SetData()
 let interval = null
+const soundList = [assets.sounds.click2]
+function getRandom(arr, n) {
+  var result = new Array(n),
+      len = arr.length,
+      taken = new Array(len);
+  if (n > len)
+      throw new RangeError("getRandom: more elements taken than available");
+  while (n--) {
+      var x = Math.floor(Math.random() * len);
+      result[n] = arr[x in taken ? taken[x] : x];
+      taken[x] = --len in taken ? taken[len] : len;
+  }
+  return result;
+}
 const Home = () =>  {
   // set hooks
   const { currentUser, logout } = useAuth()
@@ -52,7 +66,7 @@ const Home = () =>  {
       })
     }
   }, [])
-  const [play] = useSound(assets.sounds.click2);
+  const [play] = useSound(getRandom(soundList,1));
   const [popup, setPopup] = useState(false)
   const [userInput,setUserInput] = useState('')
   const [previousUserInput, setPreviousUserInput] = useState('') 

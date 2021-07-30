@@ -5,7 +5,7 @@ const SetData = () => {
         if (localStorage.getItem("wordCount")) {
         console.log("WORD COUNT ",localStorage.getItem("wordCount"))
         }else{
-            localStorage.setItem("wordCount","30")
+            localStorage.setItem("wordCount","15")
         }
         if (localStorage.getItem("englishType")){
         console.log("ENGLISH TYPE",localStorage.getItem("englishType"))

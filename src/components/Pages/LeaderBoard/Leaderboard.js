@@ -37,6 +37,7 @@ const useStyles = makeStyles({
         margin: 'auto'
     }
 });
+
 function setUp(data){
     function customSort(arr){
       arr.sort(function(first, second) {

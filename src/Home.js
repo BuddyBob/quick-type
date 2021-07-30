@@ -79,9 +79,9 @@ const Home = () =>  {
     try{
       await logout()
       setEnglishType("english1k")
-      setWordCount("30")
+      setWordCount("15")
       localStorage.setItem("englishType","english1k")
-      localStorage.setItem("wordCount","30")
+      localStorage.setItem("wordCount","15")
       setLoggedIn(false)
       setUserId(null)
       console.log("LOGGED OUT")

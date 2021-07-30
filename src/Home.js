@@ -6,7 +6,6 @@ import GetText from './components/GetText';
 import Popup from './components/Popup/Popup'
 import Reload from './components/Reload'
 import SetData from './components/SetData'
-import useSound from 'use-sound';
 import assets from './assets'
 import { Link } from 'react-router-dom';
 import { IoSettingsSharp } from 'react-icons/io5'
@@ -36,7 +35,7 @@ function returnUserData(userId){
 SetData()
 let interval = null
 const soundList = [assets.sounds.click2,assets.sounds.click3,assets.sounds.click4,assets.sounds.click5,assets.sounds.click6,assets.sounds.click7]
-function getRandom(arr, n) {
+function getRandom() {
   return soundList[Math.round(Math.random() * soundList.length)]
 }
 var audio = new Audio(soundList[0])
@@ -96,10 +95,10 @@ const Home = () =>  {
   //run function as input field changes
   function onUserInputChange(e){
     //get random sound
-    let randSound = getRandom(soundList,1)
+    let randSound = getRandom()
     //sometimes this may return `none`, so this is a backup
     while (!randSound){
-      randSound = getRandom(soundList,1)
+      randSound = getRandom()
     }
     console.log(randSound)
     let audio = new Audio(randSound)

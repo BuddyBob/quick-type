@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
-import NavBar from '../../Nav/NavBar' 
 import { db } from '../../../firebase'
+import NavBar from '../../Nav/NavBar' 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -37,18 +37,6 @@ const useStyles = makeStyles({
         margin: 'auto'
     }
 });
-
-// function createData(place, name, wpm) {
-//   return { place, name, wpm };
-// }
-
-// const data = [
-//   createData(1, 'Thavas', 140),
-//   createData(2, 'Rice Gum', 100),
-//   createData(3, 'Jaden', 80),
-//   createData(4, 'Julio', 50),
-//   createData(5, 'Tom Brady', 20),
-// ];
 function setUp(data){
     function customSort(arr){
       arr.sort(function(first, second) {

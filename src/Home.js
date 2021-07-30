@@ -35,20 +35,11 @@ function returnUserData(userId){
 }
 SetData()
 let interval = null
-const soundList = [assets.sounds.click2]
+const soundList = [assets.sounds.click2,assets.sounds.click3,assets.sounds.click4,assets.sounds.click5,assets.sounds.click6,assets.sounds.click7]
 function getRandom(arr, n) {
-  var result = new Array(n),
-      len = arr.length,
-      taken = new Array(len);
-  if (n > len)
-      throw new RangeError("getRandom: more elements taken than available");
-  while (n--) {
-      var x = Math.floor(Math.random() * len);
-      result[n] = arr[x in taken ? taken[x] : x];
-      taken[x] = --len in taken ? taken[len] : len;
-  }
-  return result;
+  return soundList[Math.round(Math.random() * soundList.length)]
 }
+var audio = new Audio(soundList[0])
 const Home = () =>  {
   // set hooks
   const { currentUser, logout } = useAuth()
@@ -66,7 +57,7 @@ const Home = () =>  {
       })
     }
   }, [])
-  const [play] = useSound(getRandom(soundList,1));
+
   const [popup, setPopup] = useState(false)
   const [userInput,setUserInput] = useState('')
   const [previousUserInput, setPreviousUserInput] = useState('') 
@@ -102,9 +93,17 @@ const Home = () =>  {
       setRegError('failed to log out')
     }
   }
-  //run function as input feild changes
+  //run function as input field changes
   function onUserInputChange(e){
-    play()
+    //get random sound
+    let randSound = getRandom(soundList,1)
+    //sometimes this may return `none`, so this is a backup
+    while (!randSound){
+      randSound = getRandom(soundList,1)
+    }
+    console.log(randSound)
+    let audio = new Audio(randSound)
+    audio.play()
     const v = e.target.value;
     //check if error occurred
     if ((v.length>previousUserInput.length) && (v[v.length-1]!==text[v.length-1])){
@@ -122,7 +121,7 @@ const Home = () =>  {
   //final wpm, includes errors as penalties
   function finalWpm(errors,sym,time){
     let GrossWpm = (sym/5) / (time/60);
-    let ErrorRate = (errors)/(time/60)
+    let ErrorRate = (errors*.5)/(time/60)
     let NetWpm = (GrossWpm-ErrorRate)
     if (NetWpm < 0){NetWpm = 0}
     return (Math.round(NetWpm))

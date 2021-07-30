@@ -8,6 +8,8 @@ import click4 from "./sounds/clicks/click4.wav";
 import click5 from "./sounds/clicks/click5.wav";
 import click6 from "./sounds/clicks/click6.wav";
 import click7 from "./sounds/clicks/click7.wav";
+import sound1 from "./sounds/clicks/sound1.wav";
+import sound2 from "./sounds/clicks/sound2.wav";
 
 const assets = {
     images: {
@@ -22,7 +24,9 @@ const assets = {
         click4,
         click5,
         click6,
-        click7
+        click7,
+        sound1,
+        sound2
     }
 }
 export default assets;

@@ -28,16 +28,16 @@ function chooseAnimal(wpm){
             animal = ["Sloth","Uhh... Your as slow as a sloth"]
             break
         case wpm > 31 &&  wpm <= 50:
-            animal = ["Sloth","Ok. You type as fast as an elephant"]
+            animal = ["Elephant","Ok. You type as fast as an elephant"]
             break
         case (wpm > 50 && wpm <= 70):
             animal = ["Horse","Sure. You type as fast as a horse"]
             break
-        case (wpm > 70 && wpm <= 100):
+        case (wpm > 70 && wpm <= 72):
             animal = ["Cheetah","Wow! You type as fast as a Cheetah can run!"]
             break
         case (wpm === "Infinity" || wpm > 200):
-            animal = ["Hacker", "Legit!"]
+            animal = ["Hacker", "Legit! Totally Legit"]
         default:
             animal = ["Hacker","You type as fast as a HACKER!"]
             break
@@ -100,6 +100,8 @@ function Popup(props) {
                                 animal_name === "Sloth" ? assets.images.Sloth : 
                                 animal_name === "Cheetah" ? assets.images.Cheetah: 
                                 animal_name === "Horse" ? assets.images.Horse: 
+                                animal_name === "Hacker" ? assets.images.Hacker: 
+                                animal_name === "Elephant" ? assets.images.Elephant:
                                 " "
                                 } 
                                 type="image" 

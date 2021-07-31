@@ -33,7 +33,7 @@ function chooseAnimal(wpm){
         case (wpm > 50 && wpm <= 70):
             animal = ["Horse","Sure. You type as fast as a horse"]
             break
-        case (wpm > 70 && wpm <= 72):
+        case (wpm > 70 && wpm <= 100):
             animal = ["Cheetah","Wow! You type as fast as a Cheetah can run!"]
             break
         case (wpm === "Infinity" || wpm > 200):

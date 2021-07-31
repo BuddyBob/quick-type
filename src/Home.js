@@ -38,13 +38,14 @@ const soundList = [assets.sounds.click2,assets.sounds.click3,assets.sounds.click
 function getRandom() {
   return soundList[Math.round(Math.random() * soundList.length)]
 }
-var audio = new Audio(soundList[0])
 const Home = () =>  {
   // set hooks
   const { currentUser, logout } = useAuth()
   const [userId, setUserId] = useState(currentUser ? currentUser.uid : null)
   const [loggedIn,setLoggedIn] = useState(currentUser ? true : false)
+  console.log("word count",localStorage.getItem('wordCount'))
   const [text,setText] = useState(GetText(localStorage.getItem('wordCount'),localStorage.getItem('englishType')))
+  console.log(text)
   const [englishType,setEnglishType] = useState(localStorage.getItem("englishType"))
   const [wordCount,setWordCount] = useState(localStorage.getItem("wordCount"))
   useEffect(() => {
@@ -100,7 +101,6 @@ const Home = () =>  {
     while (!randSound){
       randSound = getRandom()
     }
-    console.log(randSound)
     let audio = new Audio(randSound)
     audio.play()
     const v = e.target.value;
@@ -264,7 +264,6 @@ const Home = () =>  {
             <form className="row g-4">
               <div className="col-auto">
                 <input
-                  autoFocus
                   autoComplete="off" 
                   autoCorrect="off" 
                   autoCapitalize="off" 

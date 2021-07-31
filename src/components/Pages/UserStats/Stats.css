@@ -1,15 +1,10 @@
 
 /* table */
-.tb{
-    width:98%;
-    position: relative;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:20px;
-    text-align: center;
-}
 .avgTitle{
-    color:var(--titleColor)
+    color:var(--titleColor);
+    font-weight:10px;
+    font-family: "Arial", monospace;
+    font-size: 35px;
 }
 table thead tr th{ color: var(--background)}
 table tbody tr td{ font-family: 'Roboto Mono', Courier, monospace; color: var(--titleColor)}
@@ -23,48 +18,64 @@ table tbody tr td{ font-family: 'Roboto Mono', Courier, monospace; color: var(--
 
 
 /* log */
-.log{
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    top:-75px;
-}
-.row-count-dropdown{
-    position: relative;
-    top:100px;
-    left:10px;
-    text-align: left;
-}
+    transform: rotate(-90deg);
+    right:300px;
+    top:220px
+  }
+  
+/* set gap between settings */
 .sort-type-dropdown{
-    position: relative;
-    top:100px;
-    left:15px;
-    text-align: left;
+    left:4px;
 }
 .options{
-    font-size:12px;
+    font-size:11px;
 }
 
-@media screen and (max-width:710px){   
-    .log{
+/* rotate back to 0 deg and position on left of log title */
+@media screen and (max-width:1000px){   
+    .flex-container{
         position: relative;
-        top:-10px;
+        right:150px;
+        top:70px;
+        transform:rotate(0deg)
     }
-    .row-count-dropdown{
-        left:5px;
-    }
-    .sort-type-dropdown{
-        top:35px;
-        left:-80px;
+    .dropdown-label{
+        color:"#ffdc7a"
     }
     .options{
-        font-size:10px;
-        padding:0px;
-        margin:0px;
+        font-size: 10px;
+        min-height:20%
+    }
+}
+/* eventually there is no more space for the settings dropdowns.
+So the idea is the stack the dropdowns allowing this to scale down to a phone size */
+@media screen and (max-width:720px){
+    .flex-container {
+        flex-direction: column;
+    }
+    .row-count-dropdown{
+        position: relative;
+        left:-20px;
+        top:-10px;
+    }
+}
+
+/* dumb log setting position resets      */
+@media screen and (max-width:590px){
+    .flex-container {
+        flex-direction: row;
+        left:5%;
+        top:20px
     }
     
-}
-/* @media screen and (max-width:691px){   
-    .log-sort-drop{
-        position: fixed;
-        top:50%;
+    .row-count-dropdown{
+        position: relative;
+        left:-20px;
+        top:0px;
     }
-} */
+}

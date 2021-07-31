@@ -1,13 +1,49 @@
 import React, { useState, useEffect } from 'react'
 import { useAuth } from '../../context/AuthContext'
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { db } from '../../../firebase'
-import NavBar from '../../Nav/NavBar';
+import NavBar from '../../Nav/NavBar' 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import './Stats.css'
 import sum from 'lodash/sum';
+const StyledTableCell = withStyles((theme) => ({
+    head: {
+      backgroundColor: "#ede8e8",
+      padding:5,
+      fontSize:12
+    },
+    body: {
+      color:"#ffdc7a",
+      fontSize: 12,
+      padding:10,
+      fontFamily:"Roboto Mono"
+    },
+}))(TableCell);
+  
+const StyledTableRow = withStyles((theme) => ({
+    root: {
+      backgroundColor:"#2D2F31",
+      height:1,
+    },
+
+  }))(TableRow);
+  
+const useStyles = makeStyles({
+    table: {
+        border:"1px solid white", 
+        borderRadius:200, 
+        maxWidth: 500, 
+        margin: 'auto'
+    }
+});
 
 const Stats = () => {
     const { currentUser } = useAuth();
@@ -62,107 +98,120 @@ const Stats = () => {
             const zipped = _.zip(wpmArr.slice(0,rowDisplay),rawWpmArr.slice(0,rowDisplay),accuracyArr.slice(0,rowDisplay),realAccuracyArr.slice(0,rowDisplay),errorArr.slice(0,rowDisplay))
             //sort zip
             const modZipped = sortData(sortType,zipped)
-            return modZipped.map(pair => {
-                return (
-                    <tr>
-                        <td>
-                            {pair[0]}
-                        </td>
-                        <td>
-                            {pair[1]}
-                        </td>
-                        <td>
-                            {pair[2]}
-                        </td>
-                        <td>
-                            {pair[3]}
-                        </td>
-                        <td>
-                            {pair[4]}
-                        </td>
-                    </tr>
-                )
-        })
+            let avgWpm = sum(wpmArr)/(wpmArr.length)
+            let avgRawWpm = sum(rawWpmArr)/(rawWpmArr.length)
+            let avgAccuracy = sum(accuracyArr)/(accuracyArr.length)
+            let avgRealAccuracy = sum(realAccuracyArr)/(realAccuracyArr.length)
+            let avgErrors = sum(errorArr)/(errorArr.length)
+            function roundIt(num){
+                return Math.round(num * 10) / 10
+            }
+            return [modZipped,roundIt(avgWpm),roundIt(avgRawWpm),roundIt(avgAccuracy),roundIt(avgRealAccuracy),roundIt(avgErrors)]
+           
     }
     function handleChange(e,change){
         if (change === "rows"){setRowCount(e.target.value);localStorage.setItem("rowCount",e.target.value);}
         else if (change === "sort"){setSortType(e.target.value);localStorage.setItem("sortType",e.target.value);}
     }
+    const classes = useStyles()
+    let x;
+    let avgWpm;
+    let avgRawWpm;
+    let avgAccuracy;
+    let avgRealAccuracy
+    let avgErrors 
+    if (wpmArr && rawWpmArr && accuracyArr && realAccuracyArr && errorArr){
+        const data = returnIt(rowCount)
+        x = data[0]
+        console.log(data)
+        avgWpm =  data[1]  
+        avgRawWpm = data[2]
+        avgAccuracy = data[3]
+        avgRealAccuracy = data[4]  
+        avgErrors = data[5]
+    }
     return(
         <div className="iii">
-            {wpmArr && rawWpmArr && accuracyArr && realAccuracyArr && errorArr &&
+            {x &&
                 <div>
                     <NavBar/>
                     <div>
-                        <h2 className="text-center font-weight-bold mt-4 avgTitle ">Averages</h2>
-                        <table className="table table-dark table-striped tb">
-                            <thead >
-                                <tr className="table-light">
-                                    <th scope="col">Real Wpm</th>
-                                    <th scope="col">Raw Wpm</th>
-                                    <th scope="col">Raw Accuracy</th>
-                                    <th scope="col">Real Accuracy</th>
-                                    <th scope="col">Errors</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{Math.round((getAvg(wpmArr) + Number.EPSILON) * 100) / 100 }</td>
-                                    <td>{Math.round((getAvg(rawWpmArr) + Number.EPSILON) * 100) / 100 }</td>
-                                    <td>{Math.round((getAvg(accuracyArr) + Number.EPSILON) * 100) / 100 }</td>
-                                    <td>{Math.round((getAvg(realAccuracyArr) + Number.EPSILON) * 100) / 100 }</td>
-                                    <td>{Math.round((getAvg(errorArr) + Number.EPSILON) * 100) / 100 }</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <h3 className="text-center font-weight-bold mt-4 mb-3 avgTitle ">Averages</h3>
+                        <Table className={classes.table}>
+                            <TableHead>
+                                <TableRow>
+                                    <StyledTableCell className="table-headers" style={{color:"#ed3469", paddingLeft:"15px"}} align="center"><strong>Real Wpm</strong></StyledTableCell>
+                                    <StyledTableCell className="table-headers" style={{paddingLeft:"15px"}} align="center"><strong>Raw Wpm</strong></StyledTableCell>
+                                    <StyledTableCell className="table-headers" style={{paddingLeft:"15px"}} align="center"><strong>Real Accuracy</strong></StyledTableCell>
+                                    <StyledTableCell className="table-headers" style={{paddingLeft:"15px"}} align="center"><strong>Raw Accuracy</strong></StyledTableCell>
+                                    <StyledTableCell className="table-headers" style={{paddingLeft:"15px"}} align="center"><strong>Errors</strong></StyledTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <StyledTableRow>
+                                    <StyledTableCell align="center">{avgWpm}</StyledTableCell>
+                                    <StyledTableCell align="center">{avgRawWpm}</StyledTableCell>
+                                    <StyledTableCell align="center">{avgRealAccuracy}</StyledTableCell>
+                                    <StyledTableCell align="center">{avgAccuracy}</StyledTableCell>
+                                    <StyledTableCell align="center">{avgErrors}</StyledTableCell>
+                                </StyledTableRow>
+                            </TableBody>
+                        </Table>
                     </div>
-                    <div className="log">
-                        <div id="log-settings">
-                            <form className="input-group">
-                                <div className="row-count-drop">
-                                    <FormControl variant="filled" className="row-count-dropdown">
-                                        <InputLabel className="dropdown-label" style={{color:"#ffdc7a", backgroundColor:"#323437"}}>Rows</InputLabel>
-                                        <Select style={{color:"white"}} value={rowCount} onChange={(e) => handleChange(e,"rows")}>
-                                        <MenuItem value={5}><span className="options">5 rows</span></MenuItem>
-                                        <MenuItem value={10}><span className="options">10 rows</span></MenuItem>
-                                        <MenuItem value={30}><span className="options">30 rows</span></MenuItem>
-                                        <MenuItem value={100}><span className="options">100 rows</span></MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </div>
-                                <div className="log-sort-drop">
-                                    <FormControl variant="filled" className="sort-type-dropdown">
-                                        <InputLabel className="dropdown-label" style={{color:"#ffdc7a", backgroundColor:"#323437"}}>Sort</InputLabel>
-                                        <Select style={{color:"white"}} value={sortType} onChange={(e) => handleChange(e,"sort")}>
-                                        <MenuItem value={"new - old"}><span className="options">Newest to Oldest</span></MenuItem>
-                                        <MenuItem value={"old - new"}><span className="options">Oldest to Newest</span></MenuItem>
-                                        <MenuItem value={"Real Wpm"}><span className="options">Real Wpm</span></MenuItem>
-                                        <MenuItem value={"Raw Wpm"}><span className="options">Raw Wpm</span></MenuItem>
-                                        <MenuItem value={"Real Accuracy"}><span className="options">Real Accuracy</span></MenuItem>
-                                        <MenuItem value={"Raw Accuracy"}><span className="options">Raw Accuracy</span></MenuItem>
-                                        <MenuItem value={"Errors"}><span className="options">Errors</span></MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </div>
-                            </form>
+                    <div className="flex-container">
+                        <div className="row-count">
+                            <FormControl variant="filled" className="row-count-dropdown">
+                                <InputLabel className="dropdown-label" style={{fontSize:"14px",color:"#ffdc7a",backgroundColor:"#2D2F31"}}>Rows</InputLabel>
+                                <Select style={{color:"white"}} value={rowCount} onChange={(e) => handleChange(e,"rows")}>
+                                <MenuItem value={5}><span className="options">5 rows</span></MenuItem>
+                                <MenuItem value={10}><span className="options">10 rows</span></MenuItem>
+                                <MenuItem value={30}><span className="options">30 rows</span></MenuItem>
+                                <MenuItem value={100}><span className="options">100 rows</span></MenuItem>
+                                </Select>
+                            </FormControl>
                         </div>
-                        <div id="log-table">
-                            <h2 className="text-center font-weight-bold mt-5 avgTitle">Log</h2>
-                            <table className="table table-dark table-striped tb">
-                                <thead >
-                                    <tr className="table-light">
-                                        <th scope="col">Wpm</th>
-                                        <th scope="col">Raw Wpm</th>
-                                        <th scope="col">Raw Accuracy</th>
-                                        <th scope="col">Real Accuracy</th>
-                                        <th scope="col">Errors</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {returnIt(rowCount)}
-                                </tbody>
-                            </table>
+                        <div className="log-sort">
+                            <FormControl variant="filled" className="sort-type-dropdown">
+                                <InputLabel className="dropdown-label" style={{fontSize:"14px",color:"#ffdc7a", backgroundColor:"#323437"}}>Sort</InputLabel>
+                                <Select style={{color:"white"}} value={sortType} onChange={(e) => handleChange(e,"sort")}>
+                                <MenuItem value={"new - old"}><span className="options">Newest to Oldest</span></MenuItem>
+                                <MenuItem value={"old - new"}><span className="options">Oldest to Newest</span></MenuItem>
+                                <MenuItem value={"Real Wpm"}><span className="options">Real Wpm</span></MenuItem>
+                                <MenuItem value={"Raw Wpm"}><span className="options">Raw Wpm</span></MenuItem>
+                                <MenuItem value={"Real Accuracy"}><span className="options">Real Accuracy</span></MenuItem>
+                                <MenuItem value={"Raw Accuracy"}><span className="options">Raw Accuracy</span></MenuItem>
+                                <MenuItem value={"Errors"}><span className="options">Errors</span></MenuItem>
+                                </Select>
+                            </FormControl>
                         </div>
+                    </div>
+                    <div>
+                        <h3 className="text-center font-weight-bold mt-4 mb-3 avgTitle">Log</h3>
+                        <Table className={classes.table}>
+                            <TableHead>
+                                <TableRow>
+                                    <StyledTableCell className="table-headers" style={{color:"#ed3469", paddingLeft:"15px"}} align="center"><strong>Real Wpm</strong></StyledTableCell>
+                                    <StyledTableCell className="table-headers" style={{paddingLeft:"15px"}} align="center"><strong>Raw Wpm</strong></StyledTableCell>
+                                    <StyledTableCell className="table-headers" style={{paddingLeft:"15px"}} align="center"><strong>Real Accuracy</strong></StyledTableCell>
+                                    <StyledTableCell className="table-headers" style={{paddingLeft:"15px"}} align="center"><strong>Raw Accuracy</strong></StyledTableCell>
+                                    <StyledTableCell className="table-headers" style={{paddingLeft:"15px"}} align="center"><strong>Errors</strong></StyledTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                    {x.map(n => {
+                                        {console.log(n)}
+                                        return(
+                                            <StyledTableRow>
+                                                <StyledTableCell align="center">{n[0]}</StyledTableCell>
+                                                <StyledTableCell align="center">{n[1]}</StyledTableCell>
+                                                <StyledTableCell align="center">{n[2]}</StyledTableCell>
+                                                <StyledTableCell align="center">{n[3]}</StyledTableCell>
+                                                <StyledTableCell align="center">{n[4]}</StyledTableCell>
+                                            </StyledTableRow>
+                                        )
+                                    })}
+                            </TableBody>
+                        </Table>
                     </div>
                 </div>
             }

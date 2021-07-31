@@ -32,6 +32,7 @@ const SettingsButtons = ({dbData,change,types}) => {
             }
         }
         db.collection("users").doc(userId).get().then((doc) => {setData(doc.data())})
+        localStorage.setItem("wordCount",val)
         dbData = data
     }
 
@@ -58,6 +59,7 @@ const SettingsButtons = ({dbData,change,types}) => {
     async function btnClicked(type){
         setActive(type)
         await db.collection("users").doc(userId).update({englishType:type})
+        localStorage.setItem("englishType",type)
     }
     function BtnGroup(){
         return  (

@@ -1,6 +1,8 @@
 import Cheetah from "./images/Cheetah.png";
 import Sloth from "./images/Sloth.png";
 import Horse from "./images/Horse.png";
+import Elephant from "./images/Elephant.png"
+import Hacker from "./images/Hacker.png"
 import click1 from "./sounds/clicks/click1.wav";
 import click2 from "./sounds/clicks/click2.wav";
 import click3 from "./sounds/clicks/click3.wav";
@@ -13,7 +15,9 @@ const assets = {
     images: {
         Cheetah,
         Sloth,
-        Horse
+        Horse,
+        Elephant,
+        Hacker
     },
     sounds: {
         click1,
@@ -23,8 +27,6 @@ const assets = {
         click5,
         click6,
         click7,
-        sound1,
-        sound2
     }
 }
 export default assets;

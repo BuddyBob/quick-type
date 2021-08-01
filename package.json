@@ -1,6 +1,7 @@
 {
   "name": "quick-type",
   "version": "0.1.0",
+  "homepage": "https://BuddyBob.github.io/quick-type",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.2",

@@ -76,7 +76,6 @@ const Home = () =>  {
     //logout
   async function handleLogout(){
     setRegError('')
-    try{
       await logout()
       setEnglishType("english1k")
       setWordCount("15")
@@ -87,22 +86,17 @@ const Home = () =>  {
       console.log("LOGGED OUT")
       localStorage.removeItem("currentUserId");
       Reload()
-
-
-    }catch{
-      setRegError('failed to log out')
-    }
   }
   //run function as input field changes
   function onUserInputChange(e){
     //get random sound
-    let randSound = getRandom()
-    //sometimes this may return `none`, so this is a backup
-    while (!randSound){
-      randSound = getRandom()
-    }
-    let audio = new Audio(randSound)
-    audio.play()
+    // let randSound = getRandom()
+    // //sometimes this may return `none`, so this is a backup
+    // while (!randSound){
+    //   randSound = getRandom()
+    // }
+    // let audio = new Audio(randSound)
+    // audio.play()
     const v = e.target.value;
     //check if error occurred
     if ((v.length>previousUserInput.length) && (v[v.length-1]!==text[v.length-1])){

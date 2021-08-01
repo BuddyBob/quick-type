@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
       elevation: 1,
     },
   }));
+    // "start": "react-scripts start",
+    // "build": "react-scripts build",
+    // "test": "react-scripts test",
+    // "eject": "react-scripts eject"
 function chooseAnimal(wpm){
     let animal;
     switch (true) {

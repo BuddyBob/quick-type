@@ -18,6 +18,17 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'left'
     }
   }));
+function modErrors(error){
+    console.log(error)
+    switch (true){
+        case error === 'There is no user record corresponding to this identifier. The user may have been deleted.':
+            error = "We could not find this user."
+        case error === "The password is invalid or the user does not have a password.":
+            error = "We could not find this user."
+    }
+    return error;
+
+}
 const Login = () =>  {
         const classes = useStyles();
         const emailRef = useRef()
@@ -28,7 +39,6 @@ const Login = () =>  {
         const history = useHistory()
         async function handleSubmit(e) {
             e.preventDefault()
-        
             try {
               setError('')
               setLoading("true")
@@ -37,9 +47,7 @@ const Login = () =>  {
               localStorage.setItem("currentUserId",x.user.uid)
               history.push('/')
             } catch(err) {
-                if (err.message === "The password is invalid or the user does not have a password."){
-                    setError("Email or password is incorrect!")
-                }else{setError(err.message)}
+                setError(modErrors(err.message))
             }
         
             setLoading("false")

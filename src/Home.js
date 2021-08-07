@@ -85,7 +85,7 @@ const Home = () =>  {
       setUserId(null)
       console.log("LOGGED OUT")
       localStorage.removeItem("currentUserId");
-      Reload()
+      Reload() 
   }
   //run function as input field changes
   function onUserInputChange(e){

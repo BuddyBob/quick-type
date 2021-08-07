@@ -1,9 +1,7 @@
-<<<<<<< HEAD
+
 node_modules/
-=======
 .vscode
 .history
 node_modules
 .DS_Store
 .gitignore
->>>>>>> 10e30444de5a2804ae8e7f5ca5e98dd3db7e854e

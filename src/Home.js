@@ -211,7 +211,7 @@ const Home = () =>  {
           <div className="col-md-6 offset-md-3">
             <div>
               <Link style={{textDecoration:"none"}}to='/'>
-                <h1 className="quick-type-home-horizontal">Quick Qufdfdjfidsdck Type</h1>
+                <h1 className="quick-type-home-horizontal">Quick Type</h1>
               </Link>
               <form className="input-group nav-bar" style={{position:"absolute"}}>
                 <div>

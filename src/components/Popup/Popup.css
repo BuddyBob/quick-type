@@ -1,0 +1,152 @@
+/* background */
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 150%;
+    background-color: var(--dark);
+    margin-top: 2px;
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+/* main popup */
+.popup-inner {
+    border: 2px solid var(--white);
+    padding-bottom:300px;
+    border-radius: 15px;
+    height: 95%;
+    position: relative;
+    width: 70%;
+    background-color: var(--dark);
+}
+
+
+/* restart text button */
+.popup-inner .restart {
+    color: var(--titleColor);
+    min-width: 18px;
+    min-height: 18px;
+    position: absolute;
+    top: 23px;
+    right: 20px;
+}
+
+/* new text button */
+.popup-inner .next {
+    color: var(--titleColor);
+    min-width: 25px;
+    min-height: 25px;
+    position: absolute;
+    top: 20px;
+    right: 80px;
+}
+
+.restart:hover {
+    border-bottom: 2px solid white;
+}
+
+.next:hover {
+    border-bottom: 2px solid white;
+}
+
+.popup-title {
+    position: absolute;
+    color: var(--white);
+    font-size: 180%;
+    border-bottom: 1px solid;
+    border-color: deeppink;
+    left: 6.7%;
+    top: 2px;
+    margin-top: 10px;
+}
+
+
+
+/* levels */
+
+.level {
+    border:2px solid;
+    border-color: var(--backgroundColor);
+    border-radius: 20px;
+    position: relative;
+    top: 50px;
+    left:60px;
+    margin-right:100px;
+}
+
+.animal-img {
+    position: relative;
+    width:160px;
+    height:150px;
+    border-right:2px solid;
+    padding-right:20px;
+    border-color: var(--hotPink);
+
+}
+
+.speed-desc {
+    position: relative;
+    border: none;
+    font-size:18px;
+    text-align:center;
+    font-family: "Roboto Mono", "Helvetica Neue", courier new, monospace;
+    color:var(--titleColor);
+    top:50px;
+    right:50px;
+    margin-bottom:20px
+}
+@media screen and (max-width: 1156px){
+    .level {
+        position: relative;
+    }
+    .speed-desc{
+        top:25px;
+        right:50px;
+        font-size: 15px;
+    }
+    .animal-img{
+        width:110px;
+        height:100px;
+        right:10px;
+        margin-left:20px;
+    }
+
+}
+@media screen and (max-width:980px){
+    .level{
+        border:none;
+        display: flex;
+        flex-direction: column;
+    }
+    .animal-img{
+        width:100px;
+        border-right:none;
+        border-bottom: 2px solid;
+        border-color: var(--hotPink);
+        display: block;
+        padding:0px;
+        left:10px;
+    }
+    .speed-desc{
+        top:120px;
+        position: relative;
+        white-space: inherit;
+        left:30px;
+    }
+}
+@media screen and (max-width:980px){
+    .level{
+        position: relative;
+        top:0px;
+        left:0px;
+        margin-right:60px;
+    }
+    .speed-desc{
+        position: relative;
+        white-space: inherit;
+    }
+}

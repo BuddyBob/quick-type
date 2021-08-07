@@ -1,0 +1,93 @@
+/** Variables */
+:root {
+    --background: #323437;
+    --dark: #2D2F31;
+    --white: #ede8e8;
+    --titleColor: #ffdc7a;
+    --hotPink:#ed3469
+}
+
+/** background color */
+body {
+    zoom: 1.4;
+    background-color: var(--background);
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    margin: 0px;
+    padding: 10px;
+}
+
+
+/** buttons */
+.buttons {
+    background-color: var(--dark);
+    border-color: var(--white);
+    position: relative;
+    color: var(--white);
+    padding: .7rem .8rem;
+    border-color: var(--white);
+    font-family: "Roboto Mono", sans-serif;
+    font-weight: "bold";
+    border-radius: 6px;
+    top: 3%;
+    cursor: pointer;
+    outline: 0;
+    transition: ease background-color 250ms;
+}
+
+/** on hover */
+.buttons:hover {
+    background-color: var(--white);
+    color: var(--dark);
+    padding: .7rem .8rem;
+}
+
+/** labels for settings */
+label {
+    text-align: center;
+    background-color: var(--white);
+    border-color: var(--white);
+    color: var(--black);
+    font-family: "Roboto Mono", sans-serif;
+    font-weight: 400;
+    border-radius: 4px;
+    font-size: 24px;
+    padding: 8px 50px 8px 50px;
+    margin-bottom: 10px;
+
+}
+
+/** input field */
+.inputField {
+    position: relative;
+    background-color: var(--dark);
+    border-color: var(--white);
+    color: #cccbc9;
+    padding-bottom: 13px;
+    padding-top: 10px;
+    margin-top: 2px;
+    font-family: "Roboto Mono", sans-serif;
+}
+
+/* on enter */
+.inputField:focus {
+    outline: none;
+    box-shadow: 0 0 1px 1px rgb(19, 18, 18);
+    background-color: var(--dark);
+    border-color: var(--white);
+    caret-color: var(--titleColor);
+    color: #cccbc9;
+    font-family: "Roboto Mono", sans-serif;
+}
+
+
+.quick-type-home-horizontal {
+    color: var(--titleColor);
+    font-size: 40px;
+    font-family: "Roboto Mono";
+    font-weight: "bold";
+    margin-bottom: 15px;
+    margin-top: 50px;
+}

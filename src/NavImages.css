@@ -1,0 +1,74 @@
+
+:root {
+    --background:#323437;
+    --dark: #2D2F31;
+    --white: #ede8e8;
+    --titleColor: #ffdc7a
+}
+
+.nav-bar{
+    display:flex;
+    justify-content:space-around;
+    width:200px;
+    position: relative;
+    top:65px;
+    left:60%;
+
+}
+.leaderboard-icon{
+    color:var(--white)
+}
+.logout-icon{
+    color:var(--white)
+}
+.login-icon{
+    color:var(--white)
+}
+.addUser-icon{
+    color:var(--white)
+}
+.settings-icon{
+    color:var(--white)
+}
+.info-icon{
+    color:var(--white)
+}
+.stats-icon{
+    color:var(--white)
+}
+.leaderboard-icon:hover{
+    color:var(--titleColor)
+}
+.logout-icon:hover{
+    color:var(--titleColor);
+}
+.login-icon:hover{
+    color:var(--titleColor)
+}
+.settings-icon:hover{
+    color:var(--titleColor);
+}
+.addUser-icon:hover{
+    color:var(--titleColor);
+}
+.info-icon:hover{
+    color:var(--titleColor);
+}
+.stats-icon:hover{
+    color:var(--titleColor)
+}
+
+@media screen and (max-width:1420px){
+    .nav-bar{
+        position: relative;
+        left:58%;
+    }
+}
+
+@media screen and (max-width:1350px){
+    .nav-bar{
+        position: relative;
+        left:0%;
+        top:20px;
+    }
+}

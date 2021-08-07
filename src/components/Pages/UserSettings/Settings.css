@@ -1,0 +1,64 @@
+
+/* error */
+#danger-container {
+    position:fixed; 
+    top: 0px; 
+    left: 5%; 
+    width: 82%;
+    z-index:9999; 
+    border-radius:0px
+}
+.alert{
+    position: absolute;
+    text-align: left;
+    justify-content: center;
+    left:0%;
+    top:0%;
+    width:115%
+}
+/* main options */
+.settings-options{
+    position: relative;
+    text-align: center;
+}
+/* word count input field */
+.wordCount-input{
+    position: relative;
+    max-width:220px;
+    left:235px;
+}
+
+@media screen and (max-width:985px){
+    .wordCount-input{
+        position: relative;
+        left:10px;
+    }
+    .wordCount-label{
+        text-align: left;
+    }
+    .englishType-label{
+        text-align:left;
+        position: static;
+    }
+    .btnGroup{
+        text-align:left;
+        position: relative;
+        left:-25px;
+    }
+}
+@media screen and (min-width:957px){
+    #danger-container{
+        position: relative;
+        width:65%;
+        left:15%;
+    }
+    .alert{
+        top:-107px;
+    }
+}
+@media screen and (max-width:746px){
+    .alert{
+        top:10px;
+        left:5px;
+    }
+}

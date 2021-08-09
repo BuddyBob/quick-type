@@ -19,8 +19,23 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'left'
     }
 }));
+async function returnedUsernames(){
+    const snapshot = await db.collection('users').get()
+    const snappy = await snapshot.docs.map(doc => doc.data())
+    let usernames = []
+    for (var x of snappy){
+        usernames.push(x.username)
+    }
+    return usernames
+}
+function encryptPwd(pwd){
+    const CryptoJS = require("crypto-js");
+    const passphrase = "sank bridged imitation dose";
+    return CryptoJS.AES.encrypt(pwd,passphrase).toString();
+};
 const Signup = () =>  {
         const classes = useStyles();
+        const usernameRef = useRef();
         const emailRef = useRef()
         const passwordRef = useRef()
         const passwordConfirmRef = useRef()
@@ -31,6 +46,11 @@ const Signup = () =>  {
         const { currentUser } = useAuth()
         async function handleSubmit(e) {
             e.preventDefault()
+            let users = await returnedUsernames()
+            if (users.includes(usernameRef.current.value)){
+                console.log("Username already exists")
+                return setError("This username is taken")
+            }
             if (passwordRef.current.value !== passwordConfirmRef.current.value) {
               return setError("Passwords do not match")
             }
@@ -41,9 +61,11 @@ const Signup = () =>  {
                     console.log(currentUser)
                     const x = await signup(emailRef.current.value, passwordRef.current.value)
                     //add new data to user
+                    let encryptedPwd = encryptPwd(passwordRef.current.value)
                     db.collection("users").doc(x.user.uid).set({
                         email: emailRef.current.value,
-                        password: passwordRef.current.value,
+                        password: encryptedPwd,
+                        username: usernameRef.current.value,
                         wordCount:"10",
                         englishType:"english1k",
                         audio:false,
@@ -101,10 +123,12 @@ const Signup = () =>  {
                                 </Alert>
                             </div>
                         }
-                        <form onSubmit={handleSubmit}>
-                            <input autoComplete="off" ref={emailRef} type="text" id="email" className="fadeIn second" name="login" placeholder="Email" required/>
-                            <input autoComplete="off" ref={passwordRef} type="password" id="password" className="fadeIn third" name="login" placeholder="Password" required/>
-                            <input autoComplete="off" ref={passwordConfirmRef} type="password" id="confirm-password" className="fadeIn third" name="login" placeholder="Confirm Password" required/>
+                        <form  autoComplete="off" onSubmit={handleSubmit}>
+                            <input type="text" name="username" style={{display:"none"}} value="fake input" /> 
+                            <input  autoComplete="off" ref={usernameRef} type="text" id="username" className="fadeIn third" placeholder="username" required/>
+                            <input autoComplete="off" ref={emailRef} type="text" id="email" className="fadeIn second" placeholder="email" required/>
+                            <input autoComplete="off" ref={passwordRef} type="password" id="password" className="fadeIn fourth" placeholder="Password" required/>
+                            <input autoComplete="off" ref={passwordConfirmRef} type="password" id="confirm-password" className="fadeIn fifth" name="login" placeholder="Confirm Password" required/>
                             <input disable={loading} type="submit" className="fadeIn fourth" value="Sign Up"/>
                         </form>
                     <div className="redirect-register">

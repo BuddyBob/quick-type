@@ -43,17 +43,17 @@ const Home = () =>  {
   const { currentUser, logout } = useAuth()
   const [userId, setUserId] = useState(currentUser ? currentUser.uid : null)
   const [loggedIn,setLoggedIn] = useState(currentUser ? true : false)
-  console.log("word count",localStorage.getItem('wordCount'))
   const [text,setText] = useState(GetText(localStorage.getItem('wordCount'),localStorage.getItem('englishType')))
-  console.log(text)
   const [englishType,setEnglishType] = useState(localStorage.getItem("englishType"))
   const [wordCount,setWordCount] = useState(localStorage.getItem("wordCount"))
+  const [audioX,setAudioX] = useState(false)
   useEffect(() => {
     if (loggedIn){
       returnUserData(userId).then(result => {
         setText(GetText(result.wordCount,result.englishType))
         setEnglishType(result.englishType)
         setWordCount(result.wordCount)
+        setAudioX(result.audio)
       })
     }
   }, [])
@@ -67,7 +67,6 @@ const Home = () =>  {
   const [sec,setSec] = useState(0)
   const [started,setStarted] = useState(false)
   const [registerError,setRegError] = useState('')
-
   //get new text
   function newText(event){
     event.preventDefault()
@@ -87,16 +86,21 @@ const Home = () =>  {
       localStorage.removeItem("currentUserId");
       Reload() 
   }
+  function playKeySound(){
+      // get random sound
+      let randSound = getRandom()
+      //sometimes this may return `none`, so this is a backup
+      while (!randSound){
+        randSound = getRandom()
+      }
+      let audio = new Audio(randSound)
+      audio.play()
+  }
   //run function as input field changes
   function onUserInputChange(e){
-    //get random sound
-    // let randSound = getRandom()
-    // //sometimes this may return `none`, so this is a backup
-    // while (!randSound){
-    //   randSound = getRandom()
-    // }
-    // let audio = new Audio(randSound)
-    // audio.play()
+    if (audioX){
+      playKeySound()
+    }
     const v = e.target.value;
     //check if error occurred
     if ((v.length>previousUserInput.length) && (v[v.length-1]!==text[v.length-1])){

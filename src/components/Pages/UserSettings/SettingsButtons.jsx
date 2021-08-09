@@ -1,16 +1,81 @@
 import React, { useState, useEffect } from 'react'
+import { withStyles } from '@material-ui/core/styles';
 import { db } from '../../../firebase'
 import { Label } from '../../Label'
 import styled from 'styled-components'
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import './Settings.css'
+const IOSSwitch = withStyles((theme) => ({
+    root: {
+      width: 70,
+      height: 26,
+      padding: 0,
+    },
+    switchBase: {
+      padding: 1,
+      color: "#2D2F31",
+      '&$checked': {
+        transform: 'translateX(44px)',
+        transitionDuration: ".1s",
+        color: "#2D2F31",
+        '& + $track': {
+          backgroundColor: '#ede8e8',
+          opacity: 1,
+          border: 'none',
+        },
+      },
+      '&$focusVisible $thumb': {
+        color: '#52d869',
+        border: '20px solid #fff',
+      },
+    },
+    thumb: {
+      width: 24,
+      height: 24,
+    },
+    track: {
+      borderRadius: 26 / 2,
+      border: `1px solid ${theme.palette.grey[400]}`,
+      backgroundColor: theme.palette.grey[50],
+      opacity: 1,
+      transition: theme.transitions.create(['background-color', 'border']),
+    },
+    checked: {},
+    focusVisible: {},
+  }))(({ classes, ...props }) => {
+    return (
+      <Switch
+        focusVisibleClassName={classes.focusVisible}
+        disableRipple
+        classes={{
+          root: classes.root,
+          switchBase: classes.switchBase,
+          thumb: classes.thumb,
+          track: classes.track,
+          checked: classes.checked,
+        }}
+        {...props}
+      />
+    );
+});
+  
 const SettingsButtons = ({dbData,change,types}) => {
     const userId = localStorage.getItem('currentUserId')
     const [Alert, setAlert] = useState([false,"No Error"])
     const [active, setActive] = useState()
     let [data, setData] = useState(dbData)
+    const [state, setState] = React.useState({
+        checkedB: false
+    });
     useEffect(async () =>{
         await db.collection("users").doc(userId).get().then(async (doc) => {
-            await setActive(change==="englishType" ? doc.data().englishType : "")
+            await setActive(change==="englishType" ? doc.data().englishType : change==="audio" ? doc.data().audio : "")
+            setState({ ...state, ["checkedB"]: doc.data().audio });
+            
         })
     },[])
     //wordCount is updated "on change"
@@ -31,6 +96,7 @@ const SettingsButtons = ({dbData,change,types}) => {
                     await db.collection("users").doc(userId).update({wordCount:val})
             }
         }
+        //for inputs only
         db.collection("users").doc(userId).get().then((doc) => {setData(doc.data())})
         localStorage.setItem("wordCount",val)
         dbData = data
@@ -56,20 +122,27 @@ const SettingsButtons = ({dbData,change,types}) => {
         opacity:5;
         `}
     `
-    async function btnClicked(type){
+    async function handleChange(event,type){
         setActive(type)
-        await db.collection("users").doc(userId).update({englishType:type})
-        localStorage.setItem("englishType",type)
+        if (change === "englishType"){
+            await db.collection("users").doc(userId).update({englishType:type})
+            localStorage.setItem("englishType",type)
+        }
+        if (change === "audio"){
+            await setState({ ...state, [event.target.name]: event.target.checked });
+            await db.collection("users").doc(userId).update({audio:!state.checkedB})
+        }
     }
     function BtnGroup(){
         return  (
         <div style={{position:"relative",left:"30px", padding:"5px"}}>
         {types.map(type => (
-            <BtnToggle style={{margin:"5px"}}active={active===type} onClick={() => btnClicked(type)}>{type}</BtnToggle>
+            <BtnToggle style={{margin:"5px"}}active={active===type} onClick={(e) => handleChange(e,type)}>{type}</BtnToggle>
         ))}
         </div>
         )
     }
+    
     return (
         <div>
             { Alert[0] &&
@@ -106,8 +179,18 @@ const SettingsButtons = ({dbData,change,types}) => {
                         <Label type="label" >{change}</Label>
                     </div>
                 </div>
-                <div className="row">
                     <input className="wordCount-input" onChange={changed} placeholder={dbData ? dbData.wordCount : null} type="text" />
+            </form>
+        }
+        {change === "audio" &&
+            <form>
+                <div className="row">
+                    <div className="col mt-3 audio-label">
+                        <Label type="label">{change}</Label>
+                    </div>
+                </div>
+                <div className="row audio-toggle">
+                    <IOSSwitch checked={state.checkedB} onChange={handleChange} name="checkedB"/>
                 </div>
             </form>
         }

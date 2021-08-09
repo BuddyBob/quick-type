@@ -69,7 +69,6 @@ input[type=submit], input[type=reset]  {
   padding: 15px 80px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 15px;
   -webkit-border-radius: 5px 5px 5px 5px;
   border-radius: 5px 5px 5px 5px;

@@ -24,27 +24,17 @@
 /* word count input field */
 .wordCount-input{
     position: relative;
-    max-width:220px;
-    left:235px;
+    justify-content: center;
+    max-width:26%;
+    min-width:26%;
 }
-
-@media screen and (max-width:985px){
-    .wordCount-input{
-        position: relative;
-        left:10px;
-    }
-    .wordCount-label{
-        text-align: left;
-    }
-    .englishType-label{
-        text-align:left;
-        position: static;
-    }
-    .btnGroup{
-        text-align:left;
-        position: relative;
-        left:-25px;
-    }
+.audio-label{
+    left:20px;
+}
+.audio-toggle{
+    position: relative;
+    justify-content: center;
+    left:20px;
 }
 @media screen and (min-width:957px){
     #danger-container{
@@ -60,5 +50,20 @@
     .alert{
         top:10px;
         left:5px;
+    }
+}
+
+
+/* scale width of word count input */
+@media screen and (max-width:1000px){
+    .wordCount-input{
+        max-width:40%;
+        min-width:40%;
+    }
+}
+@media screen and (max-width:600px){
+    .wordCount-input{
+        max-width:60%;
+        min-width:60%;
     }
 }

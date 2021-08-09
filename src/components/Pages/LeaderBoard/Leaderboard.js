@@ -64,18 +64,20 @@ function setUp(data){
         wpms = removeOcc(wpms) //remove NaN
         wpms.sort((a, b) => a - b) //this allows sort to sort properly
         //get user name and highest wpm of row
-        let userName = data[i].email
+        let username = data[i].username
         let highestWpm = wpms[wpms.length-1] 
-        //turn empty log into 0
+        //turn empty logs into 0
         if (!highestWpm){highestWpm = 0}
-        rows.push({"userName": userName,"pb":highestWpm})
+        rows.push({"username": username,"pb":highestWpm})
     }
+    //sort data highest wpm to lowest wpm
     rows = customSort(rows)
+    //add a place to each row
     for (var i = 0; i <= rows.length-1; i++){
       rows[i]["place"] = i+1
     }
     console.log(rows)
-    return customSort(rows)
+    return rows
 }
 }
 function call(d){
@@ -113,7 +115,7 @@ const Leaderboard = () => {
                 return (
                 <StyledTableRow>
                     <StyledTableCell align="left" >{n.place}</StyledTableCell>
-                    <StyledTableCell align="left">{n.userName}</StyledTableCell>
+                    <StyledTableCell align="left">{n.username}</StyledTableCell>
                     <StyledTableCell align="center">{n.pb}</StyledTableCell>
                 </StyledTableRow>
                 );

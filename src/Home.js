@@ -288,16 +288,18 @@ const Home = () =>  {
         <script src="js/jquery-1.11.2.min.js"></script> 
         <script src="js/bootstrap.min.js"></script>
       </div>
+      <div>
       <Popup 
-      trigger={true} 
+      trigger={popup} 
       state={{errors,sec,symbols,text,userInput}} 
       next={nextPopup} 
       restart={restartPopup} 
       accuracy={finalAccuracy} 
       realAccuracy={finalRealAccuracy} 
       wpm={finalWpm}
-      rawWpm={finalRawWpm}>
-      </Popup>
+      rawWpm={finalRawWpm}
+      />
+      </div>
       
 
     </div>

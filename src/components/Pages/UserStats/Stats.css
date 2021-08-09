@@ -14,9 +14,6 @@ table tbody tr td{ font-family: 'Roboto Mono', Courier, monospace; color: var(--
 }
 
 
-
-
-
 /* log */
 .flex-container {
     display: flex;

@@ -289,7 +289,7 @@ const Home = () =>  {
         <script src="js/bootstrap.min.js"></script>
       </div>
       <Popup 
-      trigger={popup} 
+      trigger={true} 
       state={{errors,sec,symbols,text,userInput}} 
       next={nextPopup} 
       restart={restartPopup} 
@@ -297,7 +297,6 @@ const Home = () =>  {
       realAccuracy={finalRealAccuracy} 
       wpm={finalWpm}
       rawWpm={finalRawWpm}>
-      <h3 className="popup-title">Results</h3>
       </Popup>
       
 

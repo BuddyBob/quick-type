@@ -4,7 +4,6 @@
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 150%;
     background-color: var(--dark);
     margin-top: 2px;
     display: flex;
@@ -16,12 +15,12 @@
 /* main popup */
 .popup-inner {
     border: 2px solid var(--white);
-    padding-bottom:300px;
+    padding-bottom: 300px;
     border-radius: 15px;
-    height: 95%;
     position: relative;
     width: 70%;
     background-color: var(--dark);
+    padding-bottom: 400px;
 }
 
 
@@ -60,30 +59,51 @@
     border-bottom: 1px solid;
     border-color: deeppink;
     left: 6.7%;
-    top: 2px;
-    margin-top: 10px;
+    margin-top: 15px;
+}
+/* possible levels */
+.popup-sub-title {
+    position: absolute;
+    color: var(--white);
+    font-size: 180%;
+    border-bottom: 1px solid;
+    border-color: deeppink;
+    left: 6.7%;
+    bottom:80px;
+}
+.levels{
+    position: relative;
+    top:180px;
+}
+.ind-animal{
+    width:110px;
+    height: 70px;
+    /* style={{width:'95px',height:'60px'}} */
 }
 
+.animal-levels{
+    position: relative;
+    left:30px;
+}
 
-
-/* levels */
-
+/* achieved level */
 .level {
-    border:2px solid;
+    border: 2px solid;
     border-color: var(--backgroundColor);
     border-radius: 20px;
     position: relative;
     top: 50px;
-    left:60px;
-    margin-right:100px;
+    left: 60px;
+    margin-right: 100px;
 }
 
 .animal-img {
     position: relative;
-    width:160px;
-    height:150px;
-    border-right:2px solid;
-    padding-right:20px;
+    width: 200px;
+    height: 150px;
+    border-right: 2px solid;
+    padding-right: 20px;
+    padding-top: 5px;
     border-color: var(--hotPink);
 
 }
@@ -91,62 +111,126 @@
 .speed-desc {
     position: relative;
     border: none;
-    font-size:18px;
-    text-align:center;
+    font-size: 18px;
+    text-align: center;
     font-family: "Roboto Mono", "Helvetica Neue", courier new, monospace;
-    color:var(--titleColor);
-    top:50px;
-    right:50px;
-    margin-bottom:20px
+    color: var(--titleColor);
+    top: 50px;
+    right: 50px;
+    margin-bottom: 20px
 }
-@media screen and (max-width: 1156px){
-    .level {
-        position: relative;
-    }
-    .speed-desc{
-        top:25px;
-        right:50px;
+
+@media screen and (max-width:1770px) {
+    .speed-desc {
         font-size: 15px;
     }
-    .animal-img{
-        width:110px;
-        height:100px;
-        right:10px;
-        margin-left:20px;
+}
+
+@media screen and (max-width: 1450px) {
+    .speed-desc {
+        top: 40px;
+        right: 40px;
+        font-size: 15px;
     }
 
 }
-@media screen and (max-width:980px){
-    .level{
-        border:none;
+
+@media screen and (max-width:1300px) {
+    .levels{
+        position: relative;
+        top:320px;
+    }
+    .level {
+        border: none;
         display: flex;
         flex-direction: column;
+        top: 0px;
     }
-    .animal-img{
-        width:100px;
-        border-right:none;
+
+    .animal-img {
+        width: 160px;
+        height: 120px;
+        border-right: none;
+        border-left: 0px solid;
+        padding-left: 20px;
         border-bottom: 2px solid;
         border-color: var(--hotPink);
-        display: block;
-        padding:0px;
-        left:10px;
+        margin-left: 35%;
+        margin-right: 50%;
     }
-    .speed-desc{
-        top:120px;
+
+    .speed-desc {
+        top: 150px;
         position: relative;
-        white-space: inherit;
-        left:30px;
+        left: 0px;
+        display: block;
+    }
+
+}
+@media screen and (max-width:1095px){
+    .popup-sub-title{
+        position: relative;
+        bottom:50px;
+        border-bottom: 0px
+    }
+    .animal-levels{
+        position: relative;
+        bottom:50px;
     }
 }
-@media screen and (max-width:980px){
-    .level{
+/* phone size */
+@media screen and (max-width:959px) {
+
+    .level {
+        position: relative;
+        top: 20px;
+        left: 0px;
+        margin-right: 60px;
+    }
+
+    .animal-img {
+        right: 15px
+    }
+
+    .speed-desc {
+        position: relative;
+        text-align: left;
+        margin-left: 70px;
+        font-size: 13px
+    }
+}
+@media screen and (max-width: 945px){
+    .popup-sub-title{
+        bottom:50px;
+    }
+    .ind-animal{
+        width:100px;
+        height:60px;
+    }
+}
+
+@media screen and (max-width:650px) {
+    .animal-img {
+        width: 140px;
+        height: 100px;
+    }
+
+    .speed-desc {
+        top: 110px;
+    }
+}
+
+@media screen and (max-width:565px){
+    .animal-levels{
         position: relative;
         top:0px;
-        left:0px;
-        margin-right:60px;
     }
-    .speed-desc{
-        position: relative;
-        white-space: inherit;
+    .ind-animal{
+        width:80px;
+        height:50px
+    }
+    .popup-sub-title{
+        top:-20px;
+        left:90px;
     }
 }

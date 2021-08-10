@@ -53,6 +53,7 @@ const Home = () =>  {
         setText(GetText(result.wordCount,result.englishType))
         setEnglishType(result.englishType)
         setWordCount(result.wordCount)
+        localStorage.setItem("wordCount",result.wordCount)
         setAudioX(result.audio)
       })
     }
@@ -255,7 +256,9 @@ const Home = () =>  {
               </form>
             </div>
             <div>
-              <Preview wordCount={loggedIn ? wordCount : localStorage.getItem('wordCount')} text={text} userInput={userInput}/>
+              {text.split(" ").length == localStorage.getItem("wordCount") &&
+                <Preview wordCount={loggedIn ? wordCount : localStorage.getItem('wordCount')} text={text} userInput={userInput}/>
+              }
             </div>
             <form className="row g-4">
               <div className="col-auto">

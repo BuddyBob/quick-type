@@ -56,7 +56,7 @@ const Home = () =>  {
         setAudioX(result.audio)
       })
     }
-  }, [])
+  }, [loggedIn,userId])
 
   const [popup, setPopup] = useState(false)
   const [userInput,setUserInput] = useState('')
@@ -66,7 +66,6 @@ const Home = () =>  {
   const [finished, setFinished] = useState(false)
   const [sec,setSec] = useState(0)
   const [started,setStarted] = useState(false)
-  const [registerError,setRegError] = useState('')
   //get new text
   function newText(event){
     event.preventDefault()
@@ -74,7 +73,6 @@ const Home = () =>  {
   }
     //logout
   async function handleLogout(){
-    setRegError('')
       await logout()
       setEnglishType("english1k")
       setWordCount("15")

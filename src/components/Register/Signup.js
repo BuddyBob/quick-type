@@ -51,7 +51,7 @@ const Signup = () =>  {
                 console.log("Username already exists")
                 return setError("This username is taken")
             }
-            if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+            if (passwordRef?.current?.value !== passwordConfirmRef.current.value) {
               return setError("Passwords do not match")
             }
             if (passwordRef.current.value === passwordConfirmRef.current.value){

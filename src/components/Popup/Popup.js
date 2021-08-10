@@ -21,10 +21,6 @@ const useStyles = makeStyles((theme) => ({
       elevation: 1,
     },
   }));
-    // "start": "react-scripts start",
-    // "build": "react-scripts build",
-    // "test": "react-scripts test",
-    // "eject": "react-scripts eject"
 function chooseAnimal(wpm){
     let animal;
     let nextLevel = {Sloth:"Elephant",Elephant:"Horse",Horse:"Cheetah",Cheetah:"Hacker"}
@@ -50,6 +46,7 @@ function chooseAnimal(wpm){
     return animal
 
 }
+
 function Popup(props) {
     const { width, height } = useWindowDimensions();
     const classes = useStyles();
@@ -61,6 +58,9 @@ function Popup(props) {
     let seconds = props.state.sec % 60;
     let animal_text,animal_name,rest;
     [animal_name,animal_text] = chooseAnimal(final_wpm)
+    // useEffect(() => {
+    //     window.scrollTo(0,0)
+    //   }, [])
     return (props.trigger) ? (
         <div className="popup">
             <div className="popup-inner">

@@ -301,8 +301,6 @@ const Home = () =>  {
       rawWpm={finalRawWpm}
       />
       </div>
-      
-
     </div>
   );  
 }

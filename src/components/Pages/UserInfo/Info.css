@@ -18,16 +18,3 @@
     text-align:center;
 }
 
-/* @media screen and (max-width: 550px) {
-
-    .info-text{
-        position:absolute;
-        font-family: 'Roboto Mono', Courier, monospace;
-        color:var(--white);
-        left:41%;
-        width: 40%;
-        height: 20%;
-        font-size: 1.3rem;
-        padding-bottom:20px;
-    }
-} */

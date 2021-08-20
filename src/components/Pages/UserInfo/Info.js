@@ -1,3 +1,4 @@
+import React from 'react';
 import NavBar from '../../Nav/NavBar' 
 import './Info.css'
 const Info = () => {

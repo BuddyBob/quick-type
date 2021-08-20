@@ -301,6 +301,10 @@ const Home = () =>  {
       rawWpm={finalRawWpm}
       />
       </div>
+      <div class="text-center p-3 footer" style={{backgroundColor: "#6e6b6b"}}>
+        © 2021 Copyright:
+        <a class="text-reset fw-bold"> PandaBros</a>
+      </div>
     </div>
   );  
 }

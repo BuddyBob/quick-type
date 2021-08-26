@@ -18,7 +18,11 @@ import { useAuth } from './components/context/AuthContext'
 import { db } from './firebase'
 import './index.css';
 import './NavImages.css'
+<<<<<<< HEAD
 //dummy update
+=======
+//dummy man
+>>>>>>> d14d1f41c22636d2af651acef53e83cf5f21ffcd
 function returnUserData(userId){
   let docRef = db.collection("users").doc(userId)
   return docRef.get().then((doc) => {

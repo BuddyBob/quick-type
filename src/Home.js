@@ -38,6 +38,9 @@ const soundList = [assets.sounds.click2,assets.sounds.click3,assets.sounds.click
 function getRandom() {
   return soundList[Math.round(Math.random() * soundList.length)]
 }
+function func(){
+  return false;
+}
 const Home = () =>  {
   // set hooks
   const { currentUser, logout } = useAuth()
@@ -172,7 +175,12 @@ const Home = () =>  {
             d.push(finalAccuracy(userInput,text.length-1))
             const e = await doc.data().logs.errorHistory
             e.push(errors)
-            db.collection("users").doc(userId).update({logs:{wpmHistory:a,rawWpmHistory:b,realAccuracyHistory:c,accuracyHistory:d,errorHistory:e}})
+            if (a === "Infinity" || a >= 300 || a === "NaN"){
+              db.collection("users").doc(userId).update({logs:{wpmHistory:0,rawWpmHistory:b,realAccuracyHistory:0,accuracyHistory:0,errorHistory:0}})
+            }
+            else{
+              db.collection("users").doc(userId).update({logs:{wpmHistory:a,rawWpmHistory:b,realAccuracyHistory:c,accuracyHistory:d,errorHistory:e}})
+            }
         })
       }
     }
@@ -301,9 +309,9 @@ const Home = () =>  {
       rawWpm={finalRawWpm}
       />
       </div>
-      <div class="text-center p-3 footer" style={{backgroundColor: "#6e6b6b"}}>
+      <div className="text-center p-3 footer" style={{backgroundColor: "#6e6b6b"}}>
         © 2021 Copyright:
-        <a class="text-reset fw-bold"> PandaBros</a>
+        <a className="text-reset fw-bold"> PandaBros</a>
       </div>
     </div>
   );  

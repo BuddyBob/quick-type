@@ -1,18 +1,25 @@
 {
-  "main.css": "static/css/main.90c8a57b.css",
-  "main.css.map": "static/css/main.90c8a57b.css.map",
-  "main.js": "static/js/main.fb3b05be.js",
-  "main.js.map": "static/js/main.fb3b05be.js.map",
-  "static/media/Cheetah.png": "static/media/Cheetah.bdbe67a3.png",
-  "static/media/Elephant.png": "static/media/Elephant.4d606826.png",
-  "static/media/Hacker.png": "static/media/Hacker.614749c8.png",
-  "static/media/Horse.png": "static/media/Horse.a6b5a979.png",
-  "static/media/Sloth.png": "static/media/Sloth.37431d57.png",
-  "static/media/click1.wav": "static/media/click1.2d5b60d2.wav",
-  "static/media/click2.wav": "static/media/click2.9f8bceb6.wav",
-  "static/media/click3.wav": "static/media/click3.c34ccd87.wav",
-  "static/media/click4.wav": "static/media/click4.2d5b60d2.wav",
-  "static/media/click5.wav": "static/media/click5.9f8bceb6.wav",
-  "static/media/click6.wav": "static/media/click6.c34ccd87.wav",
-  "static/media/click7.wav": "static/media/click7.223e6856.wav"
+  "files": {
+    "main.css": "/static/css/main.2282ab5d.css",
+    "main.js": "/static/js/main.ba9adba3.js",
+    "static/media/Cheetah.png": "/static/media/Cheetah.f50c8d4dc1c0838de0cf.png",
+    "static/media/Elephant.png": "/static/media/Elephant.973ccbce0916e0a2a341.png",
+    "static/media/Sloth.png": "/static/media/Sloth.b2e4184a16bfe4b6c2fe.png",
+    "static/media/Horse.png": "/static/media/Horse.795930ed2fc81251a87b.png",
+    "static/media/Hacker.png": "/static/media/Hacker.7d7ed3f4d4ff75f19004.png",
+    "static/media/click7.wav": "/static/media/click7.a4211f421f6f7b3ebab8.wav",
+    "static/media/click3.wav": "/static/media/click3.33b14bd3df6f68515fe0.wav",
+    "static/media/click6.wav": "/static/media/click6.33b14bd3df6f68515fe0.wav",
+    "static/media/click2.wav": "/static/media/click2.930a7c0e9a4b4aa490e0.wav",
+    "static/media/click5.wav": "/static/media/click5.930a7c0e9a4b4aa490e0.wav",
+    "static/media/click1.wav": "/static/media/click1.74c9d4695d3ba3b0229a.wav",
+    "static/media/click4.wav": "/static/media/click4.74c9d4695d3ba3b0229a.wav",
+    "index.html": "/index.html",
+    "main.2282ab5d.css.map": "/static/css/main.2282ab5d.css.map",
+    "main.ba9adba3.js.map": "/static/js/main.ba9adba3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2282ab5d.css",
+    "static/js/main.ba9adba3.js"
+  ]
 }

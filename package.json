@@ -56,10 +56,5 @@
   "engines": {
     "node": "v15.5.0",
     "npm": "7.3.0"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-react"
-    ]
   }
 }

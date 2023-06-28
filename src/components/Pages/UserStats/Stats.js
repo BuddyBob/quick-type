@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import { useAuth } from '../../context/AuthContext'
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { db } from '../../../firebase'
-import NavBar from '../../Nav/NavBar' 
+import './Stats.css'
+
+import React, { useEffect, useState } from 'react'
+import { doc, getDoc } from 'firebase/firestore';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import NavBar from '../../Nav/NavBar'
+import Select from '@material-ui/core/Select';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import './Stats.css'
+import { db } from '../../../firebase'
 import sum from 'lodash/sum';
+import { useAuth } from '../../context/AuthContext'
+
 const StyledTableCell = withStyles((theme) => ({
     head: {
       backgroundColor: "#ede8e8",
@@ -55,22 +59,28 @@ const Stats = () => {
     const [errorArr,setErrorArr] = useState()
     const [sortType,setSortType] = useState(localStorage.getItem("sortType"))
     const [rowCount,setRowCount] = useState(localStorage.getItem("rowCount"))
-    useEffect(async () => {
-            db.collection("users")
-            .doc(userId)
-            .get()
-            .then(
-                async (doc) => {
-                    const data = await doc.data()
-                    await setWpmArr(data.logs.wpmHistory.reverse())
-                    await setRawWpmArr(data.logs.rawWpmHistory.reverse())
-                    await setAccuracyArr(data.logs.accuracyHistory.reverse())
-                    await setRealAccuracyArr(data.logs.realAccuracyHistory.reverse())
-                    await setErrorArr(data.logs.errorHistory.reverse())
-                }
-            )
-        },[]
-    )
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const docRef = doc(db, 'users', userId);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+              const data = docSnap.data();
+              setWpmArr(data.logs.wpmHistory.reverse());
+              setRawWpmArr(data.logs.rawWpmHistory.reverse());
+              setAccuracyArr(data.logs.accuracyHistory.reverse());
+              setRealAccuracyArr(data.logs.realAccuracyHistory.reverse());
+              setErrorArr(data.logs.errorHistory.reverse());
+            } else {
+              console.log("No such document!");
+            }
+          } catch (error) {
+            console.log("Error getting document:", error);
+          }
+        };
+      
+        fetchData();
+      }, []);
     function getAvg(arr){
         return (sum(arr)/arr.length)
     }

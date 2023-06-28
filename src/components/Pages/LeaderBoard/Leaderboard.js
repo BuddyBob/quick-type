@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import { db } from '../../../firebase'
-import NavBar from '../../Nav/NavBar' 
+import React, { useEffect, useState } from 'react';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { getDocs, collection } from "firebase/firestore";
+import NavBar from '../../Nav/NavBar'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
+import { db } from '../../../firebase'
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
@@ -90,11 +90,15 @@ const Leaderboard = () => {
   const classes = useStyles();
   const [data, setData] = useState()
   //get data
-  useEffect(async () => {
-      const snapshot = await db.collection('users').get()
-      const snappy = await snapshot.docs.map(doc => doc.data())
-      setData(call(snappy))
-  }, [])
+  useEffect(() => {
+    const fetchData = async () => {
+      const querySnapshot = await getDocs(collection(db, 'users'));
+      const usersData = querySnapshot.docs.map(doc => doc.data());
+      setData(call(usersData));
+    };
+  
+    fetchData();
+  }, []);
   //sort data
   return (
     <div>

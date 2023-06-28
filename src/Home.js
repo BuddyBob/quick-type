@@ -1,58 +1,64 @@
-import React, { useState , useEffect} from 'react';
-import Preview from './components/Preview';
-import Wpm from './components/Wpm';
-import Accuracy from './components/Accuracy';
-import GetText from './components/GetText';
-import Popup from './components/Popup/Popup'
-import Reload from './components/Reload'
-import SetData from './components/SetData'
-import assets from './assets'
-import { Link } from 'react-router-dom';
-import { IoSettingsSharp } from 'react-icons/io5'
-import { FaUserPlus } from 'react-icons/fa'
-import { IoLogIn } from 'react-icons/io5'
-import { IoLogOut } from 'react-icons/io5'
-import { IoStatsChart } from 'react-icons/io5'
-import { FaCrown } from 'react-icons/fa'
-import { useAuth } from './components/context/AuthContext'
-import { db } from './firebase'
 import './index.css';
 import './NavImages.css'
+
+import React, { useEffect, useState } from 'react';
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+
+import Accuracy from './components/Accuracy';
+import { FaCrown } from 'react-icons/fa'
+import { FaUserPlus } from 'react-icons/fa'
+import GetText from './components/GetText';
+import { IoLogIn } from 'react-icons/io5'
+import { IoLogOut } from 'react-icons/io5'
+import { IoSettingsSharp } from 'react-icons/io5'
+import { IoStatsChart } from 'react-icons/io5'
+import { Link } from 'react-router-dom';
+import Popup from './components/Popup/Popup'
+import Preview from './components/Preview';
+import Reload from './components/Reload'
+import SetData from './components/SetData'
+import Wpm from './components/Wpm';
+import assets from './assets'
+import { db } from './firebase'
+import { useAuth } from './components/context/AuthContext'
+
 //dummy man
-function returnUserData(userId){
-  let docRef = db.collection("users").doc(userId)
-  return docRef.get().then((doc) => {
-    if (doc.exists) {
-        return doc.data();
+async function returnUserData(userId) {
+  console.log(userId)
+
+  const docRef = doc(db, "users", userId);
+  console.log(docRef)
+  try {
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data();
     } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
+      console.log("No such document!");
     }
-  }).catch((error) => {
-      console.log("Error getting document:", error);
-  });
+  } catch (error) {
+    console.log("Error getting document:", error);
+  }
 }
-SetData()
 let interval = null
 const soundList = [assets.sounds.click2,assets.sounds.click3,assets.sounds.click4,assets.sounds.click5,assets.sounds.click6,assets.sounds.click7]
 function getRandom() {
   return soundList[Math.round(Math.random() * soundList.length)]
 }
-function func(){
-  return false;
-}
 const Home = () =>  {
   // set hooks
   const { currentUser, logout } = useAuth()
   const [userId, setUserId] = useState(currentUser ? currentUser.uid : null)
+  console.log(userId)
   const [loggedIn,setLoggedIn] = useState(currentUser ? true : false)
   const [text,setText] = useState(GetText(localStorage.getItem('wordCount'),localStorage.getItem('englishType')))
   const [englishType,setEnglishType] = useState(localStorage.getItem("englishType"))
   const [wordCount,setWordCount] = useState(localStorage.getItem("wordCount"))
   const [audioX,setAudioX] = useState(false)
   useEffect(() => {
+    SetData()
     if (loggedIn){
       returnUserData(userId).then(result => {
+        console.log(result)
         setText(GetText(result.wordCount,result.englishType))
         setEnglishType(result.englishType)
         setWordCount(result.wordCount)
@@ -156,35 +162,49 @@ const Home = () =>  {
   }
   //check if length of input is equal to given text
   async function onFinish() {
-    if (text.length-1 === userInput.length) {
+    if (text.length - 1 === userInput.length) {
       clearInterval(interval);
-      //call popup
-      setPopup(true)
-      setFinished(true)
-      setStarted(false)
-      //add new wpm entry to db under wpmHistory
-      if (loggedIn){
-        await db.collection("users").doc(userId).get().then(async (doc) => {
-            const a = await doc.data().logs.wpmHistory
-            a.push(finalWpm(errors,symbols+1,sec))
-            const b = await doc.data().logs.rawWpmHistory
-            b.push(finalRawWpm(symbols+1,sec))
-            const c = await doc.data().logs.realAccuracyHistory
-            c.push(finalRealAccuracy(userInput.length+1,text,errors))
-            const d = await doc.data().logs.accuracyHistory
-            d.push(finalAccuracy(userInput,text.length-1))
-            const e = await doc.data().logs.errorHistory
-            e.push(errors)
-            if (a === "Infinity" || a >= 300 || a === "NaN"){
-              db.collection("users").doc(userId).update({logs:{wpmHistory:0,rawWpmHistory:b,realAccuracyHistory:0,accuracyHistory:0,errorHistory:0}})
+      // call popup
+      setPopup(true);
+      setFinished(true);
+      setStarted(false);
+      // add new wpm entry to db under wpmHistory
+      if (loggedIn) {
+        const userDocRef = doc(db, 'users', userId);
+        const userDocSnapshot = await getDoc(userDocRef);
+        const userData = userDocSnapshot.data();
+  
+        const a = [...userData.logs.wpmHistory, finalWpm(errors, symbols + 1, sec)];
+        const b = [...userData.logs.rawWpmHistory, finalRawWpm(symbols + 1, sec)];
+        const c = [...userData.logs.realAccuracyHistory, finalRealAccuracy(userInput.length + 1, text, errors)];
+        const d = [...userData.logs.accuracyHistory, finalAccuracy(userInput, text.length - 1)];
+        const e = [...userData.logs.errorHistory, errors];
+  
+        if (a === "Infinity" || a >= 300 || isNaN(a)) {
+          await updateDoc(userDocRef, {
+            logs: {
+              wpmHistory: 0,
+              rawWpmHistory: b,
+              realAccuracyHistory: 0,
+              accuracyHistory: 0,
+              errorHistory: 0
             }
-            else{
-              db.collection("users").doc(userId).update({logs:{wpmHistory:a,rawWpmHistory:b,realAccuracyHistory:c,accuracyHistory:d,errorHistory:e}})
+          });
+        } else {
+          await updateDoc(userDocRef, {
+            logs: {
+              wpmHistory: a,
+              rawWpmHistory: b,
+              realAccuracyHistory: c,
+              accuracyHistory: d,
+              errorHistory: e
             }
-        })
+          });
+        }
       }
     }
   }
+  
   //if restart button clicked in popup
   function restartPopup(){
     setSec(0)

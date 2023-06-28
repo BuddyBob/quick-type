@@ -1,25 +1,34 @@
-
-import ToggleGroup from './SettingsButtons';
-import NavBar from '../../Nav/NavBar';
-import React, { useState, useEffect } from 'react'
-import { db } from '../../../firebase'
 import './Settings.css'
 
+import React, { useEffect, useState } from 'react'
+import { doc, getDoc } from "firebase/firestore";
+
+import NavBar from '../../Nav/NavBar';
+import ToggleGroup from './SettingsButtons';
+import { db } from '../../../firebase'
+
 const Settings = (props) => {
-    const [data, setData] = useState()
+    const [data, setData] = useState();
+  
     useEffect(() => {
-        db.collection("users").doc(localStorage.getItem("currentUserId")).get().then((doc) => {
-            if (doc.exists) {
-                setData(doc.data())
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }).catch((error) => {
-            console.log("Error getting document:", error);
-        });
-        
-      }, [])
+      const fetchUserData = async () => {
+        try {
+          const userId = localStorage.getItem('currentUserId');
+          const docRef = doc(db, 'users', userId);
+          const docSnap = await getDoc(docRef);
+    
+          if (docSnap.exists()) {
+            setData(docSnap.data());
+          } else {
+            console.log('No such document!');
+          }
+        } catch (error) {
+          console.log('Error getting document:', error);
+        }
+      };
+  
+      fetchUserData();
+    }, []);
     return (
         <div>
             <NavBar/>

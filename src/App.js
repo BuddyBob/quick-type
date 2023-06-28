@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { AuthProvider } from './components/context/AuthContext';
-import { HashRouter as Router } from 'react-router-dom';
-import { HashRouter as Switch, Route } from 'react-router-dom';
-import Home from './Home';
-import Leaderboard from './components/Pages/LeaderBoard/Leaderboard'
-import Info from './components/Pages/UserInfo/Info';
-import Stats from './components/Pages/UserStats/Stats';
-import Settings from './components/Pages/UserSettings/Settings';
-import Login from './components/Register/Login'
-import Signup from './components/Register/Signup';
-import ForgotPassword from './components/Register/ForgotPassword'
+import { Route, HashRouter as Switch } from 'react-router-dom';
 
-class App extends Component {
+import { AuthProvider } from './components/context/AuthContext';
+import ForgotPassword from './components/Register/ForgotPassword'
+import Home from './Home';
+import Info from './components/Pages/UserInfo/Info';
+import Leaderboard from './components/Pages/LeaderBoard/Leaderboard'
+import Login from './components/Register/Login'
+import { HashRouter as Router } from 'react-router-dom';
+import Settings from './components/Pages/UserSettings/Settings';
+import Signup from './components/Register/Signup';
+import Stats from './components/Pages/UserStats/Stats';
+
+class QuickType extends Component {
   render() {
     return (
       <div className="app" basename='/index.html'>
@@ -33,4 +34,4 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default QuickType;

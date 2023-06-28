@@ -310,7 +310,7 @@ const Home = () =>  {
       />
       </div>
       <div className="text-center p-3 footer" style={{backgroundColor: "#6e6b6b"}}>
-        © 2021 Copyright:
+        © 2022 Copyright:
         <a className="text-reset fw-bold"> PandaBros</a>
       </div>
     </div>

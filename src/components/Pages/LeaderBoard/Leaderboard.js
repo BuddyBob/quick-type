@@ -1,42 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import { getDocs, collection } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
+import { makeStyles, withStyles } from '@mui/styles';
+
 import NavBar from '../../Nav/NavBar'
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import { db } from '../../../firebase'
-
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-      backgroundColor: "#ede8e8",
-      padding:5,
-    },
-    body: {
-      color:"#ffdc7a",
-      fontSize: 12,
-      fontFamily:"Roboto Mono"
-    },
-}))(TableCell);
-  
-const StyledTableRow = withStyles((theme) => ({
-    root: {
-      backgroundColor:"#2D2F31",
-      height:1,
-    },
-
-  }))(TableRow);
-  
-const useStyles = makeStyles({
-    table: {
-        border:"1px solid white", 
-        borderRadius:200, 
-        maxWidth: 500, 
-        margin: 'auto'
-    }
-});
 
 function setUp(data){
     function customSort(arr){
@@ -87,7 +59,6 @@ function call(d){
   }
 }
 const Leaderboard = () => {
-  const classes = useStyles();
   const [data, setData] = useState()
   //get data
   useEffect(() => {
@@ -106,22 +77,22 @@ const Leaderboard = () => {
         <NavBar/>
         </div>
         {data &&
-        <Table className={classes.table}>
+        <Table >
             <TableHead>
                 <TableRow>
-                    <StyledTableCell style={{color:"#ed3469", paddingLeft:"15px"}} align="left"><strong>#</strong></StyledTableCell>
-                    <StyledTableCell style={{paddingLeft:"15px"}} align="left"><strong>Name</strong></StyledTableCell>
-                    <StyledTableCell style={{paddingLeft:"15px"}} align="center"><strong>Wpm</strong></StyledTableCell>
+                    <TableCell style={{color:"#ed3469", paddingLeft:"15px"}} align="left"><strong>#</strong></TableCell>
+                    <TableCell style={{paddingLeft:"15px"}} align="left"><strong>Name</strong></TableCell>
+                    <TableCell style={{paddingLeft:"15px"}} align="center"><strong>Wpm</strong></TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
             {data.map(n => {
                 return (
-                <StyledTableRow>
-                    <StyledTableCell align="left" >{n.place}</StyledTableCell>
-                    <StyledTableCell align="left">{n.username}</StyledTableCell>
-                    <StyledTableCell align="center">{n.pb}</StyledTableCell>
-                </StyledTableRow>
+                <TableRow>
+                    <TableCell align="left" >{n.place}</TableCell>
+                    <TableCell align="left">{n.username}</TableCell>
+                    <TableCell align="center">{n.pb}</TableCell>
+                </TableRow>
                 );
             })}
             </TableBody>

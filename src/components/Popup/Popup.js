@@ -1,11 +1,14 @@
-import React from 'react'
-import  useWindowDimensions  from './useWindowDimensions'
-import assets from '../../assets/'
-import { Paper, Grid } from '@material-ui/core/';
-import { IoArrowForward } from 'react-icons/io5'
-import { FaRedo } from 'react-icons/fa'
-import { makeStyles } from '@material-ui/core/styles';
 import './Popup.css'
+
+import { Grid, Paper } from '@mui/material/';
+
+import { FaRedo } from 'react-icons/fa'
+import { IoArrowForward } from 'react-icons/io5'
+import React from 'react'
+import assets from '../../assets/'
+import { makeStyles } from '@mui/styles';
+import  useWindowDimensions  from './useWindowDimensions'
+
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -14,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
       left:25
     },
     paper: {
-      padding: theme.spacing(2),
       textAlign: 'center',
       color: "#ffdc7a",
       backgroundColor: "#323437",

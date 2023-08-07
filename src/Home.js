@@ -24,7 +24,6 @@ import { useAuth } from './components/context/AuthContext'
 
 //dummy man
 async function returnUserData(userId) {
-  console.log(userId)
 
   const docRef = doc(db, "users", userId);
   console.log(docRef)
@@ -47,26 +46,43 @@ function getRandom() {
 const Home = () =>  {
   // set hooks
   const { currentUser, logout } = useAuth()
+
+
   const [userId, setUserId] = useState(currentUser ? currentUser.uid : null)
-  console.log(userId)
   const [loggedIn,setLoggedIn] = useState(currentUser ? true : false)
   const [text,setText] = useState(GetText(localStorage.getItem('wordCount'),localStorage.getItem('englishType')))
+  localStorage.setItem('text',text) 
+  
   const [englishType,setEnglishType] = useState(localStorage.getItem("englishType"))
   const [wordCount,setWordCount] = useState(localStorage.getItem("wordCount"))
   const [audioX,setAudioX] = useState(false)
-  useEffect(() => {
-    SetData()
-    if (loggedIn){
-      returnUserData(userId).then(result => {
-        console.log(result)
-        setText(GetText(result.wordCount,result.englishType))
-        setEnglishType(result.englishType)
-        setWordCount(result.wordCount)
-        localStorage.setItem("wordCount",result.wordCount)
-        setAudioX(result.audio)
-      })
+  console.log(loggedIn)
+  const updateText = async () => {
+    if (loggedIn) {
+      try {
+        const result = await returnUserData(userId);
+        console.log(result);
+        setText(GetText(result.wordCount, result.englishType));
+        setEnglishType(result.englishType);
+        setWordCount(result.wordCount);
+        localStorage.setItem("wordCount", result.wordCount);
+        setAudioX(result.audio);
+      } catch (error) {
+        console.log("Error getting user data:", error);
+      }
+    } else {
+      setText(GetText(localStorage.getItem('wordCount'), localStorage.getItem('englishType')));
+      setEnglishType(localStorage.getItem('englishType'));
+      setWordCount(localStorage.getItem('wordCount'));
+      setAudioX(localStorage.getItem('audio'));
     }
-  }, [loggedIn,userId])
+  };
+  
+  useEffect(() => {
+    console.log('hello')
+    SetData();
+    updateText();
+  }, [loggedIn, userId]);
 
   const [popup, setPopup] = useState(false)
   const [userInput,setUserInput] = useState('')

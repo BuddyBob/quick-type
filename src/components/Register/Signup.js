@@ -1,21 +1,20 @@
 import './Register.css';
 
-import { Alert, AlertTitle } from '@material-ui/lab';
-import { Link, useHistory } from 'react-router-dom';
+import { Alert, AlertTitle } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useRef, useState } from 'react';
 import { collection, db, doc, getDocs, setDoc } from '../../firebase';
 
-import CloseIcon from '@material-ui/icons/Close';
-import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 import NavBar from '../Nav/NavBar';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@mui/styles';
 import { useAuth } from '../context/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     '& > * + *': {
-      marginTop: theme.spacing(),
     },
   },
   errorText: {
@@ -38,7 +37,7 @@ const Signup = () => {
   const { signup } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const { currentUser } = useAuth();
 
   async function handleSubmit(e) {
@@ -82,7 +81,7 @@ const Signup = () => {
 
       localStorage.setItem('currentUserId', userCredential.user.uid);
       console.log('ADDED USER', userCredential.user.uid);
-      history.push('/');
+      navigate('/');
     } catch (err) {
       console.log('ERROR', err);
       setError(err.message);

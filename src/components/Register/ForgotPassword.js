@@ -1,19 +1,20 @@
-import React, { useRef, useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import { AlertTitle, Alert } from '@material-ui/lab';
-import { Link, useHistory } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-import IconButton from '@material-ui/core/IconButton';
-import CheckIcon from '@material-ui/icons/Check';
-import CloseIcon from '@material-ui/icons/Close';
-import { db } from '../../firebase'
-import NavBar from '../Nav/NavBar'
 import './Register.css'
+
+import { Alert, AlertTitle } from '@mui/material';
+import React, { useRef, useState } from 'react'
+
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import { Link } from 'react-router-dom'
+import NavBar from '../Nav/NavBar'
+import { makeStyles } from '@mui/styles';
+import { useAuth } from '../context/AuthContext'
+
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
       '& > * + *': {
-        marginTop: theme.spacing(),
       },
     },
     errorText: {

@@ -3,90 +3,35 @@ import './Settings.css';
 import React, { useEffect, useState } from 'react';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import Grid from '@material-ui/core/Grid';
+import Button from '@mui/material/Button';
 import { Label } from '../../Label';
-import Switch from '@material-ui/core/Switch';
-import Typography from '@material-ui/core/Typography';
+import Switch from '@mui/material/Switch';
+import { css } from '@emotion/react';
 import { db } from '../../../firebase';
-import styled from 'styled-components';
-import { withStyles } from '@material-ui/core/styles';
-
-const IOSSwitch = withStyles((theme) => ({
-  root: {
-    width: 70,
-    height: 26,
-    padding: 0,
-  },
-  switchBase: {
-    padding: 1,
-    color: "#2D2F31",
-    border: "white 1px solid",
-    '&$checked': {
-      transform: 'translateX(44px)',
-      transitionDuration: ".1s",
-      color: "#2D2F31",
-      '& + $track': {
-        backgroundColor: '#ede8e8',
-        opacity: 1,
-        border: 'none',
-      },
-    },
-    '&$focusVisible $thumb': {
-      color: '#52d869',
-      border: '20px solid #fff',
-    },
-  },
-  thumb: {
-    width: 24,
-    height: 24,
-  },
-  track: {
-    borderRadius: 26 / 2,
-    border: `1px solid ${theme.palette.grey[400]}`,
-    backgroundColor: theme.palette.grey[50],
-    opacity: 1,
-    transition: theme.transitions.create(['background-color', 'border']),
-  },
-  checked: {},
-  focusVisible: {},
-}))(({ classes, ...props }) => {
-  return (
-    <Switch
-      focusVisibleClassName={classes.focusVisible}
-      disableRipple
-      classes={{
-        root: classes.root,
-        switchBase: classes.switchBase,
-        thumb: classes.thumb,
-        track: classes.track,
-        checked: classes.checked,
-      }}
-      {...props}
-    />
-  );
-});
+import { styled } from '@mui/system';
 
 const SettingsButtons = ({ dbData, change, types }) => {
   const userId = localStorage.getItem('currentUserId');
   const [Alert, setAlert] = useState([false, "No Error"]);
   const [active, setActive] = useState();
   let [data, setData] = useState(dbData);
-  const [state, setState] = React.useState({
-    checkedB: false
-  });
+  const [state, setState] = useState({ checkedB: false });
 
-  useEffect(async () => {
-    const docRef = doc(db, 'users', userId);
-    const docSnap = await getDoc(docRef);
-    const docData = docSnap.data();
-
-    await setActive(change === "englishType" ? docData.englishType : change === "audio" ? docData.audio : "");
-    setState({ ...state, ["checkedB"]: docData.audio });
-  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const docRef = doc(db, 'users', userId);
+      const docSnap = await getDoc(docRef);
+      const docData = docSnap.data();
+  
+      setActive(change === "englishType" ? docData.englishType : change === "audio" ? docData.audio : "");
+      setState((prevState) => ({ ...prevState, checkedB: docData.audio }));
+    };
+  
+    fetchData();
+  }, [change, userId]);
 
   // wordCount is updated "on change"
+  
   async function changed(e) {
     const val = e.target.value;
 
@@ -115,29 +60,6 @@ const SettingsButtons = ({ dbData, change, types }) => {
     localStorage.setItem("wordCount", val);
     dbData = data;
   }
-
-  const Btn = styled.button`
-    border: none;
-    background: #323437;
-    color: #ffdc7a !important;
-    font-weight: 200;
-    padding: 18px;
-    border-radius: 6px;
-    display: inline-block;
-    transition: all 0.3s ease 0s;
-  `;
-
-  const BtnToggle = styled(Btn)`
-    opacity: 0.5;
-    border-color: white;
-    ${({ active }) =>
-    active && `
-      border:2px solid;
-      border-color:#ffdc7a;
-      opacity:5;
-    `}
-  `;
-
   async function handleChange(event, type) {
     setActive(type);
 
@@ -147,20 +69,28 @@ const SettingsButtons = ({ dbData, change, types }) => {
     }
 
     if (change === "audio") {
-      await setState({ ...state, [event.target.name]: event.target.checked });
+      setState((prevState) => ({ ...prevState, checkedB: !prevState.checkedB }));
       await updateDoc(doc(db, 'users', userId), { audio: !state.checkedB });
     }
   }
 
   function BtnGroup() {
     return (
-      <div style={{ position: "relative", left: "30px", padding: "5px" }}>
+      <div style={{ position: "relative", padding: "5px" }}>
         {types.map(type => (
-          <BtnToggle style={{ margin: "5px" }} active={active === type} onClick={(e) => handleChange(e, type)}>{type}</BtnToggle>
+          <input
+            key={type}
+            style={{ margin: "5px" }}
+            className={`button ${active === type ? "active" : ""}`}
+            type="button"
+            onClick={(e) => handleChange(e, type)}
+            value={type}
+          />
         ))}
       </div>
-    )
+    );
   }
+  
 
     
     return (
@@ -210,7 +140,7 @@ const SettingsButtons = ({ dbData, change, types }) => {
                     </div>
                 </div>
                 <div className="row audio-toggle">
-                    <IOSSwitch checked={state.checkedB} onChange={handleChange} name="checkedB"/>
+                    {/* <Switch checked={state.checkedB} onChange={() => handleChange()} name="checkedB"/> */}
                 </div>
             </form>
         }

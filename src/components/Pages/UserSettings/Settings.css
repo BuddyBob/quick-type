@@ -68,3 +68,23 @@
     }
 }
 
+
+
+.button{
+    position: relative;
+    justify-content: center;
+    top:10px;
+    color: #979696;
+    padding: 15px;
+    font-size: 10px;
+    background-color:#2D2F31;
+    border: #979696 solid 1px;
+    border-radius: 3px;
+}
+
+.button.active {
+    color: #ffdc7a;
+    background-color: #2D2F31;
+    border: #ffdc7a solid 1px;
+    border-radius: 3px;
+}

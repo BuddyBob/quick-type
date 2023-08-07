@@ -1,17 +1,19 @@
-import React, { useRef, useState  } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import { Link, useHistory } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-import { AlertTitle, Alert } from '@material-ui/lab';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import NavBar from '../Nav/NavBar'
 import './Register.css'
+
+import { Alert, AlertTitle } from '@mui/lab';
+import { Link, useNavigate } from 'react-router-dom'
+import React, { useRef, useState } from 'react'
+
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import NavBar from '../Nav/NavBar'
+import { makeStyles } from '@mui/styles';
+import { useAuth } from '../context/AuthContext'
+
 const useStyles = makeStyles((theme) => ({
     root: {
       width: '100%',
       '& > * + *': {
-        marginTop: theme.spacing(),
       },
     },
     errorText: {
@@ -36,22 +38,21 @@ const Login = () =>  {
         const { login } = useAuth()   
         const [error, setError] = useState('')
         const [loading, setLoading] = useState("false")
-        const history = useHistory()
+        const navigate = useNavigate()
         async function handleSubmit(e) {
-            e.preventDefault()
+            e.preventDefault();
             try {
-              setError('')
-              setLoading("true")
-              const x = await login(emailRef.current.value, passwordRef.current.value)
-              console.log("LOGGED IN TO USER", x.user.uid)
-              localStorage.setItem("currentUserId",x.user.uid)
-              history.push('/')
-            } catch(err) {
-                setError(modErrors(err.message))
+                setError('');
+                setLoading(true);
+                const x = await login(emailRef.current.value, passwordRef.current.value);
+                localStorage.setItem('currentUserId', x.user.uid);
+                navigate('/');
+                console.log('LOGGED IN TO USER', x.user.uid);
+            } catch (err) {
+                setError(modErrors(err.message));
             }
-        
-            setLoading("false")
-        }
+            setLoading("false");
+            }
     
         return (
             <div>

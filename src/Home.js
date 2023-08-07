@@ -46,6 +46,9 @@ function getRandom() {
 const Home = () =>  {
   // set hooks
   const { currentUser, logout } = useAuth()
+  if (localStorage.getItem("englishType") == null){
+    localStorage.setItem("englishType", "english1k")
+  }
 
 
   const [userId, setUserId] = useState(currentUser ? currentUser.uid : null)

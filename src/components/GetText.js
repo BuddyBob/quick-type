@@ -2,7 +2,8 @@
 const GetText = (wordCount,englishType) => {
     console.log(englishType)
     if (englishType === null){
-        englishType = "english"
+        englishType = "english1k"
+        localStorage.setItem("englishType","english1k")
     }
     const wordData = require(`./english/${englishType}.json`); 
     let wordList = []
